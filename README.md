@@ -1,4 +1,29 @@
-# otm5-change-requests
-Tracking and reporting bugs and change requests of the OTM5 specification.
+# Welcome to the OTM5 change request tracker
 
-TODO: this page will _soon_ contain a description of the process followed to make changes to the [OTM5 specification](https://otm5.opentripmodel.org/). Stay tuned..
+If you have ideas for the [OTM5 specification][otm5-spec] or found a bug, please report them here.
+
+[otm5-spec]: https://otm5.opentripmodel.org/
+
+## Where do I go for questions? 🤔
+
+Please go to the [Open Trip Model discussion forum](https://www.opentripmodel.org/discuss) first.
+We would like to keep this tracker focused on change requests and bugs.
+
+## How do I submit a change request? 📈
+
+Before opening a change request, please search in the [issues][issues] to make sure that a similar change has not been
+previously requested. If so it could be planned for a future version of OTM and you can contribute to the discussion in
+the existing issue. If your request is new, open an issue by pressing `New issue` in the upper right corner. Please use
+the "Feature request" template to help provide the best possible information.
+
+## How do I submit a bug? 🐛
+
+Similar to change requests: before opening a bug, please search in the [issues][issues] to make sure that the bug has
+not been reported already. If the bug is new, open an issue by pressing the `New issue` in the upper right corner.
+Please use the "Bug report" template to help provide the best possible information.
+
+[issues]: https://github.com/opentripmodel/otm5-change-requests/issues
+
+## When will the new feature or bugfix be available? 🚀
+
+TBD
