@@ -26,4 +26,8 @@ Please use the "Bug report" template to help provide the best possible informati
 
 ## When will the new feature or bugfix be available? 🚀
 
-TBD
+OTM5.0 has just been released, so we are still in the process of figuring this out. However we expect that;
+* bugs in the rending will be fixed fast. Or at least workarounds are provided,
+* unclear documentation can also be fixed fast,
+* small changes to the specification will be released within 2 to 3 months,
+* larger changes might be part of a beta, so we have time to try it out and improve upon it if necessary. 
