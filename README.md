@@ -6,10 +6,14 @@ If you have ideas for the [OTM5 specification][otm5-spec] or found a bug, please
 
 ## Where do I go for questions? 🤔
 
-Please go to the [Open Trip Model discussion forum](https://www.opentripmodel.org/discuss) first.
-We would like to keep this tracker focused on change requests and bugs.
+Please go to the [Open Trip Model discussion forum][otm-discuss] first. We would like to keep this tracker focused on
+change requests and bugs.
+
+[otm-discuss]: https://www.opentripmodel.org/discuss
 
 ## How do I submit a change request? 📈
+
+A change request can be any improvement or addition to the existing specification.
 
 Before opening a change request, please search in the [issues][issues] to make sure that a similar change has not been
 previously requested. If so it could be planned for a future version of OTM and you can contribute to the discussion in
@@ -18,9 +22,13 @@ the "Feature request" template to help provide the best possible information.
 
 ## How do I submit a bug? 🐛
 
-Similar to change requests: before opening a bug, please search in the [issues][issues] to make sure that the bug has
-not been reported already. If the bug is new, open an issue by pressing the `New issue` in the upper right corner.
-Please use the "Bug report" template to help provide the best possible information.
+A bug can be any fault, inconsistency or contradiction in the specification itself or the way the spec is represented
+[on the website][otm5-spec]. It can also be something that is unclear in the spec, but you might want to consider asking
+a question in the [discussion forum][otm-discuss] first.
+
+The process is similar to change requests: before opening a bug, please search in the [issues][issues] to make sure that
+the bug has not been reported already. If the bug is new, open an issue by pressing the `New issue` in the upper right
+corner.  Please use the "Bug report" template to help provide the best possible information.
 
 [issues]: https://github.com/opentripmodel/otm5-change-requests/issues
 
