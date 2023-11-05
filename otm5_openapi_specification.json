@@ -1263,8 +1263,8 @@
                       "id": "00000014-69a6-9702-0000-0021dca4629b",
                       "name": "Main warehouse",
                       "geoReference": {
-                        "lat": 5.4126792,
-                        "lon": 52.1956251,
+                        "lat": 52.1956251,
+                        "lon": 5.4126792,
                         "type": "latLonPointGeoReference"
                       },
                       "type": "warehouse",
