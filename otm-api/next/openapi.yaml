@@ -47,6 +47,10 @@ info:
     Add new property 'geoReference' and deprecate 'geoReferences'. First one is now required.
     [See 86](https://github.com/opentripmodel/otm5-change-requests/issues/86).
 
+    * Add enums for location types 'fuelStation', 'serviceStation' and 'other'.
+    Add new property 'otherLocationType' to specify the location type in case of 'other'.
+    [See 73](https://github.com/opentripmodel/otm5-change-requests/issues/73).
+
 
     **Version 5.6 (released on 2023-11-17)**
 

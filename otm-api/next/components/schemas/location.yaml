@@ -115,6 +115,12 @@ properties:
       - restrictedArea
       - customer
       - operationalBase
+      - fuelStation
+      - serviceStation
+      - other
+  otherLocationType:
+    description: Description of the location in case type of location is set to 'other'.
+    type: string
   administrativeReference:
     description: >-
       Address information that is used as an administrative reference. For
