@@ -38,6 +38,12 @@ info:
     page](https://github.com/opentripmodel/otm5-change-requests)
 
 
+    **Unreleased changes**
+
+    * Fix broken link to goods packaging type codes.
+    [See 87](https://github.com/opentripmodel/otm5-change-requests/issues/87).
+
+
     **Version 5.6 (released on 2023-11-17)**
 
 

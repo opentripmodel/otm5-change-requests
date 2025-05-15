@@ -550,7 +550,7 @@ properties:
   packagingMaterial:
     description: >-
       Description of the package type. Use as described by the [GS1
-      standard](https://www.gs1.nl/sites/default/files/so_gs1das_guideline_for_choosing_the_right_packaging_type.pdf).
+      standard](https://www.gs1.nl/media/qcdhditc/so-gs1das-guideline-packaging-type.pdf).
     type: string
   classificationLines:
     description: >-
