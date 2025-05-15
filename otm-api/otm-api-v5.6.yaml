@@ -59,9 +59,6 @@ info:
     * Add `routeEntityConstraint` and deprecate `routeConstraint`. [See
     80](https://github.com/opentripmodel/otm5-change-requests/issues/80).
 
-    * Add GLN as direct property in location definitions.
-    [See 105](https://github.com/opentripmodel/otm5-change-requests/issues/105).
-
 
     **Version 5.5 (released on 2023-02-07)**
 
