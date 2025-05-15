@@ -1,7 +1,7 @@
 example:
   id: beb9a25f-3f64-42ae-b1c6-e89cd450f66b
   name: An example route using coordinates to indicate how to drive.
-  geoReferences:
+  geoReference:
     geometry:
       coordinates:
         - - 1
@@ -69,8 +69,29 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ./unrestricted_json.yaml
-  geoReferences:
+  geoReference:
     description: Geographic representation of this route.
+    oneOf:
+      - $ref: ./latLonPointGeoReference.yaml
+      - $ref: ./latLonArrayGeoReference.yaml
+      - $ref: ./Feature.yaml
+      - $ref: ./openLRGeoReference.yaml
+      - $ref: ./tmcLocationGeoReference.yaml
+      - $ref: ./tmcArrayGeoReference.yaml
+      - $ref: ./addressGeoReference.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        latLonPointGeoReference: ./latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ./latLonArrayGeoReference.yaml
+        Feature: ./Feature.yaml
+        openLRGeoReference: ./openLRGeoReference.yaml
+        tmcLocationGeoReference: ./tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ./tmcArrayGeoReference.yaml
+        addressGeoReference: ./addressGeoReference.yaml
+  geoReferences:
+    deprecated: true
+    description: Geographic representation of this route. This property is deprecated; use geoReferece (not plural) instead.
     oneOf:
       - $ref: ./latLonPointGeoReference.yaml
       - $ref: ./latLonArrayGeoReference.yaml
@@ -120,4 +141,4 @@ properties:
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:
-  - geoReferences
+  - geoReference

@@ -8,7 +8,7 @@ get:
             example:
               id: beb9a25f-3f64-42ae-b1c6-e89cd450f66b
               name: An example route using coordinates to indicate how to drive.
-              geoReferences:
+              geoReference:
                 geometry:
                   coordinates:
                     - - 1
@@ -76,8 +76,29 @@ get:
                 properties: {}
                 additionalProperties:
                   $ref: ../components/schemas/unrestricted_json.yaml
-              geoReferences:
+              geoReference:
                 description: Geographic representation of this route.
+                oneOf:
+                  - $ref: ../components/schemas/latLonPointGeoReference.yaml
+                  - $ref: ../components/schemas/latLonArrayGeoReference.yaml
+                  - $ref: ../components/schemas/Feature.yaml
+                  - $ref: ../components/schemas/openLRGeoReference.yaml
+                  - $ref: ../components/schemas/tmcLocationGeoReference.yaml
+                  - $ref: ../components/schemas/tmcArrayGeoReference.yaml
+                  - $ref: ../components/schemas/addressGeoReference.yaml
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
+                    latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
+                    Feature: ../components/schemas/Feature.yaml
+                    openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
+                    tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
+                    tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
+                    addressGeoReference: ../components/schemas/addressGeoReference.yaml
+              geoReferences:
+                deprecated: true
+                description: Geographic representation of this route. This property is deprecated; use geoReferece (not plural) instead.
                 oneOf:
                   - $ref: ../components/schemas/latLonPointGeoReference.yaml
                   - $ref: ../components/schemas/latLonArrayGeoReference.yaml
@@ -132,7 +153,7 @@ get:
                     reference: ../components/schemas/reference.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction.yaml
             required:
-              - geoReferences
+              - geoReference
     '400':
       description: Client error
       content:

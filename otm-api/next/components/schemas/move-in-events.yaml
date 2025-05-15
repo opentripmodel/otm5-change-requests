@@ -44,7 +44,7 @@ example:
     entity:
       id: beb9a25f-3f64-42ae-b1c6-e89cd450f66b
       name: An example route using coordinates to indicate how to drive.
-      geoReferences:
+      geoReference:
         geometry:
           coordinates:
             - - 1

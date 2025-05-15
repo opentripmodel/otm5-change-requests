@@ -43,6 +43,10 @@ info:
     * Fix broken link to goods packaging type codes.
     [See 87](https://github.com/opentripmodel/otm5-change-requests/issues/87).
 
+    * Fix inconsistent use of plural name 'geoReferences' for non array property in route definitions.
+    Add new property 'geoReference' and deprecate 'geoReferences'. First one is now required.
+    [See 86](https://github.com/opentripmodel/otm5-change-requests/issues/86).
+
 
     **Version 5.6 (released on 2023-11-17)**
 
