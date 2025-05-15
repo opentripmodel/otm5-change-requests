@@ -1,0 +1,20 @@
+type: object
+properties:
+  type:
+    example: LineString
+    type: string
+    enum:
+      - LineString
+  coordinates:
+    description: >-
+      A [GeoJSON](https://tools.ietf.org/html/rfc7946) [LineString
+      geometry](https://tools.ietf.org/html/rfc7946#section-3.1.4).
+    type: array
+    items:
+      type: array
+      items:
+        type: number
+        format: double
+required:
+  - type
+  - coordinates

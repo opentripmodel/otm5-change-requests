@@ -1,0 +1,191 @@
+get:
+  responses:
+    '200':
+      description: Returned the entity with the provided UUID
+      content:
+        application/json:
+          schema:
+            example:
+              id: beb9a25f-3f64-42ae-b1c6-e89cd450f66b
+              name: An example route using coordinates to indicate how to drive.
+              geoReferences:
+                geometry:
+                  coordinates:
+                    - - 1
+                      - 0
+                    - - 5
+                      - 0
+                    - - 5
+                      - 3
+                    - - 13
+                      - 3
+                    - - 13
+                      - 7
+                  type: LineString
+                type: Feature
+            type: object
+            properties:
+              id:
+                description: >-
+                  Uniquely identifies this entity. A URI can be assigned by the
+                  client to indicate where more information
+                   can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                   required to send it in the request. One can be generated for you by the server.
+                type: string
+              name:
+                description: Name of the entity. For display purposes and search only.
+                type: string
+              creationDate:
+                description: The creation date of this entity.
+                type: string
+              lastModified:
+                description: >-
+                  The last modified date of this entity. If none is given the
+                  creation date is used instead.
+                type: string
+              contextEvents:
+                description: >-
+                  The context events provides some optional information about
+                  the events that can provide additional information
+                   on the current state of this entity.
+
+                  For example: your system might send ETA information for the
+                  arrival of a vehicle on a location. To make it clear
+
+                  what caused this ETA to be updated, we can include some
+                  information about what caused this ETA update by including
+
+                  an event as context. If your ETA update was caused by a
+                  location update, this event can be included as context. If
+
+                  the ETA was caused by a traffic accident on the route of the
+                  vehicle, you can include that event in the context.
+                type: array
+                items:
+                  $ref: ../components/schemas/events.yaml
+              externalAttributes:
+                description: >
+                  External attributes are a simple way to add information in an
+                  OpenTripModel message that could not fit into one of
+                    the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+                    ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+                   > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+                     it was intended.
+                type: object
+                properties: {}
+                additionalProperties:
+                  $ref: ../components/schemas/unrestricted_json.yaml
+              geoReferences:
+                description: Geographic representation of this route.
+                oneOf:
+                  - $ref: ../components/schemas/latLonPointGeoReference.yaml
+                  - $ref: ../components/schemas/latLonArrayGeoReference.yaml
+                  - $ref: ../components/schemas/Feature.yaml
+                  - $ref: ../components/schemas/openLRGeoReference.yaml
+                  - $ref: ../components/schemas/tmcLocationGeoReference.yaml
+                  - $ref: ../components/schemas/tmcArrayGeoReference.yaml
+                  - $ref: ../components/schemas/addressGeoReference.yaml
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
+                    latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
+                    Feature: ../components/schemas/Feature.yaml
+                    openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
+                    tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
+                    tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
+                    addressGeoReference: ../components/schemas/addressGeoReference.yaml
+              actors:
+                description: >-
+                  Actors associated with this route, for instance the Company
+                  that requires this route as a Last-Mile guidance.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/associated-actors-inline.yaml
+                    - $ref: ../components/schemas/reference-roles.yaml
+                    - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                  discriminator:
+                    propertyName: associationType
+                    mapping:
+                      inline: ../components/schemas/associated-actors-inline.yaml
+                      reference: ../components/schemas/reference-roles.yaml
+                      attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+              actions:
+                description: All the actions that need to be executed on this route.
+                type: array
+                items:
+                  $ref: ../components/schemas/associations-actions.yaml
+              constraint:
+                description: >-
+                  Constraints of using this route, for instance it might only be
+                  used by vehicles with below a certain weight.
+                oneOf:
+                  - $ref: ../components/schemas/route-constraint-inline.yaml
+                  - $ref: ../components/schemas/reference.yaml
+                  - $ref: ../components/schemas/attributeRestriction.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/route-constraint-inline.yaml
+                    reference: ../components/schemas/reference.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction.yaml
+            required:
+              - geoReferences
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '404':
+      description: ''
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Get a specific Route by its UUID
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of this Route
+      required: true
+  tags:
+    - Route
+  security:
+    - BearerToken: []
+delete:
+  responses:
+    '204':
+      description: Deleted route with the provided UUID
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Deletes a Route
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of the Route to be deleted
+      required: true
+  tags:
+    - Route
+  security:
+    - BearerToken: []

@@ -1,0 +1,15 @@
+type: object
+properties:
+  type:
+    example: invalidField
+    type: string
+    enum:
+      - invalidField
+  field:
+    type: string
+  message:
+    type: string
+required:
+  - type
+  - field
+  - message

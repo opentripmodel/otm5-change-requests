@@ -1,0 +1,24 @@
+type: object
+properties:
+  type:
+    example: MultiPolygon
+    type: string
+    enum:
+      - MultiPolygon
+  coordinates:
+    description: >-
+      A [GeoJSON](https://tools.ietf.org/html/rfc7946) [MultiPolygon
+      geometry](https://tools.ietf.org/html/rfc7946#section-3.1.7).
+    type: array
+    items:
+      type: array
+      items:
+        type: array
+        items:
+          type: array
+          items:
+            type: number
+            format: double
+required:
+  - type
+  - coordinates

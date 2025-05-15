@@ -1,0 +1,24 @@
+type: object
+properties:
+  type:
+    example: andConstraint
+    type: string
+    enum:
+      - andConstraint
+  and:
+    description: >-
+      All constraints in the array are combined using a boolean AND relation.
+      This means that the resulting constraint will only apply if
+
+      all constraints in the array would apply.
+    type: array
+    items:
+      $ref: ./constraintValue.yaml
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - and

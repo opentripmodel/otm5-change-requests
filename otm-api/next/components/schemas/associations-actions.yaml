@@ -1,0 +1,10 @@
+oneOf:
+  - $ref: ./actions-inline.yaml
+  - $ref: ./reference.yaml
+  - $ref: ./attributeRestriction.yaml
+discriminator:
+  propertyName: associationType
+  mapping:
+    inline: ./actions-inline.yaml
+    reference: ./reference.yaml
+    attributeRestriction: ./attributeRestriction.yaml

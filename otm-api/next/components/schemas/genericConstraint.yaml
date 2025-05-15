@@ -1,0 +1,12 @@
+type: object
+properties:
+  type:
+    example: genericConstraint
+    type: string
+    enum:
+      - genericConstraint
+  description:
+    type: string
+required:
+  - type
+  - description

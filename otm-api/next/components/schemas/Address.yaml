@@ -1,0 +1,25 @@
+type: object
+properties:
+  name:
+    description: Name of the address.
+    type: string
+  street:
+    description: Street of the address.
+    type: string
+  houseNumber:
+    description: House number of the address, without any extension.
+    type: string
+  houseNumberAddition:
+    description: Addition or extension of the house number.
+    type: string
+  postalCode:
+    description: Postal code of the address
+    type: string
+  city:
+    description: The city of the address.
+    type: string
+  country:
+    description: >-
+      [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1) country
+      code.
+    type: string

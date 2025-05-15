@@ -1,0 +1,3 @@
+description: Space for any (nested) properties that do not fit into OTM5
+type: object
+properties: {}

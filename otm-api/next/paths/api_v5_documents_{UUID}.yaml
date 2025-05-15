@@ -1,0 +1,196 @@
+get:
+  responses:
+    '200':
+      description: Returned the entity with the provided UUID
+      content:
+        application/json:
+          schema:
+            example:
+              id: cf32da57-5edc-4c46-9a97-58c97ae27cf8
+              name: Photo of the PoD
+              content:
+                uri: https://link-to-the-actual-document.org/1234
+                contentType: link
+              externalAttributes:
+                externalID: photo1234
+              documentType: photo
+              filename: my_photo.JPG
+              mimeType: image/jpeg
+              description: >-
+                Proof that the goods are delivered by providing the photo that
+                captures the moment
+              creator:
+                uuid: 655a2a4e-79b1-4637-9f13-b904730022ef
+                entityType: actor
+                associationType: reference
+              owner:
+                uuid: 655a2a4e-79b1-4637-9f13-b904730022ef
+                entityType: actor
+                associationType: reference
+            type: object
+            properties:
+              id:
+                description: >-
+                  Uniquely identifies this entity. A URI can be assigned by the
+                  client to indicate where more information
+                   can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                   required to send it in the request. One can be generated for you by the server.
+                type: string
+              name:
+                description: Name of the entity. For display purposes and search only.
+                type: string
+              creationDate:
+                description: The creation date of this entity.
+                type: string
+              lastModified:
+                description: >-
+                  The last modified date of this entity. If none is given the
+                  creation date is used instead.
+                type: string
+              contextEvents:
+                description: >-
+                  The context events provides some optional information about
+                  the events that can provide additional information
+                   on the current state of this entity.
+
+                  For example: your system might send ETA information for the
+                  arrival of a vehicle on a location. To make it clear
+
+                  what caused this ETA to be updated, we can include some
+                  information about what caused this ETA update by including
+
+                  an event as context. If your ETA update was caused by a
+                  location update, this event can be included as context. If
+
+                  the ETA was caused by a traffic accident on the route of the
+                  vehicle, you can include that event in the context.
+                type: array
+                items:
+                  $ref: ../components/schemas/events.yaml
+              content:
+                description: >-
+                  The content of the document. There are two different options
+                  on how the content can be provided. Either through
+
+                  an external link to where the content lives. Or directly as an
+                  encoded base64 string.
+                allOf:
+                  - $ref: ../components/schemas/content.yaml
+              externalAttributes:
+                description: >
+                  External attributes are a simple way to add information in an
+                  OpenTripModel message that could not fit into one of
+                    the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+                    ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+                   > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+                     it was intended.
+                type: object
+                properties: {}
+                additionalProperties:
+                  $ref: ../components/schemas/unrestricted_json.yaml
+              documentType:
+                description: >-
+                  The type of the document, such as a photo, text document, PDF
+                  etc.
+                type: string
+              filename:
+                description: The name of the file.
+                type: string
+              mimeType:
+                description: >-
+                  The official MIME type of the file. See
+                  [Wikepedia](https://en.wikipedia.org/wiki/Media_type) for more
+                  information.
+                type: string
+              description:
+                description: >-
+                  The description of the file, for example what purpose it
+                  serves.
+                type: string
+              creator:
+                description: >-
+                  The actor who owns the document. If not provided, the creator
+                  will be assumed to be the owner.
+                oneOf:
+                  - $ref: ../components/schemas/document-creator-inline.yaml
+                  - $ref: ../components/schemas/reference-roles.yaml
+                  - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/document-creator-inline.yaml
+                    reference: ../components/schemas/reference-roles.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+              owner:
+                description: >-
+                  The actor who owns the document. If not provided, the creator
+                  will be assumed to be the owner.
+                oneOf:
+                  - $ref: ../components/schemas/document-owner-inline.yaml
+                  - $ref: ../components/schemas/reference-roles.yaml
+                  - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/document-owner-inline.yaml
+                    reference: ../components/schemas/reference-roles.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+            required:
+              - content
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '404':
+      description: ''
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Get a specific Document by its UUID
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of this Document
+      required: true
+  tags:
+    - Document
+  security:
+    - BearerToken: []
+delete:
+  responses:
+    '204':
+      description: Deleted document with the provided UUID
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Deletes a Document
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of the Document to be deleted
+      required: true
+  tags:
+    - Document
+  security:
+    - BearerToken: []

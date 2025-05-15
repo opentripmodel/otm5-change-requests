@@ -1,0 +1,141 @@
+example:
+  id: fc6b2b0c-2f0a-40c6-a580-212c5c7984c8
+  name: couple vehicle to trip
+  lifecycle: planned
+  entity1:
+    uuid: 50824123-0924-4563-ac1e-ca0e37487823
+    entityType: trip
+    associationType: reference
+  entity2:
+    entity:
+      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
+      name: Bob's Boxtruck
+      vehicleType: boxtruck
+      fuel: electricity
+      loadCapacities:
+        - value: 1000
+          unit: kg
+      length:
+        value: 8
+        unit: m
+      height:
+        value: 2.8
+        unit: m
+      width:
+        value: 2
+        unit: m
+      licensePlate: AB-12-CD
+      emptyWeight:
+        value: 2000
+        unit: kg
+      entityType: vehicle
+    associationType: inline
+  eventType: associationCreatedEvent
+type: object
+properties:
+  eventType:
+    example: associationCreatedEvent
+    type: string
+    enum:
+      - associationCreatedEvent
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  externalAttributes:
+    description: >
+      External attributes are a simple way to add information in an
+      OpenTripModel message that could not fit into one of
+        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+         it was intended.
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  lifecycle:
+    description: >-
+      A lifecycle models _when_ the data in the action is taking place. You can
+      provide the same action in multiple
+
+      lifecycles to model how it changes over time. For example the planned and
+      realized time of an action taking place
+
+      can differ because of unforseen circumstances (such as traffic jams).
+    type: string
+    enum:
+      - requested
+      - planned
+      - projected
+      - actual
+      - realized
+  entity1:
+    description: >-
+      One of the two entities between which an association is created. Note that
+      the order of the entities is unimportant, an association created works
+      both ways.
+    allOf:
+      - $ref: ./entity1.yaml
+  entity2:
+    description: >-
+      One of the two entities between which an association is created. Note that
+      the order of the entities is unimportant, an association created works
+      both ways.
+    allOf:
+      - $ref: ./entity2.yaml
+  actors:
+    description: >-
+      The actors that are relevant to this event, such as the carrier or shipper
+      it belongs to.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./reference-roles.yaml
+        - $ref: ./attributeRestriction-roles.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./associated-actors-inline.yaml
+          reference: ./reference-roles.yaml
+          attributeRestriction: ./attributeRestriction-roles.yaml
+required:
+  - eventType
+  - entity1
+  - entity2

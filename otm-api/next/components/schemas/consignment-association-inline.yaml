@@ -1,0 +1,30 @@
+type: object
+properties:
+  associationType:
+    example: inline
+    type: string
+    enum:
+      - inline
+  entity:
+    $ref: ./consignment-association.yaml
+  description:
+    description: A free text description of the relationship to the associated entity.
+    type: string
+  relation:
+    description: >-
+      New consignments can replace previous consignments because one of two
+      reasons:
+       * **split**: when the consignment is split into multiple sub-consignments, for example because the contents were too large for single transport.
+       * **postponed**: when the consignment could not be delivered correctly.
+
+      Note that the relation only goes from previous consignment to new
+      consignment and not vice-versa. See also the
+
+      `relatedConsignments` field on Consignments.
+    type: string
+    enum:
+      - split
+      - postponed
+required:
+  - associationType
+  - entity

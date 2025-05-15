@@ -1,0 +1,48 @@
+oneOf:
+  - $ref: ./trip.yaml
+  - $ref: ./sensor.yaml
+  - $ref: ./route.yaml
+  - $ref: ./location.yaml
+  - $ref: ./actor.yaml
+  - $ref: ./constraint.yaml
+  - $ref: ./transportOrder.yaml
+  - $ref: ./goods.yaml
+  - $ref: ./consignment.yaml
+  - $ref: ./vehicle.yaml
+  - $ref: ./document.yaml
+  - $ref: ./load-in-events.yaml
+  - $ref: ./unload-in-events.yaml
+  - $ref: ./stop-in-events.yaml
+  - $ref: ./move-in-events.yaml
+  - $ref: ./handover-in-events.yaml
+  - $ref: ./attach-in-events.yaml
+  - $ref: ./detach-in-events.yaml
+  - $ref: ./refuel-in-events.yaml
+  - $ref: ./break-in-events.yaml
+  - $ref: ./wait-in-events.yaml
+  - $ref: ./generic-in-events.yaml
+discriminator:
+  propertyName: entityType
+  mapping:
+    trip: ./trip.yaml
+    sensor: ./sensor.yaml
+    route: ./route.yaml
+    location: ./location.yaml
+    actor: ./actor.yaml
+    constraint: ./constraint.yaml
+    transportOrder: ./transportOrder.yaml
+    goods: ./goods.yaml
+    consignment: ./consignment.yaml
+    vehicle: ./vehicle.yaml
+    document: ./document.yaml
+    load: ./load-in-events.yaml
+    unload: ./unload-in-events.yaml
+    stop: ./stop-in-events.yaml
+    move: ./move-in-events.yaml
+    handOver: ./handover-in-events.yaml
+    attachTransportEquipment: ./attach-in-events.yaml
+    detachTransportEquipment: ./detach-in-events.yaml
+    refuel: ./refuel-in-events.yaml
+    break: ./break-in-events.yaml
+    wait: ./wait-in-events.yaml
+    genericAction: ./generic-in-events.yaml

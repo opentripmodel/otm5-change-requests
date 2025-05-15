@@ -1,0 +1,35 @@
+type: object
+properties:
+  type:
+    example: tmcLocationGeoReference
+    type: string
+    enum:
+      - tmcLocationGeoReference
+  countryCode:
+    description: TMC country code.
+    type: string
+  tableId:
+    description: TMC table ID.
+    type: string
+  tableVersionId:
+    description: TMC table version ID.
+    type: string
+  locationCode:
+    description: TMC location code.
+    type: string
+  direction:
+    description: TMC direction.
+    type: string
+    enum:
+      - positive
+      - negative
+  offset:
+    description: Offset from the TMC location in meters.
+    type: integer
+    format: int64
+required:
+  - type
+  - countryCode
+  - tableId
+  - tableVersionId
+  - locationCode

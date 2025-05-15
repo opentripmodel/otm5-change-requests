@@ -1,0 +1,12 @@
+type: array
+items:
+  oneOf:
+    - $ref: ./invalidJson.yaml
+    - $ref: ./invalidField.yaml
+    - $ref: ./missingField.yaml
+  discriminator:
+    propertyName: type
+    mapping:
+      invalidJson: ./invalidJson.yaml
+      invalidField: ./invalidField.yaml
+      missingField: ./missingField.yaml

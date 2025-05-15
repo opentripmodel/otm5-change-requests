@@ -1,0 +1,29 @@
+oneOf:
+  - $ref: ./associationCreatedEvent.yaml
+  - $ref: ./associationRemovedEvent.yaml
+  - $ref: ./updateEvent.yaml
+  - $ref: ./locationUpdateEvent.yaml
+  - $ref: ./startMovingEvent.yaml
+  - $ref: ./stopMovingEvent.yaml
+  - $ref: ./startWaitingEvent.yaml
+  - $ref: ./stopMovingEvent.yaml
+  - $ref: ./startEngineEvent.yaml
+  - $ref: ./stopEngineEvent.yaml
+  - $ref: ./sensorUpdateEvent.yaml
+  - $ref: ./fuelConsumedEvent.yaml
+  - $ref: ./emissionEvent.yaml
+discriminator:
+  propertyName: eventType
+  mapping:
+    associationCreatedEvent: ./associationCreatedEvent.yaml
+    associationRemovedEvent: ./associationRemovedEvent.yaml
+    updateEvent: ./updateEvent.yaml
+    locationUpdateEvent: ./locationUpdateEvent.yaml
+    startMovingEvent: ./startMovingEvent.yaml
+    stopMovingEvent: ./stopMovingEvent.yaml
+    startWaitingEvent: ./startWaitingEvent.yaml
+    startEngineEvent: ./startEngineEvent.yaml
+    stopEngineEvent: ./stopEngineEvent.yaml
+    sensorUpdateEvent: ./sensorUpdateEvent.yaml
+    fuelConsumedEvent: ./fuelConsumedEvent.yaml
+    emissionEvent: ./emissionEvent.yaml

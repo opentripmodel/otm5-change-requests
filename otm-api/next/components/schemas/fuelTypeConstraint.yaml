@@ -1,0 +1,20 @@
+type: object
+properties:
+  type:
+    example: fuelTypeConstraint
+    type: string
+    enum:
+      - fuelTypeConstraint
+  fuelTypes:
+    description: The fuel types to which this constraint apply.
+    type: array
+    items:
+      type: string
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - fuelTypes

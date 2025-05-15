@@ -1,0 +1,20 @@
+type: object
+properties:
+  type:
+    example: vehicleTypeConstraint
+    type: string
+    enum:
+      - vehicleTypeConstraint
+  vehicleTypes:
+    description: The vehicle types that this constraint apply to.
+    type: array
+    items:
+      type: string
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - vehicleTypes

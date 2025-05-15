@@ -1,0 +1,305 @@
+example:
+  id: a0e04457-a272-4160-91cc-4483aa5296c7
+  name: Moving between the warehouse and the customer
+  externalAttributes:
+    timeDelay:
+      value: 2
+      unit: s
+  from:
+    entity:
+      id: 11c11d75-e114-4b5f-9751-b3a4afa23ecf
+      name: Main warehouse
+      geoReference:
+        lat: 5.4126792
+        lon: 52.1956251
+        type: latLonPointGeoReference
+      type: warehouse
+      administrativeReference:
+        name: Supermarket warehouse
+        street: Valutaboulevard
+        houseNumber: '16'
+        houseNumberAddition: C
+        postalCode: 1825BT
+        city: Amersfoort
+        country: NL
+      contactDetails:
+        - value: '+312012345678'
+          remark: private cellphone of the CEO
+          language: nld
+          type: phone
+      remark: The cafe around the corner has the best coffee in town.
+    associationType: inline
+  to:
+    entity:
+      id: 9a3f26b2-8cf3-48db-b663-6c751c86d710
+      geoReference:
+        name: House of Alice
+        street: North Lane
+        houseNumber: '123'
+        houseNumberAddition: B
+        postalCode: 9999ZZ
+        type: addressGeoReference
+    associationType: inline
+  route:
+    entity:
+      id: beb9a25f-3f64-42ae-b1c6-e89cd450f66b
+      name: An example route using coordinates to indicate how to drive.
+      geoReferences:
+        geometry:
+          coordinates:
+            - - 1
+              - 0
+            - - 5
+              - 0
+            - - 5
+              - 3
+            - - 13
+              - 3
+            - - 13
+              - 7
+          type: LineString
+        type: Feature
+    associationType: inline
+type: object
+properties:
+  entityType:
+    example: move
+    type: string
+    enum:
+      - move
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  externalAttributes:
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  lifecycle:
+    description: >-
+      A lifecycle models _when_ the data in the action is taking place. You can
+      provide the same action in multiple
+
+      lifecycles to model how it changes over time. For example the planned and
+      realized time of an action taking place
+
+      can differ because of unforseen circumstances (such as traffic jams).
+    type: string
+    enum:
+      - requested
+      - planned
+      - projected
+      - actual
+      - realized
+  result:
+    description: >-
+      The result of the action, can only be present in the actual or realized
+      lifecycles. The result has a
+
+      required status and optional additional info, like a remark and reason (in
+      the case of failure).
+    type: object
+    properties:
+      status:
+        description: >-
+          The status of the result, either succeeded, failed, partially
+          succeeded or cancelled.
+        type: string
+        enum:
+          - succeeded
+          - failed
+          - partiallySucceeded
+          - cancelled
+      remark:
+        description: >-
+          The remark of the result, usually only interesting in case the result
+          was failed or partially succeedded. Note that
+
+          differs from the remark on an action, which is a remark that is
+          relevant before the execution of the action. Whereas
+
+          this remark is relevant for the result after execution.
+        type: string
+      reason:
+        description: >-
+          The reason why the action (partially) failed. Currently the only
+          supported reasons are 'damage' and
+
+          `receiverAbsent`. E.g. as an example of the former: the handOver
+          failed because the goods were too damaged and
+
+          were rejected. An example of the latter is when the goods were planned
+          to be delivered but nobody was there
+
+          to receive the goods and therefore had to be taken back.
+        type: string
+        enum:
+          - damage
+          - receiverAbsent
+    required:
+      - status
+  transportMode:
+    description: >-
+      Method of transport used for the carriage of goods on this move, can
+      either be using a ship (maritime or
+
+      inland waterway), a truck/car/van/bike/etc. (road), using the train
+      (rail), or using a plane (air). These
+
+      values are based on the
+
+      [recommendation of
+      UNECE](https://unece.org/fileadmin/DAM/cefact/recommendations/rec19/rec19_ecetrd138.pdf).
+    type: string
+    enum:
+      - maritime
+      - road
+      - rail
+      - air
+      - inlandWaterway
+  remark:
+    description: Free text field for adding an on remark on this action.
+    type: string
+  sequenceNr:
+    description: >-
+      The sequence number of this action within the entity it is taking place.
+      Can be used to indicate order when no times are present
+    type: integer
+    format: int64
+  trip:
+    description: >-
+      The trip in which this Move takes place, only provided if the trip is not
+      clear from the context.
+    oneOf:
+      - $ref: ./trip-association-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./trip-association-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  from:
+    description: The location from which the move action is started.
+    oneOf:
+      - $ref: ./from-location-move-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./from-location-move-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  to:
+    description: The location where the move action is ended.
+    oneOf:
+      - $ref: ./to-location-move-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./to-location-move-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  timeFormat:
+    default: dateTime
+    type: string
+    enum:
+      - dateTime
+      - recurringDateTime
+      - duration
+  startTime:
+    description: The time at which the actions starts in ISO format.
+    type: string
+  endTime:
+    description: The time at which the action is completed in ISO format.
+    type: string
+  recurrence:
+    description: >-
+      The recurrence of the date time, should only be set when `timeFormat` is
+      set to `recurringDateTime`. The
+
+      recurrence follows the [Recurrence
+      Rule](https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.3)
+
+      specification
+    type: string
+    format: recurrence
+  duration:
+    description: >-
+      The duration of this action/event, should only be set when `timeFormat` is
+      set to `duration`. The
+
+      duration follows the [ISO
+      8601](https://www.digi.com/resources/documentation/digidocs//90001488-13/reference/r_iso_8601_duration_format.htm)
+
+      specification
+    example: PT168H
+    type: string
+    format: duration
+  route:
+    description: The route from location A to location B that is travelled.
+    oneOf:
+      - $ref: ./route-association-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./route-association-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  constraint:
+    description: >-
+      Constraints which this move action abides to, such as vehicle type or time
+      window constraints.
+    oneOf:
+      - $ref: ./move-constraint-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./move-constraint-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+required:
+  - entityType

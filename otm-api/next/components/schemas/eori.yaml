@@ -1,0 +1,22 @@
+type: object
+properties:
+  type:
+    example: eori
+    type: string
+    enum:
+      - eori
+  value:
+    description: >-
+      An EORI number. See [the official
+      specification](https://ec.europa.eu/taxation_customs/dds2/eos/eori_home.jsp?Lang=en)
+      for more details.
+    type: string
+  remark:
+    description: Remark for this EORI number.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value

@@ -1,0 +1,283 @@
+get:
+  responses:
+    '200':
+      description: Returned the entity with the provided UUID
+      content:
+        application/json:
+          schema:
+            example:
+              id: 11c11d75-e114-4b5f-9751-b3a4afa23ecf
+              name: Main warehouse
+              geoReference:
+                lat: 5.4126792
+                lon: 52.1956251
+                type: latLonPointGeoReference
+              type: warehouse
+              administrativeReference:
+                name: Supermarket warehouse
+                street: Valutaboulevard
+                houseNumber: '16'
+                houseNumberAddition: C
+                postalCode: 1825BT
+                city: Amersfoort
+                country: NL
+              contactDetails:
+                - value: '+312012345678'
+                  remark: private cellphone of the CEO
+                  language: nld
+                  type: phone
+              remark: The cafe around the corner has the best coffee in town.
+            type: object
+            properties:
+              id:
+                description: >-
+                  Uniquely identifies this entity. A URI can be assigned by the
+                  client to indicate where more information
+                   can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                   required to send it in the request. One can be generated for you by the server.
+                type: string
+              name:
+                description: Name of the entity. For display purposes and search only.
+                type: string
+              creationDate:
+                description: The creation date of this entity.
+                type: string
+              lastModified:
+                description: >-
+                  The last modified date of this entity. If none is given the
+                  creation date is used instead.
+                type: string
+              contextEvents:
+                description: >-
+                  The context events provides some optional information about
+                  the events that can provide additional information
+                   on the current state of this entity.
+
+                  For example: your system might send ETA information for the
+                  arrival of a vehicle on a location. To make it clear
+
+                  what caused this ETA to be updated, we can include some
+                  information about what caused this ETA update by including
+
+                  an event as context. If your ETA update was caused by a
+                  location update, this event can be included as context. If
+
+                  the ETA was caused by a traffic accident on the route of the
+                  vehicle, you can include that event in the context.
+                type: array
+                items:
+                  $ref: ../components/schemas/events.yaml
+              geoReference:
+                description: >-
+                  Describes a geographic reference, this is the primary way to
+                  link a `Location` entity to a physical, geographic location.
+                oneOf:
+                  - $ref: ../components/schemas/latLonPointGeoReference.yaml
+                  - $ref: ../components/schemas/latLonArrayGeoReference.yaml
+                  - $ref: ../components/schemas/Feature.yaml
+                  - $ref: ../components/schemas/openLRGeoReference.yaml
+                  - $ref: ../components/schemas/tmcLocationGeoReference.yaml
+                  - $ref: ../components/schemas/tmcArrayGeoReference.yaml
+                  - $ref: ../components/schemas/addressGeoReference.yaml
+                discriminator:
+                  propertyName: type
+                  mapping:
+                    latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
+                    latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
+                    Feature: ../components/schemas/Feature.yaml
+                    openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
+                    tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
+                    tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
+                    addressGeoReference: ../components/schemas/addressGeoReference.yaml
+              externalAttributes:
+                type: object
+                properties: {}
+                additionalProperties:
+                  $ref: ../components/schemas/unrestricted_json.yaml
+              unCode:
+                description: >-
+                  the United Nations Code for Trade and Transport Locations, is
+                  a geographic coding scheme developed and
+                   maintained by United Nations Economic Commission for Europe (UNECE) to uniquely identify locations. See
+                   [this Wikipedia page](https://en.wikipedia.org/wiki/UN/LOCODE).
+                type: string
+              gln:
+                description: >-
+                  The Global Location Number (GLN) is part of the GS1 systems of
+                  standards to uniquely identify a location. See
+                   also this [Wikipedia page](https://en.wikipedia.org/wiki/Global_Location_Number)
+                type: string
+              type:
+                description: The type of location.
+                type: string
+                enum:
+                  - warehouse
+                  - store
+                  - environmentalZone
+                  - restrictedArea
+                  - customer
+                  - operationalBase
+              administrativeReference:
+                description: >-
+                  Address information that is used as an administrative
+                  reference. For example: when the actual load location is
+                  different from the officially registered location, this holds
+                  the latter
+                allOf:
+                  - $ref: ../components/schemas/Address.yaml
+              contactDetails:
+                description: Contact details for this `Location`.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/phone.yaml
+                    - $ref: ../components/schemas/mobilePhone.yaml
+                    - $ref: ../components/schemas/email.yaml
+                    - $ref: ../components/schemas/firstName.yaml
+                    - $ref: ../components/schemas/lastName.yaml
+                    - $ref: ../components/schemas/name.yaml
+                    - $ref: ../components/schemas/vatCode.yaml
+                    - $ref: ../components/schemas/gln.yaml
+                    - $ref: ../components/schemas/iban.yaml
+                    - $ref: ../components/schemas/eori.yaml
+                    - $ref: ../components/schemas/other.yaml
+                  discriminator:
+                    propertyName: type
+                    mapping:
+                      phone: ../components/schemas/phone.yaml
+                      mobilePhone: ../components/schemas/mobilePhone.yaml
+                      email: ../components/schemas/email.yaml
+                      firstName: ../components/schemas/firstName.yaml
+                      lastName: ../components/schemas/lastName.yaml
+                      name: ../components/schemas/name.yaml
+                      vatCode: ../components/schemas/vatCode.yaml
+                      gln: ../components/schemas/gln.yaml
+                      iban: ../components/schemas/iban.yaml
+                      eori: ../components/schemas/eori.yaml
+                      other: ../components/schemas/other.yaml
+              remark:
+                description: >-
+                  Remark about the location. Please don't misuse this field for
+                  external references, use the `externalAttributes` field
+                  instead.
+                type: string
+              subLocations:
+                description: >-
+                  The locations that are can be identified on their own, but are
+                  also part of this location. For example a dock at
+
+                  a large distribution area. Sub-locations can also be seen as
+                  'points of interest' on a larger location.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/associated-locations-inline.yaml
+                    - $ref: ../components/schemas/reference.yaml
+                    - $ref: ../components/schemas/attributeRestriction.yaml
+                  discriminator:
+                    propertyName: associationType
+                    mapping:
+                      inline: ../components/schemas/associated-locations-inline.yaml
+                      reference: ../components/schemas/reference.yaml
+                      attributeRestriction: ../components/schemas/attributeRestriction.yaml
+              actors:
+                description: >-
+                  Locations can be associated with actors in multiple ways,
+                  though the most common one is the _owner_ of the location,
+                  either a person or a legal entity.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/associated-actors-inline.yaml
+                    - $ref: ../components/schemas/reference-roles.yaml
+                    - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                  discriminator:
+                    propertyName: associationType
+                    mapping:
+                      inline: ../components/schemas/associated-actors-inline.yaml
+                      reference: ../components/schemas/reference-roles.yaml
+                      attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+              actions:
+                description: >-
+                  Multiple actions can be associated with a location, such as a
+                  Last-Mile guidance that should be followed to reach that
+                  location.
+                type: array
+                items:
+                  $ref: ../components/schemas/associations-actions.yaml
+              constraint:
+                description: >-
+                  In the context of a `Location`, access to the location is only
+                  allowed if the given constraint applies.
+
+
+                  > **ℹ Note** that constraints can be nested and combined using
+                  the `andConstraint`, `orConstraint` and `notConstraint`.
+                oneOf:
+                  - $ref: ../components/schemas/location-constraint-inline.yaml
+                  - $ref: ../components/schemas/reference.yaml
+                  - $ref: ../components/schemas/attributeRestriction.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/location-constraint-inline.yaml
+                    reference: ../components/schemas/reference.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction.yaml
+            required:
+              - geoReference
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '404':
+      description: ''
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Get a specific Location by its UUID
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of this Location
+      required: true
+  tags:
+    - Location
+  security:
+    - BearerToken: []
+delete:
+  responses:
+    '204':
+      description: Deleted location with the provided UUID
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Deletes a Location
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of the Location to be deleted
+      required: true
+  tags:
+    - Location
+  security:
+    - BearerToken: []

@@ -1,0 +1,21 @@
+type: object
+properties:
+  type:
+    example: mobilePhone
+    type: string
+    enum:
+      - mobilePhone
+  value:
+    description: >-
+      A mobile phone number. Note for a land line you can use the normal phone
+      contact detail type.
+    type: string
+  remark:
+    description: Remark for this mobile phone.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value

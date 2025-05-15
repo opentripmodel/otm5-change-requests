@@ -1,0 +1,98 @@
+example:
+  id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+  name: Example combined constraint
+  value:
+    and:
+      - startTime: '2021-06-23T10:00:00Z'
+        endTime: '2021-06-23T13:00:00Z'
+        description: alert-threshold
+        type: timeWindowConstraint
+      - constraintType: maximum
+        maximum:
+          value: 5
+          unit: C
+        type: temperatureConstraint
+      - or:
+          - fuelTypes:
+              - battery
+            type: fuelTypeConstraint
+          - fuelTypes:
+              - biodiesel
+            type: fuelTypeConstraint
+          - minimum: euro5
+            type: emissionStandardConstraint
+        type: orConstraint
+    type: andConstraint
+type: object
+properties:
+  entityType:
+    example: constraint
+    type: string
+    enum:
+      - constraint
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  value:
+    $ref: ./constraintValue.yaml
+  enforceability:
+    description: >-
+      The enforceability of the constraint. Indicates whether or not the
+      constraint is a suggestion/preference or something that is mandatory to
+      adhere to.
+    default: enforced
+    type: string
+    enum:
+      - enforced
+      - preference
+  externalAttributes:
+    description: >
+      External attributes are a simple way to add information in an
+      OpenTripModel message that could not fit into one of
+        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+         it was intended.
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+required:
+  - entityType
+  - value

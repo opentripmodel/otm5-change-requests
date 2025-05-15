@@ -1,0 +1,26 @@
+type: object
+properties:
+  type:
+    example: routeEntityConstraint
+    type: string
+    enum:
+      - routeEntityConstraint
+  route:
+    oneOf:
+      - $ref: ./route-entity-constraint-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./route-entity-constraint-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - route

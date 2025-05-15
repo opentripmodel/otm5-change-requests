@@ -1,0 +1,502 @@
+put:
+  responses:
+    '200':
+      description: The same entity
+      content:
+        application/json:
+          schema:
+            example:
+              id: 50824123-0924-4563-ac1e-ca0e37487823
+              name: Daily supply trip
+              status: inTransit
+              transportMode: road
+              vehicle:
+                uuid: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
+                entityType: vehicle
+                associationType: reference
+              actions:
+                - entity:
+                    id: d1636ce5-1d12-4545-b3ee-6ddb05631b3a
+                    name: Stop at the distribution center (already done)
+                    lifecycle: realized
+                    sequenceNr: 0
+                    actions:
+                      - entity:
+                          id: e81a7aa3-23a6-4089-b916-52b854c7b6f1
+                          lifecycle: planned
+                          remark: loading a consignment
+                          consignment:
+                            uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
+                            entityType: consignment
+                            associationType: reference
+                          startTime: '2021-06-23T14:00:00Z'
+                          endTime: '2021-06-23T14:15:00Z'
+                          constraint:
+                            entity:
+                              id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+                              name: Example combined constraint
+                              value:
+                                and:
+                                  - startTime: '2021-06-23T10:00:00Z'
+                                    endTime: '2021-06-23T13:00:00Z'
+                                    description: alert-threshold
+                                    type: timeWindowConstraint
+                                  - constraintType: maximum
+                                    maximum:
+                                      value: 5
+                                      unit: C
+                                    type: temperatureConstraint
+                                  - or:
+                                      - fuelTypes:
+                                          - battery
+                                        type: fuelTypeConstraint
+                                      - fuelTypes:
+                                          - biodiesel
+                                        type: fuelTypeConstraint
+                                      - minimum: euro5
+                                        type: emissionStandardConstraint
+                                    type: orConstraint
+                                type: andConstraint
+                            associationType: inline
+                          actionType: load
+                        associationType: inline
+                    actionType: stop
+                  associationType: inline
+                - entity:
+                    id: 8dd09992-eb55-40a4-b496-bf1292fa5933
+                    name: Stop at the store (still needs to be visited)
+                    lifecycle: planned
+                    sequenceNr: 1
+                    actions:
+                      - entity:
+                          id: a5f5fc23-744a-46f7-81b4-bfe26629ad4f
+                          lifecycle: planned
+                          remark: unloading a consignment
+                          consignment:
+                            uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
+                            entityType: consignment
+                            associationType: reference
+                          startTime: '2021-06-23T15:00:00Z'
+                          endTime: '2021-06-23T15:15:00Z'
+                          constraint:
+                            entity:
+                              id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+                              name: Example combined constraint
+                              value:
+                                and:
+                                  - startTime: '2021-06-23T10:00:00Z'
+                                    endTime: '2021-06-23T13:00:00Z'
+                                    description: alert-threshold
+                                    type: timeWindowConstraint
+                                  - constraintType: maximum
+                                    maximum:
+                                      value: 5
+                                      unit: C
+                                    type: temperatureConstraint
+                                  - or:
+                                      - fuelTypes:
+                                          - battery
+                                        type: fuelTypeConstraint
+                                      - fuelTypes:
+                                          - biodiesel
+                                        type: fuelTypeConstraint
+                                      - minimum: euro5
+                                        type: emissionStandardConstraint
+                                    type: orConstraint
+                                type: andConstraint
+                            associationType: inline
+                          actionType: unload
+                        associationType: inline
+                    actionType: stop
+                  associationType: inline
+            type: object
+            properties:
+              id:
+                description: >-
+                  Uniquely identifies this entity. A URI can be assigned by the
+                  client to indicate where more information
+                   can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                   required to send it in the request. One can be generated for you by the server.
+                type: string
+              name:
+                description: Name of the entity. For display purposes and search only.
+                type: string
+              creationDate:
+                description: The creation date of this entity.
+                type: string
+              lastModified:
+                description: >-
+                  The last modified date of this entity. If none is given the
+                  creation date is used instead.
+                type: string
+              contextEvents:
+                description: >-
+                  The context events provides some optional information about
+                  the events that can provide additional information
+                   on the current state of this entity.
+
+                  For example: your system might send ETA information for the
+                  arrival of a vehicle on a location. To make it clear
+
+                  what caused this ETA to be updated, we can include some
+                  information about what caused this ETA update by including
+
+                  an event as context. If your ETA update was caused by a
+                  location update, this event can be included as context. If
+
+                  the ETA was caused by a traffic accident on the route of the
+                  vehicle, you can include that event in the context.
+                type: array
+                items:
+                  $ref: ../components/schemas/events.yaml
+              externalAttributes:
+                type: object
+                properties: {}
+                additionalProperties:
+                  $ref: ../components/schemas/unrestricted_json.yaml
+              status:
+                description: >-
+                  Whether this trip is a draft, requested, confirmed, in
+                  transit, completed or cancelled. The values accepted
+
+                  (replaced by confirmed) and modified (replaced the
+                  lastModified field on every entity) are deprecated since
+
+                  OTM5.1, but will be supported for the whole OTM5.X line.
+                type: string
+                enum:
+                  - draft
+                  - requested
+                  - confirmed
+                  - inTransit
+                  - completed
+                  - cancelled
+                  - accepted
+                  - modified
+              transportMode:
+                description: >-
+                  Method of transport used for the carriage of goods on this
+                  trip, can either be using a ship (maritime or
+
+                  inland waterway), a truck/car/van/bike/etc. (road), using the
+                  train (rail), or using a plane (air). These
+
+                  values are based on the
+
+                  [recommendation of
+                  UNECE](https://unece.org/fileadmin/DAM/cefact/recommendations/rec19/rec19_ecetrd138.pdf).
+                type: string
+                enum:
+                  - maritime
+                  - road
+                  - rail
+                  - air
+                  - inlandWaterway
+              vehicle:
+                description: The `Vehicle` that is driving this trip.
+                oneOf:
+                  - $ref: ../components/schemas/vehicle-association-inline.yaml
+                  - $ref: ../components/schemas/reference.yaml
+                  - $ref: ../components/schemas/attributeRestriction.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/vehicle-association-inline.yaml
+                    reference: ../components/schemas/reference.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction.yaml
+              actors:
+                description: >-
+                  The actors associated with this trip, for instance the client
+                  or the executing party
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/associated-actors-inline.yaml
+                    - $ref: ../components/schemas/reference-roles.yaml
+                    - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                  discriminator:
+                    propertyName: associationType
+                    mapping:
+                      inline: ../components/schemas/associated-actors-inline.yaml
+                      reference: ../components/schemas/reference-roles.yaml
+                      attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+              actions:
+                description: >-
+                  All actions that are/were happening on this trip, such as
+                  stopping at certain locations and loading and unloading of
+                  consignments.
+                type: array
+                items:
+                  $ref: ../components/schemas/associations-actions.yaml
+              constraint:
+                description: >-
+                  Constraints this trip has to abide to, such as the start and
+                  end date times in which it has to be completed.
+                oneOf:
+                  - $ref: ../components/schemas/trip-constraint-inline.yaml
+                  - $ref: ../components/schemas/reference.yaml
+                  - $ref: ../components/schemas/attributeRestriction.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/trip-constraint-inline.yaml
+                    reference: ../components/schemas/reference.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction.yaml
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Adds a new Trip
+  requestBody:
+    content:
+      application/json:
+        schema:
+          example:
+            id: 50824123-0924-4563-ac1e-ca0e37487823
+            name: Daily supply trip
+            status: inTransit
+            transportMode: road
+            vehicle:
+              uuid: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
+              entityType: vehicle
+              associationType: reference
+            actions:
+              - entity:
+                  id: d1636ce5-1d12-4545-b3ee-6ddb05631b3a
+                  name: Stop at the distribution center (already done)
+                  lifecycle: realized
+                  sequenceNr: 0
+                  actions:
+                    - entity:
+                        id: e81a7aa3-23a6-4089-b916-52b854c7b6f1
+                        lifecycle: planned
+                        remark: loading a consignment
+                        consignment:
+                          uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
+                          entityType: consignment
+                          associationType: reference
+                        startTime: '2021-06-23T14:00:00Z'
+                        endTime: '2021-06-23T14:15:00Z'
+                        constraint:
+                          entity:
+                            id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+                            name: Example combined constraint
+                            value:
+                              and:
+                                - startTime: '2021-06-23T10:00:00Z'
+                                  endTime: '2021-06-23T13:00:00Z'
+                                  description: alert-threshold
+                                  type: timeWindowConstraint
+                                - constraintType: maximum
+                                  maximum:
+                                    value: 5
+                                    unit: C
+                                  type: temperatureConstraint
+                                - or:
+                                    - fuelTypes:
+                                        - battery
+                                      type: fuelTypeConstraint
+                                    - fuelTypes:
+                                        - biodiesel
+                                      type: fuelTypeConstraint
+                                    - minimum: euro5
+                                      type: emissionStandardConstraint
+                                  type: orConstraint
+                              type: andConstraint
+                          associationType: inline
+                        actionType: load
+                      associationType: inline
+                  actionType: stop
+                associationType: inline
+              - entity:
+                  id: 8dd09992-eb55-40a4-b496-bf1292fa5933
+                  name: Stop at the store (still needs to be visited)
+                  lifecycle: planned
+                  sequenceNr: 1
+                  actions:
+                    - entity:
+                        id: a5f5fc23-744a-46f7-81b4-bfe26629ad4f
+                        lifecycle: planned
+                        remark: unloading a consignment
+                        consignment:
+                          uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
+                          entityType: consignment
+                          associationType: reference
+                        startTime: '2021-06-23T15:00:00Z'
+                        endTime: '2021-06-23T15:15:00Z'
+                        constraint:
+                          entity:
+                            id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+                            name: Example combined constraint
+                            value:
+                              and:
+                                - startTime: '2021-06-23T10:00:00Z'
+                                  endTime: '2021-06-23T13:00:00Z'
+                                  description: alert-threshold
+                                  type: timeWindowConstraint
+                                - constraintType: maximum
+                                  maximum:
+                                    value: 5
+                                    unit: C
+                                  type: temperatureConstraint
+                                - or:
+                                    - fuelTypes:
+                                        - battery
+                                      type: fuelTypeConstraint
+                                    - fuelTypes:
+                                        - biodiesel
+                                      type: fuelTypeConstraint
+                                    - minimum: euro5
+                                      type: emissionStandardConstraint
+                                  type: orConstraint
+                              type: andConstraint
+                          associationType: inline
+                        actionType: unload
+                      associationType: inline
+                  actionType: stop
+                associationType: inline
+          type: object
+          properties:
+            id:
+              description: >-
+                Uniquely identifies this entity. A URI can be assigned by the
+                client to indicate where more information
+                 can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                 required to send it in the request. One can be generated for you by the server.
+              type: string
+            name:
+              description: Name of the entity. For display purposes and search only.
+              type: string
+            creationDate:
+              description: The creation date of this entity.
+              type: string
+            lastModified:
+              description: >-
+                The last modified date of this entity. If none is given the
+                creation date is used instead.
+              type: string
+            contextEvents:
+              description: >-
+                The context events provides some optional information about the
+                events that can provide additional information
+                 on the current state of this entity.
+
+                For example: your system might send ETA information for the
+                arrival of a vehicle on a location. To make it clear
+
+                what caused this ETA to be updated, we can include some
+                information about what caused this ETA update by including
+
+                an event as context. If your ETA update was caused by a location
+                update, this event can be included as context. If
+
+                the ETA was caused by a traffic accident on the route of the
+                vehicle, you can include that event in the context.
+              type: array
+              items:
+                $ref: ../components/schemas/events.yaml
+            externalAttributes:
+              type: object
+              properties: {}
+              additionalProperties:
+                $ref: ../components/schemas/unrestricted_json.yaml
+            status:
+              description: >-
+                Whether this trip is a draft, requested, confirmed, in transit,
+                completed or cancelled. The values accepted
+
+                (replaced by confirmed) and modified (replaced the lastModified
+                field on every entity) are deprecated since
+
+                OTM5.1, but will be supported for the whole OTM5.X line.
+              type: string
+              enum:
+                - draft
+                - requested
+                - confirmed
+                - inTransit
+                - completed
+                - cancelled
+                - accepted
+                - modified
+            transportMode:
+              description: >-
+                Method of transport used for the carriage of goods on this trip,
+                can either be using a ship (maritime or
+
+                inland waterway), a truck/car/van/bike/etc. (road), using the
+                train (rail), or using a plane (air). These
+
+                values are based on the
+
+                [recommendation of
+                UNECE](https://unece.org/fileadmin/DAM/cefact/recommendations/rec19/rec19_ecetrd138.pdf).
+              type: string
+              enum:
+                - maritime
+                - road
+                - rail
+                - air
+                - inlandWaterway
+            vehicle:
+              description: The `Vehicle` that is driving this trip.
+              oneOf:
+                - $ref: ../components/schemas/vehicle-association-inline.yaml
+                - $ref: ../components/schemas/reference.yaml
+                - $ref: ../components/schemas/attributeRestriction.yaml
+              discriminator:
+                propertyName: associationType
+                mapping:
+                  inline: ../components/schemas/vehicle-association-inline.yaml
+                  reference: ../components/schemas/reference.yaml
+                  attributeRestriction: ../components/schemas/attributeRestriction.yaml
+            actors:
+              description: >-
+                The actors associated with this trip, for instance the client or
+                the executing party
+              type: array
+              items:
+                oneOf:
+                  - $ref: ../components/schemas/associated-actors-inline.yaml
+                  - $ref: ../components/schemas/reference-roles.yaml
+                  - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/associated-actors-inline.yaml
+                    reference: ../components/schemas/reference-roles.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+            actions:
+              description: >-
+                All actions that are/were happening on this trip, such as
+                stopping at certain locations and loading and unloading of
+                consignments.
+              type: array
+              items:
+                $ref: ../components/schemas/associations-actions.yaml
+            constraint:
+              description: >-
+                Constraints this trip has to abide to, such as the start and end
+                date times in which it has to be completed.
+              oneOf:
+                - $ref: ../components/schemas/trip-constraint-inline.yaml
+                - $ref: ../components/schemas/reference.yaml
+                - $ref: ../components/schemas/attributeRestriction.yaml
+              discriminator:
+                propertyName: associationType
+                mapping:
+                  inline: ../components/schemas/trip-constraint-inline.yaml
+                  reference: ../components/schemas/reference.yaml
+                  attributeRestriction: ../components/schemas/attributeRestriction.yaml
+  tags:
+    - Trip
+  security:
+    - BearerToken: []

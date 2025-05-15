@@ -1,0 +1,30 @@
+put:
+  responses:
+    '200':
+      description: The same entity
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/events.yaml
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Adds a new Event
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/events.yaml
+  tags:
+    - Event
+  security:
+    - BearerToken: []

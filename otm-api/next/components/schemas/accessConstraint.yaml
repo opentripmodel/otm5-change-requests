@@ -1,0 +1,17 @@
+type: object
+properties:
+  type:
+    example: accessConstraint
+    type: string
+    enum:
+      - accessConstraint
+  access:
+    type: string
+    enum:
+      - closed
+      - partialClosed
+  description:
+    type: string
+required:
+  - type
+  - access

@@ -1,0 +1,22 @@
+type: object
+properties:
+  type:
+    example: MultiLineString
+    type: string
+    enum:
+      - MultiLineString
+  coordinates:
+    description: >-
+      A [GeoJSON](https://tools.ietf.org/html/rfc7946) [MultiLineString
+      geometry](https://tools.ietf.org/html/rfc7946#section-3.1.5).
+    type: array
+    items:
+      type: array
+      items:
+        type: array
+        items:
+          type: number
+          format: double
+required:
+  - type
+  - coordinates

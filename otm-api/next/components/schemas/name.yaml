@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    example: name
+    type: string
+    enum:
+      - name
+  value:
+    description: The full name. Includes first and last name if applicable.
+    type: string
+  remark:
+    description: Remark for this name.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value

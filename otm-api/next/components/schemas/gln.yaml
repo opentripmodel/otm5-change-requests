@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    example: gln
+    type: string
+    enum:
+      - gln
+  value:
+    description: A GLN (Global Location Number) code.
+    type: string
+  remark:
+    description: Remark for this GLN code.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value
