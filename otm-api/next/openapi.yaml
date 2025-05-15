@@ -51,6 +51,10 @@ info:
     Add new property 'otherLocationType' to specify the location type in case of 'other'.
     [See 73](https://github.com/opentripmodel/otm5-change-requests/issues/73).
 
+    * Add eight new action result reasons, including 'deliveredElsewhere', 'deliveredToWrongReceiver' and 'other'.
+    In case of 'other' the result reason can be provided as free text in the existing remark property.
+    [See 89](https://github.com/opentripmodel/otm5-change-requests/issues/89).
+
 
     **Version 5.6 (released on 2023-11-17)**
 

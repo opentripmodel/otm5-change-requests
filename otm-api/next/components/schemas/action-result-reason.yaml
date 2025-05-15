@@ -1,0 +1,36 @@
+type: string
+description: >-
+  The reason why the action (partially) failed.
+
+  Supported reasons are:
+    * damage
+      The package was damaged during transit and cannot be delivered.
+    * deliveredElsewhere
+      Indicates that the delivery was completed but not at the originally planned destination. This may occur due to instructions from the recipient, changes in delivery requirements, or operational constraints.
+    * deliveredToWrongReceiver
+      The package was delivered to the wrong recipient and is no longer available.
+    * inaccessibleAddress
+      The delivery address is temporarily unreachable (e.g., due to roadworks, severe weather, or emergencies).
+    * incomplete
+      Indicates that the delivery or transport operation was not fully completed. This could be due to partial delivery, missing items, or an inability to deliver all goods as planned.
+    * invalidAddress
+      The specified address is incorrect or does not exist.
+    * invalidShippingLabel
+      The shipping label contains incorrect or unreadable information.
+    * receiverAbsent
+      The recipient was not present at the time of delivery.
+    * rejectedByReceiver
+      The recipient refused to accept the package.
+    * other
+      A general result reason for outcomes that do not match any of the predefined result reasons. It is designed to capture edge cases or uncommon situations that may require further investigation or manual review. The specific reason is provided in the remark property of this result object.
+enum:
+  - damage
+  - deliveredElsewhere
+  - deliveredToWrongReceiver
+  - inaccessibleAddress
+  - incomplete
+  - invalidAddress
+  - invalidShippingLabel
+  - receiverAbsent
+  - rejectedByReceiver
+  - other

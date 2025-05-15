@@ -151,21 +151,7 @@ properties:
           this remark is relevant for the result after execution.
         type: string
       reason:
-        description: >-
-          The reason why the action (partially) failed. Currently the only
-          supported reasons are 'damage' and
-
-          `receiverAbsent`. E.g. as an example of the former: the handOver
-          failed because the goods were too damaged and
-
-          were rejected. An example of the latter is when the goods were planned
-          to be delivered but nobody was there
-
-          to receive the goods and therefore had to be taken back.
-        type: string
-        enum:
-          - damage
-          - receiverAbsent
+        $ref: ./action-result-reason.yaml
     required:
       - status
   transportMode:
