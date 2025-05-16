@@ -40,6 +40,9 @@ example:
         postalCode: 9999ZZ
         type: addressGeoReference
     associationType: inline
+  distance:
+    value: 120
+    unit: "km"
   route:
     entity:
       id: beb9a25f-3f64-42ae-b1c6-e89cd450f66b
@@ -262,6 +265,12 @@ properties:
     example: PT168H
     type: string
     format: duration
+  distance:
+    description: >-
+      The distance between `from` and `to` locations of this move action.
+      The difference between calculated and actually driven distance can be specified using multiple move actions with a different
+      lifecycle (e.g. 'projected' vs 'actual')
+    $ref: ./value-with-unit.yaml
   route:
     description: The route from location A to location B that is travelled.
     oneOf:

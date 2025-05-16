@@ -55,6 +55,9 @@ info:
     In case of 'other' the result reason can be provided as free text in the existing remark property.
     [See 89](https://github.com/opentripmodel/otm5-change-requests/issues/89).
 
+    * Add distance property in move action. This can be provided by means of value and unit (e.g. 120 km)
+    [See 90](https://github.com/opentripmodel/otm5-change-requests/issues/90)
+
 
     **Version 5.6 (released on 2023-11-17)**
 
