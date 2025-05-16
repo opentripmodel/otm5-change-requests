@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    example: iban
+    type: string
+    enum:
+      - iban
+  value:
+    description: An IBAN (International Bank Account Number) code.
+    type: string
+  remark:
+    description: Remark for this IBAN code.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value

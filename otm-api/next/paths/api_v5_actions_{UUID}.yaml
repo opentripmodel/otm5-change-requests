@@ -1,0 +1,64 @@
+get:
+  responses:
+    '200':
+      description: Returned the entity with the provided UUID
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/action.yaml
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '404':
+      description: ''
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Get a specific Action by its UUID
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of this Action
+      required: true
+  tags:
+    - Action
+  security:
+    - BearerToken: []
+delete:
+  responses:
+    '204':
+      description: Deleted action with the provided UUID
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Deletes a Action
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of the Action to be deleted
+      required: true
+  tags:
+    - Action
+  security:
+    - BearerToken: []

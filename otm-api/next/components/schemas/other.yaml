@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    example: other
+    type: string
+    enum:
+      - other
+  value:
+    description: Some other contact detail.
+    type: string
+  remark:
+    description: Remark for this other type of contact detail.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value

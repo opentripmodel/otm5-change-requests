@@ -1,0 +1,191 @@
+type: object
+properties:
+  type:
+    example: latLonArrayGeoReference
+    type: string
+    enum:
+      - latLonArrayGeoReference
+  points:
+    description: An array of lat/lon points.
+    type: array
+    items:
+      type: object
+      properties:
+        lat:
+          description: The latitude of a point location.
+          type: number
+          format: double
+        lon:
+          description: The longitude of a point location.
+          type: number
+          format: double
+        speed:
+          description: The speed of a moving vehicle.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        heading:
+          description: >-
+            The heading of a vehicle, that is: the direction the "nose" of the
+            vehicle is pointing to.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        bearing:
+          description: >-
+            The bearing of a vehicle, that is: the angle between the vehicle and
+            its destination.
+             Either measured _relative_ or _absolute_. See [Wikipedia](https://en.wikipedia.org/wiki/Bearing_(navigation)) for an explanation.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        bearingType:
+          description: >-
+            Denotes how the bearing is measured. See
+            [Wikipedia](https://en.wikipedia.org/wiki/Bearing_(navigation)) for
+            an explanation.
+          type: string
+          enum:
+            - absolute
+            - relative
+      required:
+        - lat
+        - lon
+required:
+  - type
+  - points

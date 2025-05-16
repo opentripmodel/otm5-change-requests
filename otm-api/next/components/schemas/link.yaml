@@ -1,0 +1,12 @@
+type: object
+properties:
+  contentType:
+    example: link
+    type: string
+    enum:
+      - link
+  uri:
+    type: string
+required:
+  - contentType
+  - uri

@@ -1,0 +1,26 @@
+type: object
+properties:
+  type:
+    example: emissionStandardConstraint
+    type: string
+    enum:
+      - emissionStandardConstraint
+  minimum:
+    description: The minimum required emission standard that is required for the vehicle.
+    type: string
+    enum:
+      - euro0
+      - euro1
+      - euro2
+      - euro3
+      - euro4
+      - euro5
+      - euro6
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - minimum

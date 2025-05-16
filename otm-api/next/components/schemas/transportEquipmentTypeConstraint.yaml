@@ -1,0 +1,23 @@
+type: object
+properties:
+  type:
+    example: transportEquipmentTypeConstraint
+    type: string
+    enum:
+      - transportEquipmentTypeConstraint
+  equipmentTypes:
+    type: array
+    items:
+      type: string
+  subEquipmentTypes:
+    type: array
+    items:
+      type: string
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - equipmentTypes

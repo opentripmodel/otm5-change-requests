@@ -1,0 +1,59 @@
+type: object
+properties:
+  associationType:
+    example: attributeRestriction
+    type: string
+    enum:
+      - attributeRestriction
+  restriction:
+    type: object
+    properties:
+      externalAttributes:
+        type: object
+        properties: {}
+        additionalProperties:
+          type: string
+    required:
+      - externalAttributes
+  entityType:
+    type: string
+    enum:
+      - actor
+      - constraint
+      - location
+      - sensor
+      - trip
+      - vehicle
+      - transportOrder
+      - consignment
+      - goods
+      - items
+      - transportEquipment
+      - load
+      - unload
+      - handOver
+      - attachTransportEquipment
+      - detachTransportEquipment
+      - document
+      - route
+      - stop
+      - move
+      - genericAction
+      - associationCreated
+      - associationRemoved
+      - updateEvent
+      - locationUpdate
+      - sensorUpdate
+      - startWaiting
+      - stopWaiting
+      - startMoving
+      - stopMoving
+      - startEngine
+      - stopEngine
+  description:
+    description: A free text description of the relationship to the associated entity.
+    type: string
+required:
+  - associationType
+  - restriction
+  - entityType

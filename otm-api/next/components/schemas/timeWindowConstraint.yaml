@@ -1,0 +1,20 @@
+type: object
+properties:
+  type:
+    example: timeWindowConstraint
+    type: string
+    enum:
+      - timeWindowConstraint
+  startTime:
+    description: This constraint applies from the given start date/time.
+    type: string
+  endTime:
+    description: This constraint applies until the given start date/time.
+    type: string
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type

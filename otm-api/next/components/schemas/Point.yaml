@@ -1,0 +1,18 @@
+type: object
+properties:
+  type:
+    example: Point
+    type: string
+    enum:
+      - Point
+  coordinates:
+    description: >-
+      A [GeoJSON](https://tools.ietf.org/html/rfc7946) [Point
+      geometry](https://tools.ietf.org/html/rfc7946#section-3.1.2).
+    type: array
+    items:
+      type: number
+      format: double
+required:
+  - type
+  - coordinates

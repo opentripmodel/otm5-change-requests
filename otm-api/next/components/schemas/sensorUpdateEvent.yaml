@@ -1,0 +1,166 @@
+example:
+  name: temperature sensor
+  creationDate: '2021-06-23T10:00:00Z'
+  lifecycle: actual
+  sensor:
+    uuid: 9d2f8c40-ced5-4d48-89a2-6377b0362d2a
+    entityType: sensor
+    associationType: reference
+  value:
+    value: -20
+    unit: °C
+  eventType: sensorUpdateEvent
+type: object
+properties:
+  eventType:
+    example: sensorUpdateEvent
+    type: string
+    enum:
+      - sensorUpdateEvent
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  externalAttributes:
+    description: >
+      External attributes are a simple way to add information in an
+      OpenTripModel message that could not fit into one of
+        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+         it was intended.
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  lifecycle:
+    description: >-
+      A lifecycle models _when_ the data in the action is taking place. You can
+      provide the same action in multiple
+
+      lifecycles to model how it changes over time. For example the planned and
+      realized time of an action taking place
+
+      can differ because of unforseen circumstances (such as traffic jams).
+    type: string
+    enum:
+      - requested
+      - planned
+      - projected
+      - actual
+      - realized
+  sensor:
+    description: The value that is measured by the sensor at the specified time.
+    oneOf:
+      - $ref: ./sensor-association-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./sensor-association-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  value:
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        description: >-
+          Measurement unit of this value. OTM5 currently does not enforce any
+          units of measure. So you are free to use
+
+          any unit necessary. However to ensure parties use OTM5 consistently
+          there are a few rules:
+
+          * For **currencies** use the [ISO_4217
+          standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+          * For **mass**, **volume** and **length** the [SI system
+          (International System of
+          Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+          is
+            recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+            proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+          * For degrees the recommend approach is Celsius, but Fahrenheit and
+          Kelvin are also supported. To again avoid
+            problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+            (C, F, or K).
+          * For velocity use the metric system. The required format would then
+          be \<length\>/\<time unit\> for the metric
+            system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+          Since usage is not enforced you can deviate from these rules, though
+          only do so if strictly necessary. The
+
+          benefit from using a standard comes from consistent use, so deviating
+          from the recommendations diminishes your
+
+          benefit.
+
+
+          If the type of unit you need is not supported please create a
+
+          [change
+          request](https://github.com/opentripmodel/otm5-change-requests)
+        type: string
+    required:
+      - value
+      - unit
+  actors:
+    description: >-
+      The actors that are relevant to this event, such as the carrier or shipper
+      it belongs to.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./reference-roles.yaml
+        - $ref: ./attributeRestriction-roles.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./associated-actors-inline.yaml
+          reference: ./reference-roles.yaml
+          attributeRestriction: ./attributeRestriction-roles.yaml
+required:
+  - eventType
+  - value

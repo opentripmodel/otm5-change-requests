@@ -1,0 +1,921 @@
+example:
+  id: 903807df-ee62-47aa-bf8e-7efd747618ce
+  description: Box of bananas
+  remark: Please deliver in time, we want fresh bananas
+  barCode: CSE370
+  productType: Fruit
+  packagingMaterial: Box
+  constraint:
+    entity:
+      value:
+        and:
+          - startTime: '2021-06-23T10:00:00Z'
+            endTime: '2021-06-23T13:00:00Z'
+            description: alert-threshold
+            type: timeWindowConstraint
+          - constraintType: maximum
+            maximum:
+              value: 5
+              unit: C
+            type: temperatureConstraint
+          - or:
+              - fuelTypes:
+                  - battery
+                type: fuelTypeConstraint
+              - fuelTypes:
+                  - biodiesel
+                type: fuelTypeConstraint
+              - minimum: euro5
+                type: emissionStandardConstraint
+            type: orConstraint
+        type: andConstraint
+    associationType: inline
+  type: items
+type: object
+properties:
+  type:
+    example: items
+    type: string
+    enum:
+      - items
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  externalAttributes:
+    description: >
+      External attributes are a simple way to add information in an
+      OpenTripModel message that could not fit into one of
+        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+         it was intended.
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  description:
+    description: A free text description of these goods.
+    type: string
+  remark:
+    description: >-
+      Remark belonging to the goods that need to be transported. For example a
+      delivery note.
+    type: string
+  barCode:
+    description: >-
+      A barcode present on the (packaging of the) goods that uniquely identifies
+      these goods.
+    type: string
+  quantity:
+    description: >-
+      A quantity determines how many of a certain good you have. Note that all
+      other measurements are measured 
+
+      for a **single** product, not for the total of products.
+    type: integer
+    format: int32
+  weight:
+    description: >-
+      The net weight of a 'single' good, the total weight can be calculated by
+      using the quantity and multiplying it
+
+      with this weight.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        description: >-
+          Measurement unit of this value. OTM5 currently does not enforce any
+          units of measure. So you are free to use
+
+          any unit necessary. However to ensure parties use OTM5 consistently
+          there are a few rules:
+
+          * For **currencies** use the [ISO_4217
+          standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+          * For **mass**, **volume** and **length** the [SI system
+          (International System of
+          Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+          is
+            recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+            proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+          * For degrees the recommend approach is Celsius, but Fahrenheit and
+          Kelvin are also supported. To again avoid
+            problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+            (C, F, or K).
+          * For velocity use the metric system. The required format would then
+          be \<length\>/\<time unit\> for the metric
+            system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+          Since usage is not enforced you can deviate from these rules, though
+          only do so if strictly necessary. The
+
+          benefit from using a standard comes from consistent use, so deviating
+          from the recommendations diminishes your
+
+          benefit.
+
+
+          If the type of unit you need is not supported please create a
+
+          [change
+          request](https://github.com/opentripmodel/otm5-change-requests)
+        type: string
+    required:
+      - value
+      - unit
+  grossWeight:
+    description: >-
+      The gross weight of a 'single' good, the total weight can be calculated by
+      using the quantity and multiplying it
+
+      with this weight.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        description: >-
+          Measurement unit of this value. OTM5 currently does not enforce any
+          units of measure. So you are free to use
+
+          any unit necessary. However to ensure parties use OTM5 consistently
+          there are a few rules:
+
+          * For **currencies** use the [ISO_4217
+          standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+          * For **mass**, **volume** and **length** the [SI system
+          (International System of
+          Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+          is
+            recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+            proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+          * For degrees the recommend approach is Celsius, but Fahrenheit and
+          Kelvin are also supported. To again avoid
+            problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+            (C, F, or K).
+          * For velocity use the metric system. The required format would then
+          be \<length\>/\<time unit\> for the metric
+            system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+          Since usage is not enforced you can deviate from these rules, though
+          only do so if strictly necessary. The
+
+          benefit from using a standard comes from consistent use, so deviating
+          from the recommendations diminishes your
+
+          benefit.
+
+
+          If the type of unit you need is not supported please create a
+
+          [change
+          request](https://github.com/opentripmodel/otm5-change-requests)
+        type: string
+    required:
+      - value
+      - unit
+  width:
+    description: >-
+      The width of a 'single' good, the total width can be calculated by using
+      the quantity and multiplying it
+
+      with this width.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        description: >-
+          Measurement unit of this value. OTM5 currently does not enforce any
+          units of measure. So you are free to use
+
+          any unit necessary. However to ensure parties use OTM5 consistently
+          there are a few rules:
+
+          * For **currencies** use the [ISO_4217
+          standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+          * For **mass**, **volume** and **length** the [SI system
+          (International System of
+          Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+          is
+            recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+            proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+          * For degrees the recommend approach is Celsius, but Fahrenheit and
+          Kelvin are also supported. To again avoid
+            problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+            (C, F, or K).
+          * For velocity use the metric system. The required format would then
+          be \<length\>/\<time unit\> for the metric
+            system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+          Since usage is not enforced you can deviate from these rules, though
+          only do so if strictly necessary. The
+
+          benefit from using a standard comes from consistent use, so deviating
+          from the recommendations diminishes your
+
+          benefit.
+
+
+          If the type of unit you need is not supported please create a
+
+          [change
+          request](https://github.com/opentripmodel/otm5-change-requests)
+        type: string
+    required:
+      - value
+      - unit
+  height:
+    description: >-
+      The height of a 'single' good, the total height can be calculated by using
+      the quantity and multiplying
+
+      it with this height.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        description: >-
+          Measurement unit of this value. OTM5 currently does not enforce any
+          units of measure. So you are free to use
+
+          any unit necessary. However to ensure parties use OTM5 consistently
+          there are a few rules:
+
+          * For **currencies** use the [ISO_4217
+          standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+          * For **mass**, **volume** and **length** the [SI system
+          (International System of
+          Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+          is
+            recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+            proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+          * For degrees the recommend approach is Celsius, but Fahrenheit and
+          Kelvin are also supported. To again avoid
+            problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+            (C, F, or K).
+          * For velocity use the metric system. The required format would then
+          be \<length\>/\<time unit\> for the metric
+            system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+          Since usage is not enforced you can deviate from these rules, though
+          only do so if strictly necessary. The
+
+          benefit from using a standard comes from consistent use, so deviating
+          from the recommendations diminishes your
+
+          benefit.
+
+
+          If the type of unit you need is not supported please create a
+
+          [change
+          request](https://github.com/opentripmodel/otm5-change-requests)
+        type: string
+    required:
+      - value
+      - unit
+  length:
+    description: >-
+      The length of a 'single' good, the total length can be calculated by using
+      the quantity and multiplying
+
+      it with this length.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        description: >-
+          Measurement unit of this value. OTM5 currently does not enforce any
+          units of measure. So you are free to use
+
+          any unit necessary. However to ensure parties use OTM5 consistently
+          there are a few rules:
+
+          * For **currencies** use the [ISO_4217
+          standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+          * For **mass**, **volume** and **length** the [SI system
+          (International System of
+          Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+          is
+            recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+            proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+          * For degrees the recommend approach is Celsius, but Fahrenheit and
+          Kelvin are also supported. To again avoid
+            problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+            (C, F, or K).
+          * For velocity use the metric system. The required format would then
+          be \<length\>/\<time unit\> for the metric
+            system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+          Since usage is not enforced you can deviate from these rules, though
+          only do so if strictly necessary. The
+
+          benefit from using a standard comes from consistent use, so deviating
+          from the recommendations diminishes your
+
+          benefit.
+
+
+          If the type of unit you need is not supported please create a
+
+          [change
+          request](https://github.com/opentripmodel/otm5-change-requests)
+        type: string
+    required:
+      - value
+      - unit
+  adr:
+    description: Information about the potentially dangerous properties of these goods.
+    type: object
+    properties:
+      UNNumber:
+        description: >-
+          A UN number (United Nations number) is a four-digit number that
+          identifies hazardous materials, and articles
+
+          (such as explosives, flammable liquids, oxidizers, toxic liquids,
+          etc.) in the framework of international
+
+          transport. The list of UN numbers can be found in the
+
+          [official
+          specification](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf).
+        type: string
+      waste:
+        description: Indicator to be used in case commodity is classified as waste
+        type: boolean
+      description:
+        description: >-
+          Contains in upper case chararacters, the name of the substance or
+          article, if the substance or article has
+
+          been assigned its own specific UN number, or otherwise the proper
+          shipping name shall be used. See 3.1.2 for
+
+          further details
+        type: string
+      technicalName:
+        description: >-
+          The technical name which shall supplement the proper shipping name
+          shall be the ISO common name. A
+
+          recognized chemical name, if relevant a biological name, or other name
+          currently used in scientific and
+
+          technical handbooks, journals and texts. (see 3.1.2.8.1.1 in
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+        type: string
+      dangerLabels:
+        description: >-
+          The model number(s) of the labels/placards (see 5.2.2.2 and 5.3.1.7
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+          that have to be
+
+          affixed to packages, containers, tank containers, portable tanks,
+          MEGC’s and veh
+        type: array
+        items:
+          type: string
+      class:
+        description: >-
+          Number of the class, whose heading covers the dangerous substance or
+          article. 2.1.1.1 The classes of
+
+          dangerous goods according to ADR are the following:
+
+
+          - Class 1 Explosive substances and articles
+
+          - Class 2 Gases
+
+          - Class 3 Flammable liquids
+
+          - Class 4.1 Flammable solids, self reactive substances, polymerizing
+          substances and solid desensitized
+            explosives
+          - Class 4.2 Substances liable to spontaneous combustion
+
+          - Class 4.3 Substances which, in contact with water, emit flammable
+          gases
+
+          - Class 5.1 Oxidizing substances
+
+          - Class 5.2 Organic peroxides
+
+          - Class6.1 Toxic substances
+
+          - Class 6.2 Infectious substances
+
+          - Class 7 Radioactive material
+
+          - Class 8 Corrosive substances
+
+          - Class 9 Miscellaneous dangerous substances and articles
+        type: string
+      classificationCode:
+        description: >-
+          The classification code of the dangerous substance or article. The
+          code consists out of a division number
+
+          and compatibility group letter depending on the class
+        type: string
+      packagingGroup:
+        description: >-
+          Packing Group means a group of which, for packing purposes, certain
+          substances may be assigned in accordance
+
+          with their degree of danger. Packing group values: I, II and II
+        type: string
+      tunnelCode:
+        description: >-
+          Code to indicate tunnel category where restrictions apply to the
+          passage of vehicles carrying dangerous goods.
+
+          Categories A.B.C.D. and E as defined in 1.9.5.2.2.
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+        type: string
+      environmentallyHazardous:
+        description: Indicator to be used to label waste as environmentally hazardous.
+        type: boolean
+      language:
+        description: >-
+          Marks shall be in an official language of the country of origin and
+          also, if that language is not English,
+
+          French or German, in English, French or German, unless agreements, if
+          any, concluded between the countries
+
+          concerned in transport operations provide otherwise.
+        type: string
+      specialProvisions:
+        description: >-
+          Contains the numeric codes of special provisions that have to be met.
+          Listed in Chapter 3.3
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+        type: string
+      points:
+        description: >-
+          Determines the amount of points the goods being transported are
+          categorized with. The higher the points the
+
+          more dangerous the goods are. The method for calculating ADR points
+          can be found
+
+          [here](https://prosafecon.de/en/the-1000-points-rule-how-are-adr-points-calculated).
+        type: integer
+        format: int32
+      transportCategory:
+        description: >-
+          Determines the type of transport category the goods are categorized
+          with. See
+
+          [this table](https://specialcargo.nl/adr.php) for more information on
+          the different categories.
+        type: string
+        enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+    required:
+      - UNNumber
+      - description
+      - packagingGroup
+      - tunnelCode
+      - language
+  productType:
+    description: The product type of goods, for instance bananas.
+    type: string
+  packagingMaterial:
+    description: >-
+      Description of the package type. Use as described by the [GS1
+      standard](https://www.gs1.nl/media/qcdhditc/so-gs1das-guideline-packaging-type.pdf).
+    type: string
+  classificationLines:
+    description: >-
+      Product classification information often required at customs. A single
+      product can contain multiple classification
+
+      lines. For example whenever the product consists of multiple components
+      that can each be classified. The most
+
+      important information in the classification lines is often the HS code.
+    type: array
+    items:
+      type: object
+      properties:
+        hsCode:
+          description: >-
+            [The Harmonized System (HS)
+            code](https://en.wikipedia.org/wiki/Harmonized_System) is a product
+            classification
+
+            code used by all members of the World Customs Organization (WCO) to
+            classify goods for customs purposes.
+          type: string
+        description:
+          description: The description of this classification line.
+          type: string
+        quantity:
+          description: >-
+            A quantity determines how many of a certain good you have. Note that
+            all other measurements are measured 
+
+            for a **single** product, not for the total of products.
+          type: integer
+          format: int32
+        weight:
+          description: >-
+            The net weight of a 'single' good, the total weight can be
+            calculated by using the quantity and multiplying it
+
+            with this weight.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        grossWeight:
+          description: >-
+            The gross weight of a 'single' good, the total weight can be
+            calculated by using the quantity and multiplying it
+
+            with this weight.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        width:
+          description: >-
+            The width of a 'single' classified goods part, the total width can
+            be calculated by using the quantity and multiplying it
+
+            with this width.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        height:
+          description: >-
+            The height of a 'single' classified goods part, the total height can
+            be calculated by using the quantity and multiplying
+
+            it with this height.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        length:
+          description: >-
+            The length of a 'single' classified goods part, the total length can
+            be calculated by using the quantity and multiplying
+
+            it with this length.
+          type: object
+          properties:
+            value:
+              description: Value in the given unit.
+              type: number
+              format: double
+            unit:
+              description: >-
+                Measurement unit of this value. OTM5 currently does not enforce
+                any units of measure. So you are free to use
+
+                any unit necessary. However to ensure parties use OTM5
+                consistently there are a few rules:
+
+                * For **currencies** use the [ISO_4217
+                standard](https://en.wikipedia.org/wiki/ISO_4217)
+
+                * For **mass**, **volume** and **length** the [SI system
+                (International System of
+                Units)](https://en.wikipedia.org/wiki/International_System_of_Units)
+                is
+                  recommended. To avoid problems with symbols, square and cubic units of measure are simply communicated using the
+                  proper number. Thus a square meter is `m2` and a cubic meter is `m3`.
+                * For degrees the recommend approach is Celsius, but Fahrenheit
+                and Kelvin are also supported. To again avoid
+                  problems with symbols, the degree symbol (° in °C) is left off, thus only the single capital letter remains
+                  (C, F, or K).
+                * For velocity use the metric system. The required format would
+                then be \<length\>/\<time unit\> for the metric
+                  system, such as km/h (kilometer per hour) or m/s (meter per second).
+
+                Since usage is not enforced you can deviate from these rules,
+                though only do so if strictly necessary. The
+
+                benefit from using a standard comes from consistent use, so
+                deviating from the recommendations diminishes your
+
+                benefit.
+
+
+                If the type of unit you need is not supported please create a
+
+                [change
+                request](https://github.com/opentripmodel/otm5-change-requests)
+              type: string
+          required:
+            - value
+            - unit
+        others:
+          description: >-
+            Fallback solution as a stopgap for fields not yet in otm. You can
+            use these, but please file a
+
+            [change
+            request](https://github.com/opentripmodel/otm5-change-requests/issues)
+            so that they can be properly
+
+            incorporated into the specification.
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                description: The key of this classification field
+                type: string
+              value:
+                description: The value that belongs to the kef of this classification field
+                type: string
+            required:
+              - key
+              - value
+  actors:
+    description: >-
+      All parties associated with these goods, for example the consignor and
+      consignee.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./reference-roles.yaml
+        - $ref: ./attributeRestriction-roles.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./associated-actors-inline.yaml
+          reference: ./reference-roles.yaml
+          attributeRestriction: ./attributeRestriction-roles.yaml
+  constraint:
+    description: >-
+      The constraints put on these goods, most notably the required temperature
+      range or size of the vehicle. You
+
+      should only put constraints on the goods themselves when it is important
+      to distinguish goods within one
+
+      consignment with different requirements. Individual constraints on a goods
+      are powerful, but also complicate
+
+      the solution. When possible, prefer to put the constraint on the
+      consignment of the goods.
+    oneOf:
+      - $ref: ./goods-constraint-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./goods-constraint-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+required:
+  - type

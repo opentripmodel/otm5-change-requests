@@ -1,0 +1,42 @@
+# Think of allOf like a "merge"
+allOf:
+  - $ref: ./actor.yaml
+  - type: object
+    properties:
+      coc:
+        description: Chamber of Commerce number.
+        type: string
+      vat:
+        description: Value Added Tax number.
+        type: string
+      actors:
+        description: List of actors associated with this company actor. E.g. sister companies or employees.
+        type: array
+        items:
+          oneOf:
+            - $ref: ./associated-actors-inline.yaml
+            - $ref: ./reference-roles.yaml
+            - $ref: ./attributeRestriction-roles.yaml
+          discriminator:
+            propertyName: associationType
+            mapping:
+              inline: ./associated-actors-inline.yaml
+              reference: ./reference-roles.yaml
+              attributeRestriction: ./attributeRestriction-roles.yaml
+      website:
+        type: string
+      iban:
+        type: string
+      headoffice:
+        oneOf:
+          - $ref: ./associated-locations-inline.yaml
+          - $ref: ./reference.yaml
+          - $ref: ./attributeRestriction.yaml
+        discriminator:
+          propertyName: associationType
+          mapping:
+            inline: ./associated-locations-inline.yaml
+            reference: ./reference.yaml
+            attributeRestriction: ./attributeRestriction.yaml
+      gln:
+        type: string

@@ -1,0 +1,216 @@
+example:
+  id: 11c11d75-e114-4b5f-9751-b3a4afa23ecf
+  name: Main warehouse
+  geoReference:
+    lat: 5.4126792
+    lon: 52.1956251
+    type: latLonPointGeoReference
+  type: warehouse
+  administrativeReference:
+    name: Supermarket warehouse
+    street: Valutaboulevard
+    houseNumber: '16'
+    houseNumberAddition: C
+    postalCode: 1825BT
+    city: Amersfoort
+    country: NL
+  contactDetails:
+    - value: '+312012345678'
+      remark: private cellphone of the CEO
+      language: nld
+      type: phone
+  remark: The cafe around the corner has the best coffee in town.
+type: object
+properties:
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  geoReference:
+    description: >-
+      Describes a geographic reference, this is the primary way to link a
+      `Location` entity to a physical, geographic location.
+    oneOf:
+      - $ref: ./latLonPointGeoReference.yaml
+      - $ref: ./latLonArrayGeoReference.yaml
+      - $ref: ./Feature.yaml
+      - $ref: ./openLRGeoReference.yaml
+      - $ref: ./tmcLocationGeoReference.yaml
+      - $ref: ./tmcArrayGeoReference.yaml
+      - $ref: ./addressGeoReference.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        latLonPointGeoReference: ./latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ./latLonArrayGeoReference.yaml
+        Feature: ./Feature.yaml
+        openLRGeoReference: ./openLRGeoReference.yaml
+        tmcLocationGeoReference: ./tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ./tmcArrayGeoReference.yaml
+        addressGeoReference: ./addressGeoReference.yaml
+  externalAttributes:
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  unCode:
+    description: >-
+      the United Nations Code for Trade and Transport Locations, is a geographic
+      coding scheme developed and
+       maintained by United Nations Economic Commission for Europe (UNECE) to uniquely identify locations. See
+       [this Wikipedia page](https://en.wikipedia.org/wiki/UN/LOCODE).
+    type: string
+  gln:
+    description: >-
+      The Global Location Number (GLN) is part of the GS1 systems of standards
+      to uniquely identify a location. See
+       also this [Wikipedia page](https://en.wikipedia.org/wiki/Global_Location_Number)
+    type: string
+  type:
+    description: The type of location.
+    type: string
+    enum:
+      - warehouse
+      - store
+      - environmentalZone
+      - restrictedArea
+      - customer
+      - operationalBase
+      - fuelStation
+      - serviceStation
+      - other
+  otherLocationType:
+    description: Description of the location in case type of location is set to 'other'.
+    type: string
+  administrativeReference:
+    description: >-
+      Address information that is used as an administrative reference. For
+      example: when the actual load location is different from the officially
+      registered location, this holds the latter
+    allOf:
+      - $ref: ./Address.yaml
+  contactDetails:
+    description: Contact details for this `Location`.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./phone.yaml
+        - $ref: ./mobilePhone.yaml
+        - $ref: ./email.yaml
+        - $ref: ./firstName.yaml
+        - $ref: ./lastName.yaml
+        - $ref: ./name.yaml
+        - $ref: ./vatCode.yaml
+        - $ref: ./gln.yaml
+        - $ref: ./iban.yaml
+        - $ref: ./eori.yaml
+        - $ref: ./other.yaml
+      discriminator:
+        propertyName: type
+        mapping:
+          phone: ./phone.yaml
+          mobilePhone: ./mobilePhone.yaml
+          email: ./email.yaml
+          firstName: ./firstName.yaml
+          lastName: ./lastName.yaml
+          name: ./name.yaml
+          vatCode: ./vatCode.yaml
+          gln: ./gln.yaml
+          iban: ./iban.yaml
+          eori: ./eori.yaml
+          other: ./other.yaml
+  remark:
+    description: >-
+      Remark about the location. Please don't misuse this field for external
+      references, use the `externalAttributes` field instead.
+    type: string
+  subLocations:
+    description: >-
+      The locations that are can be identified on their own, but are also part
+      of this location. For example a dock at
+
+      a large distribution area. Sub-locations can also be seen as 'points of
+      interest' on a larger location.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./associated-locations-inline.yaml
+        - $ref: ./reference.yaml
+        - $ref: ./attributeRestriction.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./associated-locations-inline.yaml
+          reference: ./reference.yaml
+          attributeRestriction: ./attributeRestriction.yaml
+  actors:
+    description: >-
+      Locations can be associated with actors in multiple ways, though the most
+      common one is the _owner_ of the location, either a person or a legal
+      entity.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./reference-roles.yaml
+        - $ref: ./attributeRestriction-roles.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./associated-actors-inline.yaml
+          reference: ./reference-roles.yaml
+          attributeRestriction: ./attributeRestriction-roles.yaml
+  constraint:
+    description: >-
+      In the context of a `Location`, access to the location is only allowed if
+      the given constraint applies.
+
+
+      > **ℹ Note** that constraints can be nested and combined using the
+      `andConstraint`, `orConstraint` and `notConstraint`.
+    oneOf:
+      - $ref: ./location-constraint-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./location-constraint-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+required:
+  - geoReference

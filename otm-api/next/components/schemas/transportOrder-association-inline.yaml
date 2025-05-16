@@ -1,0 +1,15 @@
+type: object
+properties:
+  associationType:
+    example: inline
+    type: string
+    enum:
+      - inline
+  entity:
+    $ref: ./transportOrder-association.yaml
+  description:
+    description: A free text description of the relationship to the associated entity.
+    type: string
+required:
+  - associationType
+  - entity

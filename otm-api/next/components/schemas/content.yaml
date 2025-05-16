@@ -1,0 +1,8 @@
+oneOf:
+  - $ref: ./link.yaml
+  - $ref: ./data.yaml
+discriminator:
+  propertyName: contentType
+  mapping:
+    link: ./link.yaml
+    data: ./data.yaml

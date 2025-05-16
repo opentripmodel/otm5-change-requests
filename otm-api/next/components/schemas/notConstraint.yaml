@@ -1,0 +1,23 @@
+type: object
+properties:
+  type:
+    example: notConstraint
+    type: string
+    enum:
+      - notConstraint
+  not:
+    description: >-
+      The `notConstraint` inverts a given constraint, like a boolean NOT
+      operation. This means the resulting constraint will apply if the
+
+      underlying constraint would not.
+    allOf:
+      - $ref: ./constraintValue.yaml
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - not

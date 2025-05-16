@@ -1,0 +1,237 @@
+example:
+  id: a2d2595f-9554-45a3-8c7d-df2d1923ef51
+  lifecycle: planned
+  remark: attaching a trailer
+  vehicle:
+    entity:
+      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
+      name: Bob's Boxtruck
+      vehicleType: boxtruck
+      fuel: electricity
+      loadCapacities:
+        - value: 1000
+          unit: kg
+      length:
+        value: 8
+        unit: m
+      height:
+        value: 2.8
+        unit: m
+      width:
+        value: 2
+        unit: m
+      licensePlate: AB-12-CD
+      emptyWeight:
+        value: 2000
+        unit: kg
+    associationType: inline
+  transportEquipment:
+    uuid: a29905bb-9af8-4118-896a-71b1eaf07cc0
+    entityType: transportEquipment
+    associationType: reference
+  startTime: '2021-06-23T15:20:00Z'
+  endTime: '2021-06-23T15:30:00Z'
+type: object
+properties:
+  entityType:
+    example: detachTransportEquipment
+    type: string
+    enum:
+      - detachTransportEquipment
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  externalAttributes:
+    description: >
+      External attributes are a simple way to add information in an
+      OpenTripModel message that could not fit into one of
+        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
+        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
+
+       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
+         it was intended.
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  lifecycle:
+    description: >-
+      A lifecycle models _when_ the data in the action is taking place. You can
+      provide the same action in multiple
+
+      lifecycles to model how it changes over time. For example the planned and
+      realized time of an action taking place
+
+      can differ because of unforseen circumstances (such as traffic jams).
+    type: string
+    enum:
+      - requested
+      - planned
+      - projected
+      - actual
+      - realized
+  result:
+    description: >-
+      The result of the action, can only be present in the actual or realized
+      lifecycles. The result has a
+
+      required status and optional additional info, like a remark and reason (in
+      the case of failure).
+    type: object
+    properties:
+      status:
+        description: >-
+          The status of the result, either succeeded, failed, partially
+          succeeded or cancelled.
+        type: string
+        enum:
+          - succeeded
+          - failed
+          - partiallySucceeded
+          - cancelled
+      remark:
+        description: >-
+          The remark of the result, usually only interesting in case the result
+          was failed or partially succeedded. Note that
+
+          differs from the remark on an action, which is a remark that is
+          relevant before the execution of the action. Whereas
+
+          this remark is relevant for the result after execution.
+        type: string
+      reason:
+        $ref: ./action-result-reason.yaml
+    required:
+      - status
+  remark:
+    description: Free text field for adding an on remark on this action.
+    type: string
+  sequenceNr:
+    description: >-
+      The sequence number of this action within the entity it is taking place.
+      Can be used to indicate order when no times are present
+    type: integer
+    format: int64
+  vehicle:
+    description: The vehicle that is involved in this action.
+    oneOf:
+      - $ref: ./vehicle-association-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./vehicle-association-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  transportEquipment:
+    description: >-
+      The transport equipment that is being attached/detached to the associated
+      vehicle.
+    oneOf:
+      - $ref: ./transport-equipment-association-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./transport-equipment-association-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  location:
+    description: The location at which this action is taking place.
+    oneOf:
+      - $ref: ./action-location-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./action-location-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  timeFormat:
+    default: dateTime
+    type: string
+    enum:
+      - dateTime
+      - recurringDateTime
+      - duration
+  startTime:
+    description: The time at which the actions starts in ISO format.
+    type: string
+  endTime:
+    description: The time at which the action is completed in ISO format.
+    type: string
+  recurrence:
+    description: >-
+      The recurrence of the date time, should only be set when `timeFormat` is
+      set to `recurringDateTime`. The
+
+      recurrence follows the [Recurrence
+      Rule](https://datatracker.ietf.org/doc/html/rfc5545#section-3.8.5.3)
+
+      specification
+    type: string
+    format: recurrence
+  duration:
+    description: >-
+      The duration of this action/event, should only be set when `timeFormat` is
+      set to `duration`. The
+
+      duration follows the [ISO
+      8601](https://www.digi.com/resources/documentation/digidocs//90001488-13/reference/r_iso_8601_duration_format.htm)
+
+      specification
+    example: PT168H
+    type: string
+    format: duration
+  constraint:
+    description: The constraints this action abides to, such as start and end time windows.
+    oneOf:
+      - $ref: ./action-constraint-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./action-constraint-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+required:
+  - entityType

@@ -1,0 +1,187 @@
+type: object
+properties:
+  id:
+    description: >-
+      Uniquely identifies this entity. A URI can be assigned by the client to
+      indicate where more information
+       can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+       required to send it in the request. One can be generated for you by the server.
+    type: string
+  name:
+    description: Name of the entity. For display purposes and search only.
+    type: string
+  creationDate:
+    description: The creation date of this entity.
+    type: string
+  lastModified:
+    description: >-
+      The last modified date of this entity. If none is given the creation date
+      is used instead.
+    type: string
+  contextEvents:
+    description: >-
+      The context events provides some optional information about the events
+      that can provide additional information
+       on the current state of this entity.
+
+      For example: your system might send ETA information for the arrival of a
+      vehicle on a location. To make it clear
+
+      what caused this ETA to be updated, we can include some information about
+      what caused this ETA update by including
+
+      an event as context. If your ETA update was caused by a location update,
+      this event can be included as context. If
+
+      the ETA was caused by a traffic accident on the route of the vehicle, you
+      can include that event in the context.
+    type: array
+    items:
+      $ref: ./events.yaml
+  externalAttributes:
+    type: object
+    properties: {}
+    additionalProperties:
+      $ref: ./unrestricted_json.yaml
+  description:
+    description: >-
+      General description of consignment in Free text. e.g 20 europallets fruit.
+      Meant for human inspection, not for automating processes.
+    type: string
+  status:
+    description: >-
+      Whether this consignment is a draft, requested, confirmed, in transit,
+      completed or cancelled. The values accepted
+
+      (replaced by confirmed) and modified (replaced the lastModified field on
+      every entity) are deprecated since
+
+      OTM5.1, but will be supported for the whole OTM5.X line.
+    type: string
+    enum:
+      - draft
+      - requested
+      - confirmed
+      - inTransit
+      - completed
+      - cancelled
+      - accepted
+      - modified
+  type:
+    description: >-
+      Free text to describe type of consignment. Usually used to indicate the
+      property types of the products being transported (e.g. frozen, fragile,
+      etc.).
+    type: string
+  goods:
+    description: >-
+      The various goods that need to be transported, together they are part of
+      this consignment.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./goods-inline.yaml
+        - $ref: ./reference.yaml
+        - $ref: ./attributeRestriction.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./goods-inline.yaml
+          reference: ./reference.yaml
+          attributeRestriction: ./attributeRestriction.yaml
+  transportOrder:
+    description: The transport order this consignment belongs to.
+    oneOf:
+      - $ref: ./transportOrder-association-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./transportOrder-association-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  documents:
+    description: >-
+      Documents that are relevant for this consignment. Such as an official
+      agreement between consignee and consignor.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./documents-inline.yaml
+        - $ref: ./reference.yaml
+        - $ref: ./attributeRestriction.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./documents-inline.yaml
+          reference: ./reference.yaml
+          attributeRestriction: ./attributeRestriction.yaml
+  remark:
+    description: >-
+      Remark concerning the complete consignment, to be printed on the transport
+      document.
+    type: string
+  actors:
+    description: >-
+      The actors associated with this consignment, for instance the shipper and
+      carrier. One should inline the actors only on the top-level entity (such
+      as the transportOrder or trip)
+    type: array
+    items:
+      oneOf:
+        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./reference-roles.yaml
+        - $ref: ./attributeRestriction-roles.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./associated-actors-inline.yaml
+          reference: ./reference-roles.yaml
+          attributeRestriction: ./attributeRestriction-roles.yaml
+  constraint:
+    description: >-
+      Constraints this consignment has to abide to, such special equipment (tail
+      lift, truck mounted forklift), special
+
+      vehicle, special instructions related to consignor and consignee. Note
+      that you can put the constraints on the
+
+      individual goods. However using constraints on the consignment is simpler
+      and therefore recommended when
+
+      possible.
+    oneOf:
+      - $ref: ./consignment-constraint-inline.yaml
+      - $ref: ./reference.yaml
+      - $ref: ./attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ./consignment-constraint-inline.yaml
+        reference: ./reference.yaml
+        attributeRestriction: ./attributeRestriction.yaml
+  relatedConsignments:
+    description: >-
+      Consignments that have replaced the current consignment. Because of
+      various reasons a consignment can be
+
+      cancelled and replaced by one or more other consignments. An example is
+      that the consignment is too large
+
+      to be transported as a single 'transportable unit'. You can use the
+      `relation` field in the association to
+
+      indicate the type of relationship.
+    type: array
+    items:
+      oneOf:
+        - $ref: ./relatedConsignments-association-inline.yaml
+        - $ref: ./reference.yaml
+        - $ref: ./attributeRestriction.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ./relatedConsignments-association-inline.yaml
+          reference: ./reference.yaml
+          attributeRestriction: ./attributeRestriction.yaml

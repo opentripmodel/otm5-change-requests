@@ -1,0 +1,71 @@
+get:
+  responses:
+    '200':
+      description: Returned the entity with the provided UUID
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - $ref: ../components/schemas/items.yaml
+              - $ref: ../components/schemas/transportEquipment.yaml
+            discriminator:
+              propertyName: type
+              mapping:
+                items: ../components/schemas/items.yaml
+                transportEquipment: ../components/schemas/transportEquipment.yaml
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '404':
+      description: ''
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Get a specific Goods by its UUID
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of this Goods
+      required: true
+  tags:
+    - Goods
+  security:
+    - BearerToken: []
+delete:
+  responses:
+    '204':
+      description: Deleted goods with the provided UUID
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Deletes a Goods
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of the Goods to be deleted
+      required: true
+  tags:
+    - Goods
+  security:
+    - BearerToken: []

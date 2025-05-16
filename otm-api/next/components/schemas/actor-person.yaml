@@ -1,0 +1,23 @@
+# Think of allOf like a "merge"
+allOf:
+  - $ref: ./actor.yaml
+  - type: object
+    properties:
+      firstName:
+        description: The first name.
+        type: string
+      lastName:
+        description: The last name.
+        type: string
+      role:
+        description: The role/function title in relation to where the person works.
+        type: string
+      department:
+        type: string
+      languages:
+        description: The languages this person speaks.
+        type: array
+        items:
+          type: string
+          description: One must use the ISO 639-3 codes.
+          example: nld

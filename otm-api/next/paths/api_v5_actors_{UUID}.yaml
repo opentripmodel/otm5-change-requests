@@ -1,0 +1,171 @@
+get:
+  responses:
+    '200':
+      description: Returned the entity with the provided UUID
+      content:
+        application/json:
+          schema:
+            example:
+              id: 45db6ed0-28a7-4e4a-baba-3d5f8d171103
+              name: Logistics manager
+              contactDetails:
+                - value: Simon Isaac
+                  remark: Wants to be called 'Sim'.
+                  type: firstName
+                - value: Macan
+                  type: lastName
+                - value: '+312012345678'
+                  remark: private cellphone of the CEO
+                  language: nld
+                  type: phone
+                - value: simon@macan
+                  type: email
+                - value: NL74BANK5890469479
+                  type: iban
+                - value: NL000099998B57
+                  type: vatCode
+            type: object
+            properties:
+              id:
+                description: >-
+                  Uniquely identifies this entity. A URI can be assigned by the
+                  client to indicate where more information
+                   can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                   required to send it in the request. One can be generated for you by the server.
+                type: string
+              name:
+                description: Name of the entity. For display purposes and search only.
+                type: string
+              creationDate:
+                description: The creation date of this entity.
+                type: string
+              lastModified:
+                description: >-
+                  The last modified date of this entity. If none is given the
+                  creation date is used instead.
+                type: string
+              contextEvents:
+                description: >-
+                  The context events provides some optional information about
+                  the events that can provide additional information
+                   on the current state of this entity.
+
+                  For example: your system might send ETA information for the
+                  arrival of a vehicle on a location. To make it clear
+
+                  what caused this ETA to be updated, we can include some
+                  information about what caused this ETA update by including
+
+                  an event as context. If your ETA update was caused by a
+                  location update, this event can be included as context. If
+
+                  the ETA was caused by a traffic accident on the route of the
+                  vehicle, you can include that event in the context.
+                type: array
+                items:
+                  $ref: ../components/schemas/events.yaml
+              externalAttributes:
+                type: object
+                properties: {}
+                additionalProperties:
+                  $ref: ../components/schemas/unrestricted_json.yaml
+              contactDetails:
+                description: Contact details for this `Actor`.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/phone.yaml
+                    - $ref: ../components/schemas/mobilePhone.yaml
+                    - $ref: ../components/schemas/email.yaml
+                    - $ref: ../components/schemas/firstName.yaml
+                    - $ref: ../components/schemas/lastName.yaml
+                    - $ref: ../components/schemas/name.yaml
+                    - $ref: ../components/schemas/vatCode.yaml
+                    - $ref: ../components/schemas/gln.yaml
+                    - $ref: ../components/schemas/iban.yaml
+                    - $ref: ../components/schemas/eori.yaml
+                    - $ref: ../components/schemas/other.yaml
+                  discriminator:
+                    propertyName: type
+                    mapping:
+                      phone: ../components/schemas/phone.yaml
+                      mobilePhone: ../components/schemas/mobilePhone.yaml
+                      email: ../components/schemas/email.yaml
+                      firstName: ../components/schemas/firstName.yaml
+                      lastName: ../components/schemas/lastName.yaml
+                      name: ../components/schemas/name.yaml
+                      vatCode: ../components/schemas/vatCode.yaml
+                      gln: ../components/schemas/gln.yaml
+                      iban: ../components/schemas/iban.yaml
+                      eori: ../components/schemas/eori.yaml
+                      other: ../components/schemas/other.yaml
+              locations:
+                description: Locations for this `Actor`.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/associated-locations-inline.yaml
+                    - $ref: ../components/schemas/reference.yaml
+                    - $ref: ../components/schemas/attributeRestriction.yaml
+                  discriminator:
+                    propertyName: associationType
+                    mapping:
+                      inline: ../components/schemas/associated-locations-inline.yaml
+                      reference: ../components/schemas/reference.yaml
+                      attributeRestriction: ../components/schemas/attributeRestriction.yaml
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '404':
+      description: ''
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Get a specific Actor by its UUID
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of this Actor
+      required: true
+  tags:
+    - Actor
+  security:
+    - BearerToken: []
+delete:
+  responses:
+    '204':
+      description: Deleted actor with the provided UUID
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Deletes a Actor
+  parameters:
+    - name: UUID
+      in: path
+      schema:
+        type: string
+        format: uuid
+      description: The unique UUID of the Actor to be deleted
+      required: true
+  tags:
+    - Actor
+  security:
+    - BearerToken: []

@@ -1,0 +1,284 @@
+put:
+  responses:
+    '200':
+      description: The same entity
+      content:
+        application/json:
+          schema:
+            example:
+              id: 6666f00c-1332-472c-aff9-bc11b3d53296
+              name: Temperature sensor in trailer x
+              placement: Compartment 1
+              sensorType: accelerometer
+              actors:
+                - entity:
+                    id: 45db6ed0-28a7-4e4a-baba-3d5f8d171103
+                    name: Logistics manager
+                    contactDetails:
+                      - value: Simon Isaac
+                        remark: Wants to be called 'Sim'.
+                        type: firstName
+                      - value: Macan
+                        type: lastName
+                      - value: '+312012345678'
+                        remark: private cellphone of the CEO
+                        language: nld
+                        type: phone
+                      - value: simon@macan
+                        type: email
+                      - value: NL74BANK5890469479
+                        type: iban
+                      - value: NL000099998B57
+                        type: vatCode
+                  associationType: inline
+            type: object
+            properties:
+              id:
+                description: >-
+                  Uniquely identifies this entity. A URI can be assigned by the
+                  client to indicate where more information
+                   can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                   required to send it in the request. One can be generated for you by the server.
+                type: string
+              name:
+                description: Name of the entity. For display purposes and search only.
+                type: string
+              creationDate:
+                description: The creation date of this entity.
+                type: string
+              lastModified:
+                description: >-
+                  The last modified date of this entity. If none is given the
+                  creation date is used instead.
+                type: string
+              contextEvents:
+                description: >-
+                  The context events provides some optional information about
+                  the events that can provide additional information
+                   on the current state of this entity.
+
+                  For example: your system might send ETA information for the
+                  arrival of a vehicle on a location. To make it clear
+
+                  what caused this ETA to be updated, we can include some
+                  information about what caused this ETA update by including
+
+                  an event as context. If your ETA update was caused by a
+                  location update, this event can be included as context. If
+
+                  the ETA was caused by a traffic accident on the route of the
+                  vehicle, you can include that event in the context.
+                type: array
+                items:
+                  $ref: ../components/schemas/events.yaml
+              externalAttributes:
+                type: object
+                properties: {}
+                additionalProperties:
+                  $ref: ../components/schemas/unrestricted_json.yaml
+              placement:
+                description: >-
+                  Sometimes more than one sensor can be associated with a single
+                  entity. This is the case e.g. in cooled trailers that are
+                  divided into
+
+                  compartments with different temperatures, where each
+                  compartment has its own sensor. The `placement` member can be
+                  used to identify where
+
+                  a sensor is placed. Parties using OpenTripModel to exchange
+                  sensor data may wish to agree on a standardized naming, but
+                  this is too
+
+                  specific to describe in the standard.
+                type: string
+              sensorType:
+                description: The type of sensor.
+                type: string
+              actors:
+                description: >-
+                  The actors associated with this sensor, for instance the
+                  owners, the producers or the users of this sensor.
+                type: array
+                items:
+                  oneOf:
+                    - $ref: ../components/schemas/associated-actors-inline.yaml
+                    - $ref: ../components/schemas/reference-roles.yaml
+                    - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                  discriminator:
+                    propertyName: associationType
+                    mapping:
+                      inline: ../components/schemas/associated-actors-inline.yaml
+                      reference: ../components/schemas/reference-roles.yaml
+                      attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+              constraint:
+                description: >
+                  In the context of a `Sensor`, only `sensorValueConstraint`s
+                  really make sense. You can use such a constraint to model a
+                  sensor of
+
+                  which the measured value must be within certain bounds at all
+                  times.
+
+
+                  > **ℹ Note** that constraints can be nested and combined using
+                  the `andConstraint`, `orConstraint` and `notConstraint`.
+                oneOf:
+                  - $ref: ../components/schemas/sensor-constraint-inline.yaml
+                  - $ref: ../components/schemas/reference.yaml
+                  - $ref: ../components/schemas/attributeRestriction.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/sensor-constraint-inline.yaml
+                    reference: ../components/schemas/reference.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction.yaml
+    '400':
+      description: Client error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/clientError.yaml
+    '500':
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/serverError.yaml
+  summary: Adds a new Sensor
+  requestBody:
+    content:
+      application/json:
+        schema:
+          example:
+            id: 6666f00c-1332-472c-aff9-bc11b3d53296
+            name: Temperature sensor in trailer x
+            placement: Compartment 1
+            sensorType: accelerometer
+            actors:
+              - entity:
+                  id: 45db6ed0-28a7-4e4a-baba-3d5f8d171103
+                  name: Logistics manager
+                  contactDetails:
+                    - value: Simon Isaac
+                      remark: Wants to be called 'Sim'.
+                      type: firstName
+                    - value: Macan
+                      type: lastName
+                    - value: '+312012345678'
+                      remark: private cellphone of the CEO
+                      language: nld
+                      type: phone
+                    - value: simon@macan
+                      type: email
+                    - value: NL74BANK5890469479
+                      type: iban
+                    - value: NL000099998B57
+                      type: vatCode
+                associationType: inline
+          type: object
+          properties:
+            id:
+              description: >-
+                Uniquely identifies this entity. A URI can be assigned by the
+                client to indicate where more information
+                 can be retrieved. Note that every entity always has a unique EntityId. However since, OTM5.2 it is not
+                 required to send it in the request. One can be generated for you by the server.
+              type: string
+            name:
+              description: Name of the entity. For display purposes and search only.
+              type: string
+            creationDate:
+              description: The creation date of this entity.
+              type: string
+            lastModified:
+              description: >-
+                The last modified date of this entity. If none is given the
+                creation date is used instead.
+              type: string
+            contextEvents:
+              description: >-
+                The context events provides some optional information about the
+                events that can provide additional information
+                 on the current state of this entity.
+
+                For example: your system might send ETA information for the
+                arrival of a vehicle on a location. To make it clear
+
+                what caused this ETA to be updated, we can include some
+                information about what caused this ETA update by including
+
+                an event as context. If your ETA update was caused by a location
+                update, this event can be included as context. If
+
+                the ETA was caused by a traffic accident on the route of the
+                vehicle, you can include that event in the context.
+              type: array
+              items:
+                $ref: ../components/schemas/events.yaml
+            externalAttributes:
+              type: object
+              properties: {}
+              additionalProperties:
+                $ref: ../components/schemas/unrestricted_json.yaml
+            placement:
+              description: >-
+                Sometimes more than one sensor can be associated with a single
+                entity. This is the case e.g. in cooled trailers that are
+                divided into
+
+                compartments with different temperatures, where each compartment
+                has its own sensor. The `placement` member can be used to
+                identify where
+
+                a sensor is placed. Parties using OpenTripModel to exchange
+                sensor data may wish to agree on a standardized naming, but this
+                is too
+
+                specific to describe in the standard.
+              type: string
+            sensorType:
+              description: The type of sensor.
+              type: string
+            actors:
+              description: >-
+                The actors associated with this sensor, for instance the owners,
+                the producers or the users of this sensor.
+              type: array
+              items:
+                oneOf:
+                  - $ref: ../components/schemas/associated-actors-inline.yaml
+                  - $ref: ../components/schemas/reference-roles.yaml
+                  - $ref: ../components/schemas/attributeRestriction-roles.yaml
+                discriminator:
+                  propertyName: associationType
+                  mapping:
+                    inline: ../components/schemas/associated-actors-inline.yaml
+                    reference: ../components/schemas/reference-roles.yaml
+                    attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
+            constraint:
+              description: >
+                In the context of a `Sensor`, only `sensorValueConstraint`s
+                really make sense. You can use such a constraint to model a
+                sensor of
+
+                which the measured value must be within certain bounds at all
+                times.
+
+
+                > **ℹ Note** that constraints can be nested and combined using
+                the `andConstraint`, `orConstraint` and `notConstraint`.
+              oneOf:
+                - $ref: ../components/schemas/sensor-constraint-inline.yaml
+                - $ref: ../components/schemas/reference.yaml
+                - $ref: ../components/schemas/attributeRestriction.yaml
+              discriminator:
+                propertyName: associationType
+                mapping:
+                  inline: ../components/schemas/sensor-constraint-inline.yaml
+                  reference: ../components/schemas/reference.yaml
+                  attributeRestriction: ../components/schemas/attributeRestriction.yaml
+  tags:
+    - Sensor
+  security:
+    - BearerToken: []

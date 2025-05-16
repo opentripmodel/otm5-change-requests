@@ -1,0 +1,13 @@
+type: object
+properties:
+  type:
+    example: openLRGeoReference
+    type: string
+    enum:
+      - openLRGeoReference
+  openLRString:
+    description: A base64 encoded binary [OpenLR](http://openlr.org/documents.html) string.
+    type: string
+required:
+  - type
+  - openLRString

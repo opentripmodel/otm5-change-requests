@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    example: vatCode
+    type: string
+    enum:
+      - vatCode
+  value:
+    description: A VAT (Value Added Taxes) code.
+    type: string
+  remark:
+    description: Remark for this VAT code.
+    type: string
+  language:
+    description: Language required for contacting. One must use the ISO 639-3 codes.
+    type: string
+required:
+  - type
+  - value

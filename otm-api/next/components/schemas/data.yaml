@@ -1,0 +1,12 @@
+type: object
+properties:
+  contentType:
+    example: data
+    type: string
+    enum:
+      - data
+  raw:
+    type: string
+required:
+  - contentType
+  - raw

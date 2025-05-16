@@ -1,0 +1,44 @@
+oneOf:
+  - $ref: ./genericConstraint.yaml
+  - $ref: ./notConstraint.yaml
+  - $ref: ./orConstraint.yaml
+  - $ref: ./andConstraint.yaml
+  - $ref: ./routeConstraint.yaml
+  - $ref: ./routeEntityConstraint.yaml
+  - $ref: ./vehicleTypeConstraint.yaml
+  - $ref: ./fuelTypeConstraint.yaml
+  - $ref: ./emissionStandardConstraint.yaml
+  - $ref: ./sensorValueConstraint.yaml
+  - $ref: ./timeWindowConstraint.yaml
+  - $ref: ./transportEquipmentTypeConstraint.yaml
+  - $ref: ./valueBoundConstraint.yaml
+  - $ref: ./accessConstraint.yaml
+  - $ref: ./speedConstraint.yaml
+  - $ref: ./weightConstraint.yaml
+  - $ref: ./sizeConstraint.yaml
+  - $ref: ./temperatureConstraint.yaml
+  - $ref: ./endDateTimeConstraint.yaml
+  - $ref: ./startDateTimeConstraint.yaml
+discriminator:
+  propertyName: type
+  mapping:
+    genericConstraint: ./genericConstraint.yaml
+    notConstraint: ./notConstraint.yaml
+    orConstraint: ./orConstraint.yaml
+    andConstraint: ./andConstraint.yaml
+    routeConstraint: ./routeConstraint.yaml
+    routeEntityConstraint: ./routeEntityConstraint.yaml
+    vehicleTypeConstraint: ./vehicleTypeConstraint.yaml
+    fuelTypeConstraint: ./fuelTypeConstraint.yaml
+    emissionStandardConstraint: ./emissionStandardConstraint.yaml
+    sensorValueConstraint: ./sensorValueConstraint.yaml
+    timeWindowConstraint: ./timeWindowConstraint.yaml
+    transportEquipmentTypeConstraint: ./transportEquipmentTypeConstraint.yaml
+    valueBoundConstraint: ./valueBoundConstraint.yaml
+    accessConstraint: ./accessConstraint.yaml
+    speedConstraint: ./speedConstraint.yaml
+    weightConstraint: ./weightConstraint.yaml
+    sizeConstraint: ./sizeConstraint.yaml
+    temperatureConstraint: ./temperatureConstraint.yaml
+    endDateTimeConstraint: ./endDateTimeConstraint.yaml
+    startDateTimeConstraint: ./startDateTimeConstraint.yaml

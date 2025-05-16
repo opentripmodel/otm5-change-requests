@@ -1,0 +1,42 @@
+type: object
+properties:
+  type:
+    example: Feature
+    type: string
+    enum:
+      - Feature
+  geometry:
+    description: >-
+      A [GeoJSON](https://tools.ietf.org/html/rfc7946)
+      [Geometry](https://tools.ietf.org/html/rfc7946#section-3.1) object.
+    oneOf:
+      - $ref: ./Point.yaml
+      - $ref: ./LineString.yaml
+      - $ref: ./Polygon.yaml
+      - $ref: ./MultiPoint.yaml
+      - $ref: ./MultiLineString.yaml
+      - $ref: ./MultiPolygon.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        Point: ./Point.yaml
+        LineString: ./LineString.yaml
+        Polygon: ./Polygon.yaml
+        MultiPoint: ./MultiPoint.yaml
+        MultiLineString: ./MultiLineString.yaml
+        MultiPolygon: ./MultiPolygon.yaml
+  properties:
+    description: >-
+      [GeoJSON](https://tools.ietf.org/html/rfc7946)
+
+      [properties](https://tools.ietf.org/html/rfc7946#section-3.1). Please
+      don't overuse this, since most relevant propeties are probably
+
+      already present in OTM fields.
+    type: object
+    properties: {}
+    additionalProperties:
+      type: string
+required:
+  - type
+  - geometry

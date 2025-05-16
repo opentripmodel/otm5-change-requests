@@ -1,0 +1,12 @@
+type: object
+properties:
+  type:
+    example: invalidJson
+    type: string
+    enum:
+      - invalidJson
+  message:
+    type: string
+required:
+  - type
+  - message

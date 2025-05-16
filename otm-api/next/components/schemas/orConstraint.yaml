@@ -1,0 +1,24 @@
+type: object
+properties:
+  type:
+    example: orConstraint
+    type: string
+    enum:
+      - orConstraint
+  or:
+    description: >-
+      All constraints in the array are combined using a boolean OR relation.
+      This means that the resulting constraint will apply if any of
+
+      the constraints in the array would apply.
+    type: array
+    items:
+      $ref: ./constraintValue.yaml
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - or
