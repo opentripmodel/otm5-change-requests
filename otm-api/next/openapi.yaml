@@ -58,6 +58,9 @@ info:
     * Add distance property in move action. This can be provided by means of value and unit (e.g. 120 km)
     [See 90](https://github.com/opentripmodel/otm5-change-requests/issues/90)
 
+    * Add two specializations of actor, i.e. 'peron' and 'company'. Each with an additional set of properties.
+    [See 100](https://github.com/opentripmodel/otm5-change-requests/issues/100)
+
 
     **Version 5.6 (released on 2023-11-17)**
 
