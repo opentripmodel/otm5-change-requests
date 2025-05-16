@@ -1,12 +1,9 @@
 openapi: 3.0.0
 info:
-  title: OTM
-  version: v5
+  title: Open Trip Model
+  version: v5.4
   description: >
-    # Open Trip Model
-
-
-    ### Why OTM?
+    ## Why OTM?
 
 
     In this day and age more and more information about logistics and traffic is
@@ -28,7 +25,7 @@ info:
     portal](https://otm5developerportal.redoc.ly/)**.
 
 
-    ### Changelog
+    ## Changelog
 
 
     Found any bugs on this page? Or have any feature requests for OTM? Create a
