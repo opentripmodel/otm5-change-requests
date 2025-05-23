@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Open Trip Model
-  version: v5.7-rc.1
+  version: v5.7
   description: |
     ## Why OTM?
 
