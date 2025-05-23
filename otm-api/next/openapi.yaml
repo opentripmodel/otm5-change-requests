@@ -21,9 +21,8 @@ info:
     services.
 
 
-    To learn more about the what, the why and the how see the **[developer
-    portal](https://otm5developerportal.redoc.ly/)**.
-
+    To learn more about the what, the why and the how see the
+    **[OTM documentation website](https://opentripmodel.org/)**.
 
     ## Changelog
 
@@ -36,6 +35,9 @@ info:
 
 
     **Unreleased changes**
+
+
+    **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.
     [See 87](https://github.com/opentripmodel/otm5-change-requests/issues/87).
