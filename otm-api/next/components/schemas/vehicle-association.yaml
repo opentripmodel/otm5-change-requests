@@ -2,7 +2,15 @@ example:
   id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
   name: Bob's Boxtruck
   vehicleType: boxtruck
-  fuel: electricity
+  fuels:
+    - fuelType: electricity
+      averageConsumption:
+        value: 20.0
+        unit: kWh/100km
+    - fuelType: petrol
+      averageConsumption:
+        value: 5.5
+        unit: l/100km
   loadCapacities:
     - value: 1000
       unit: kg
@@ -67,26 +75,27 @@ properties:
   vehicleType:
     description: The type of vehicle
     type: string
-  fuel:
+  fuels:
     description: >-
-      The type of fuel the vehicle runs on. For vehicle without an engine of
-      their own, such as a trailer, you may choose `not-applicable`. For
-      trailers with cooling capabilities, choose the fuel type of the cooling
-      engine.
-    type: string
-    enum:
-      - petrol
-      - diesel
-      - electricity
-      - hydrogen
-      - lng
-      - cng
-      - adBlue
-      - other
+      The types of fuel the vehicle runs on.
+    type: array
+    items:
+      $ref: ./fuel.yaml
+  fuel:
+    allOf:
+      - description: >-
+          The type of fuel the vehicle runs on. For vehicle without an engine of
+          their own, such as a trailer, you may choose `not-applicable`. For
+          trailers with cooling capabilities, choose the fuel type of the cooling
+          engine.
+        deprecated: true
+      - $ref: ./fuel-types.yaml
   otherFuelType:
+    deprecated: true
     description: Type of fuel, only to be used when the `fuel` field is set to `other`.
     type: string
   averageFuelConsumption:
+    deprecated: true
     description: >-
       The average fuel consumption for this vehicle. Usually measured in
       distance per 100l

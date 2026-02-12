@@ -50,6 +50,12 @@ info:
     This can be provided by means of value and unit (e.g. 120 m3).
     [See 111](https://github.com/opentripmodel/otm5-change-requests/issues/111)
 
+    * Add support for multiple vehicle fuel types. This deprecated the fields:
+    'fuel', 'otherFuelType' and 'averageFuelConsumption' on the vehicle entity,
+    and replaces it with a new field 'fuels' that allows for multiple fuel types,
+    each with their own average fuel consumption.
+    [See 112](https://github.com/opentripmodel/otm5-change-requests/issues/112)
+
     **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.
