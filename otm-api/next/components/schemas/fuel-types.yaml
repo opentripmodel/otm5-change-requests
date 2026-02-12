@@ -1,0 +1,10 @@
+type: string
+enum:
+  - petrol
+  - diesel
+  - electricity
+  - hydrogen
+  - lng
+  - cng
+  - adBlue
+  - other

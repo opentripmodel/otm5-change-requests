@@ -1,0 +1,36 @@
+type: object
+required:
+  - fuelType
+properties:
+  fuelType:
+    $ref: ./fuel-types.yaml
+  otherType:
+    description: Type of fuel, only to be used when the `fuel` field is set to `other`.
+    type: string
+  averageConsumption:
+    description: The average fuel consumption for this vehicle.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ./uom.yaml
+    required:
+      - value
+      - unit
+examples:
+  - fuelType: electricity
+    averageConsumption:
+      value: 20.0
+      unit: kWh/100km
+  - fuelType: petrol
+    averageConsumption:
+      value: 5.5
+      unit: l/100km
+  - fuelType: other
+    otherType: biodiesel
+    averageConsumption:
+      value: 6.0
+      unit: l/100km
