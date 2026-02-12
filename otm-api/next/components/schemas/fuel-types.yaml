@@ -5,6 +5,11 @@ enum:
   - electricity
   - hydrogen
   - lng
+  - bioLng
   - cng
+  - bioCng
   - adBlue
+  - ethanol
+  - hvo # biodiesel HVO
+  - fame # biodiesel FAME
   - other

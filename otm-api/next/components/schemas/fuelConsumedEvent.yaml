@@ -109,7 +109,10 @@ properties:
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   fuel:
-    description: The type of fuel consumed in this event.
+    description: >-
+      The type of fuel consumed in this event.
+      Note, it is strongly recommended to use the fuel types as also used in the vehicle entity. However,
+      for backwards compatibility reasons, it is still possible to use any string to indicate the fuel type.
     type: string
   amount:
     description: The amount of fuel consumed in this event.
