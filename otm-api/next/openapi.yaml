@@ -43,6 +43,9 @@ info:
     * Better explain the difference between fields `actors[].entity.role` and `actors[].roles`
     [See 109](https://github.com/opentripmodel/otm5-change-requests/issues/109)
 
+    * Fix inconsistencies in the specification of use of actor entity.
+    [See 110](https://github.com/opentripmodel/otm5-change-requests/issues/110)
+
     **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.

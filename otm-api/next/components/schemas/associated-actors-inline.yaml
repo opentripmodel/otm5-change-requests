@@ -6,7 +6,7 @@ properties:
     enum:
       - inline
   entity:
-    $ref: ./associated-actors.yaml
+    $ref: ./actor.yaml
   description:
     description: A free text description of the relationship to the associated entity.
     type: string
