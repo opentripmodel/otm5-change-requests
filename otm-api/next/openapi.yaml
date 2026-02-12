@@ -40,6 +40,9 @@ info:
     need to relate them to a trip. E.g. to indicate that a vehicle has a trailer (i.e. transport equipment) attached.
     [See 108](https://github.com/opentripmodel/otm5-change-requests/issues/108)
 
+    * Better explain the difference between fields `actors[].entity.role` and `actors[].roles`
+    [See 109](https://github.com/opentripmodel/otm5-change-requests/issues/109)
+
     **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.
