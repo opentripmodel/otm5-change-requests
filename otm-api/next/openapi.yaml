@@ -36,6 +36,8 @@ info:
 
     **Unreleased changes**
 
+    * Remove several duplicate definitions of the same entity or fields e.g. unit of measure
+
     * Add actions property for vehicle entity. This allows to relate actions to a vehicle without the 
     need to relate them to a trip. E.g. to indicate that a vehicle has a trailer (i.e. transport equipment) attached.
     [See 108](https://github.com/opentripmodel/otm5-change-requests/issues/108)
