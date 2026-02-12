@@ -59,6 +59,9 @@ info:
     * Extend list of possible fuel types
     [See 113](https://github.com/opentripmodel/otm5-change-requests/issues/113)
 
+    * Extend list of possible emission standards with value Z
+    [See 117](https://github.com/opentripmodel/otm5-change-requests/issues/117)
+
     **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.

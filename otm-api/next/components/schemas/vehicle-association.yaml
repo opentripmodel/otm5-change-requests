@@ -132,6 +132,7 @@ properties:
       - euro4
       - euro5
       - euro6
+      - Z
   maxLinks:
     description: >-
       Maximum number of links to other `Vehicle` s. Typical values are 0, 1 or

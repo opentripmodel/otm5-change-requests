@@ -16,6 +16,7 @@ properties:
       - euro4
       - euro5
       - euro6
+      - Z
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined
