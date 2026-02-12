@@ -36,6 +36,9 @@ info:
 
     **Unreleased changes**
 
+    * Add actions property for vehicle entity. This allows to relate actions to a vehicle without the 
+    need to relate them to a trip. E.g. to indicate that a vehicle has a trailer (i.e. transport equipment) attached.
+    [See 108](https://github.com/opentripmodel/otm5-change-requests/issues/108)
 
     **Version 5.7 (released on 2025-05-23)**
 

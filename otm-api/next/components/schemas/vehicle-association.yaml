@@ -445,6 +445,13 @@ properties:
           inline: ./associated-actors-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
+  actions:
+    description: >-
+      All actions that are/were related to this vehicle, such as
+      attaching or detaching transport equipment.
+    type: array
+    items:
+      $ref: ./associations-actions.yaml
   sensors:
     description: >-
       Vehicles might have some sensors that are permanently attached, these can
