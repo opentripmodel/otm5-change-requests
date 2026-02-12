@@ -46,6 +46,10 @@ info:
     * Fix inconsistencies in the specification of use of actor entity.
     [See 110](https://github.com/opentripmodel/otm5-change-requests/issues/110)
 
+    * Add volume property to transport equipment and goods items.
+    This can be provided by means of value and unit (e.g. 120 m3).
+    [See 111](https://github.com/opentripmodel/otm5-change-requests/issues/111)
+
     **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.
