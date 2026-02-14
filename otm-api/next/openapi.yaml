@@ -61,6 +61,13 @@ info:
     * Extend list of possible fuel types
     [See 113](https://github.com/opentripmodel/otm5-change-requests/issues/113)
 
+    * Add the possibility to reference entities in the action result and
+    specificy sub results. For example the unload action can be succeeded for
+    certain goods and failed for others, in which case the overall result would
+    be partially succeeded and the sub results would indicate which goods were
+    unloaded successfully and which were not.
+    [See 115](https://github.com/opentripmodel/otm5-change-requests/issues/115)
+
     * Extend list of possible emission standards with value Z
     [See 117](https://github.com/opentripmodel/otm5-change-requests/issues/117)
 

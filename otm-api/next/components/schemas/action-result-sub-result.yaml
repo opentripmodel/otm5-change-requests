@@ -33,12 +33,3 @@ properties:
     type: array
     items:
       $ref: ./entity1.yaml
-  results:
-    description: >-
-      In some cases, there can be multiple sub results that are relevant.
-      For example the unload action can be succeeded for certain goods and failed for others,
-      in which case the overall result would be partially succeeded and the sub results would
-      indicate which goods were unloaded successfully and which were not.
-    type: array
-    items:
-      $ref: ./action-result-sub-result.yaml
