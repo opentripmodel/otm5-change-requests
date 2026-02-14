@@ -1,10 +1,10 @@
 type: object
 properties:
   actionType:
-    example: break
+    example: wait
     type: string
     enum:
-      - break
+      - wait
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -42,7 +42,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -55,7 +55,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -73,7 +73,7 @@ properties:
       - actual
       - realized
   result:
-    $ref: ./action-result.yaml
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -83,30 +83,35 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
+  reason:
+    description: >-
+      Reason why the driver has to wait, for example because the dock is
+      occupied.
+    type: string
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ./action-location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../action-location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./action-location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../action-location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   trip:
     description: The trip this action takes place on.
     oneOf:
-      - $ref: ./trip-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../trip-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./trip-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../trip-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -146,14 +151,14 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./break-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../wait-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./break-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../wait-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - actionType

@@ -1,26 +1,26 @@
 oneOf:
-  - $ref: ./load.yaml
-  - $ref: ./unload.yaml
-  - $ref: ./stop.yaml
-  - $ref: ./move.yaml
-  - $ref: ./handOver.yaml
-  - $ref: ./attachTransportEquipment.yaml
-  - $ref: ./detachTransportEquipment.yaml
-  - $ref: ./refuel.yaml
-  - $ref: ./break.yaml
-  - $ref: ./wait.yaml
-  - $ref: ./genericAction.yaml
+  - $ref: ./actions/load.yaml
+  - $ref: ./actions/unload.yaml
+  - $ref: ./actions/stop.yaml
+  - $ref: ./actions/move.yaml
+  - $ref: ./actions/handOver.yaml
+  - $ref: ./actions/attachTransportEquipment.yaml
+  - $ref: ./actions/detachTransportEquipment.yaml
+  - $ref: ./actions/refuel.yaml
+  - $ref: ./actions/break.yaml
+  - $ref: ./actions/wait.yaml
+  - $ref: ./actions/genericAction.yaml
 discriminator:
   propertyName: actionType
   mapping:
-    load: ./load.yaml
-    unload: ./unload.yaml
-    stop: ./stop.yaml
-    move: ./move.yaml
-    handOver: ./handOver.yaml
-    attachTransportEquipment: ./attachTransportEquipment.yaml
-    detachTransportEquipment: ./detachTransportEquipment.yaml
-    refuel: ./refuel.yaml
-    break: ./break.yaml
-    wait: ./wait.yaml
-    genericAction: ./genericAction.yaml
+    load: ./actions/load.yaml
+    unload: ./actions/unload.yaml
+    stop: ./actions/stop.yaml
+    move: ./actions/move.yaml
+    handOver: ./actions/handOver.yaml
+    attachTransportEquipment: ./actions/attachTransportEquipment.yaml
+    detachTransportEquipment: ./actions/detachTransportEquipment.yaml
+    refuel: ./actions/refuel.yaml
+    break: ./actions/break.yaml
+    wait: ./actions/wait.yaml
+    genericAction: ./actions/genericAction.yaml

@@ -1,20 +1,48 @@
 example:
-  id: 84506b63-3da2-44d4-aaef-d034ae6e3afe
-  remark: Handing over a consignment from one party to another
+  id: a5f5fc23-744a-46f7-81b4-bfe26629ad4f
+  lifecycle: planned
+  remark: unloading a consignment
   consignment:
     uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
     entityType: consignment
     associationType: reference
-  startTime: '2021-06-23T15:05:00Z'
-  endTime: '2021-06-23T15:10:00Z'
-  actionType: handOver
+  startTime: '2021-06-23T15:00:00Z'
+  endTime: '2021-06-23T15:15:00Z'
+  constraint:
+    entity:
+      id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+      name: Example combined constraint
+      value:
+        and:
+          - startTime: '2021-06-23T10:00:00Z'
+            endTime: '2021-06-23T13:00:00Z'
+            description: alert-threshold
+            type: timeWindowConstraint
+          - constraintType: maximum
+            maximum:
+              value: 5
+              unit: C
+            type: temperatureConstraint
+          - or:
+              - fuelTypes:
+                  - battery
+                type: fuelTypeConstraint
+              - fuelTypes:
+                  - biodiesel
+                type: fuelTypeConstraint
+              - minimum: euro5
+                type: emissionStandardConstraint
+            type: orConstraint
+        type: andConstraint
+    associationType: inline
+  actionType: unload
 type: object
 properties:
   actionType:
-    example: handOver
+    example: unload
     type: string
     enum:
-      - handOver
+      - unload
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -52,20 +80,12 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
-    description: >
-      External attributes are a simple way to add information in an
-      OpenTripModel message that could not fit into one of
-        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
-        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
-
-       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
-         it was intended.
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -83,7 +103,7 @@ properties:
       - actual
       - realized
   result:
-    $ref: ./action-result.yaml
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -93,54 +113,42 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
-  from:
-    description: The party that is handing over the consignment/goods.
-    oneOf:
-      - $ref: ./handover-from-actor-inline.yaml
-      - $ref: ./reference-roles.yaml
-      - $ref: ./attributeRestriction-roles.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./handover-from-actor-inline.yaml
-        reference: ./reference-roles.yaml
-        attributeRestriction: ./attributeRestriction-roles.yaml
-  to:
-    description: The party that is receiving the consignments/goods.
-    oneOf:
-      - $ref: ./handover-to-actor-inline.yaml
-      - $ref: ./reference-roles.yaml
-      - $ref: ./attributeRestriction-roles.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./handover-to-actor-inline.yaml
-        reference: ./reference-roles.yaml
-        attributeRestriction: ./attributeRestriction-roles.yaml
   stop:
     description: The stop that is associated with this action.
     oneOf:
-      - $ref: ./handover-stop-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../unload-stop-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./handover-stop-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../unload-stop-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   consignment:
     description: The consignment that is the subject of this action.
     oneOf:
-      - $ref: ./consignment-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../consignment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./consignment-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../consignment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  transportEquipment:
+    description: The transport equipment the consignment is loaded in/unloaded from.
+    oneOf:
+      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../transport-equipment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   documents:
     description: >-
       Documents that are relevant for this action. Such as a proof-of-delivery
@@ -148,27 +156,27 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./documents-inline.yaml
-        - $ref: ./reference.yaml
-        - $ref: ./attributeRestriction.yaml
+        - $ref: ../documents-inline.yaml
+        - $ref: ../reference.yaml
+        - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./documents-inline.yaml
-          reference: ./reference.yaml
-          attributeRestriction: ./attributeRestriction.yaml
+          inline: ../documents-inline.yaml
+          reference: ../reference.yaml
+          attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ./handover-location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../action-location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./handover-location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../action-location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -208,14 +216,14 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./handover-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../action-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./handover-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../action-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - actionType
