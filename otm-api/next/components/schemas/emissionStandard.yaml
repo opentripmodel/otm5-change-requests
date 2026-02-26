@@ -1,0 +1,18 @@
+description: >
+  European emission standards are vehicle emission standards for exhaust
+  emissions of new vehicles sold in the European Union and EEA member states.
+  
+  The standards are defined in a series of European Union directives staging
+  the progressive introduction of increasingly stringent standards.
+  
+  See also [European emission standards - Wikipedia](https://en.wikipedia.org/wiki/European_emission_standards#Emission_standards_for_trucks_and_buses).
+type: string
+enum:
+  - euro0
+  - euro1
+  - euro2
+  - euro3
+  - euro4
+  - euro5
+  - euro6
+  - Z
