@@ -1,7 +1,9 @@
 # Think of allOf like a "merge"
 allOf:
-  - $ref: ./actor.yaml
+  - $ref: ./actor-base.yaml
   - type: object
+    required:
+      - type
     properties:
       firstName:
         description: The first name.
