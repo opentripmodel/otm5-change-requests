@@ -144,6 +144,13 @@ properties:
           inline: ./associated-actors-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
+  actions:
+    description: >-
+      General description of actions related to the consignment f.e.
+      loading, unloading, hand over, drop of.
+    type: array
+    items:
+      $ref: ./associations-actions.yaml
   constraint:
     description: >-
       Constraints this consignment has to abide to, such special equipment (tail
