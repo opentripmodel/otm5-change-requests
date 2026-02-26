@@ -71,6 +71,9 @@ info:
     * Extend list of possible emission standards with value Z
     [See 117](https://github.com/opentripmodel/otm5-change-requests/issues/117)
 
+    * Fix missing entityType property for goods sub types items and transport equipment.
+    [See 118](https://github.com/opentripmodel/otm5-change-requests/issues/118)
+
     **Version 5.7 (released on 2025-05-23)**
 
     * Fix broken link to goods packaging type codes.

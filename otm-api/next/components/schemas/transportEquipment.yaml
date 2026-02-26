@@ -1,5 +1,7 @@
 example:
   id: a29905bb-9af8-4118-896a-71b1eaf07cc0
+  entityType: goods
+  type: transportEquipment
   description: A trailer
   width:
     value: 2.46
@@ -11,9 +13,13 @@ example:
     value: 13.62
     unit: m
   licensePlate: 123-ABC
-  type: transportEquipment
 type: object
 properties:
+  entityType:
+    example: goods
+    type: string
+    enum:
+      - goods
   type:
     example: transportEquipment
     type: string
@@ -443,4 +449,5 @@ properties:
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:
+  - entityType
   - type

@@ -1,5 +1,7 @@
 example:
   id: 903807df-ee62-47aa-bf8e-7efd747618ce
+  entityType: goods
+  type: items
   description: Box of bananas
   remark: Please deliver in time, we want fresh bananas
   barCode: CSE370
@@ -30,9 +32,13 @@ example:
             type: orConstraint
         type: andConstraint
     associationType: inline
-  type: items
 type: object
 properties:
+  entityType:
+    example: goods
+    type: string
+    enum:
+      - goods
   type:
     example: items
     type: string
@@ -576,4 +582,5 @@ properties:
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:
+  - entityType
   - type
