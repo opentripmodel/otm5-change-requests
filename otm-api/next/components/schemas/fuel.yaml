@@ -3,10 +3,22 @@ required:
   - fuelType
 properties:
   fuelType:
-    $ref: ./fuel-types.yaml
-  otherType:
-    description: Type of fuel, only to be used when the `fuel` field is set to `other`.
     type: string
+    # Note! Keep this list in sync with the one in fuel-types.yaml
+    # The list below don't include `other` since that is deprecated and should not be used anymore.
+    enum:
+      - petrol
+      - diesel
+      - electricity
+      - hydrogen
+      - lng
+      - bioLng
+      - cng
+      - bioCng
+      - adBlue
+      - ethanol
+      - hvo # biodiesel HVO
+      - fame # biodiesel FAME
   averageConsumption:
     description: The average fuel consumption for this vehicle.
     type: object
@@ -28,9 +40,4 @@ examples:
   - fuelType: petrol
     averageConsumption:
       value: 5.5
-      unit: l/100km
-  - fuelType: other
-    otherType: biodiesel
-    averageConsumption:
-      value: 6.0
       unit: l/100km
