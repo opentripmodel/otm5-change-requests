@@ -242,5 +242,3 @@ properties:
           inline: ./sensors-association-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
-required:
-  - entityType

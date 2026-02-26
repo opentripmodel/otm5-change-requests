@@ -197,5 +197,3 @@ properties:
           inline: ./relatedConsignments-association-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
-required:
-  - entityType

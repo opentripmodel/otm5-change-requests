@@ -116,5 +116,3 @@ properties:
           inline: ./associated-locations-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
-required:
-  - entityType
