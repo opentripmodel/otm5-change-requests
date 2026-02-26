@@ -5,7 +5,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/vehicle-association.yaml
+            $ref: ../components/schemas/vehicle.yaml
     '400':
       description: Client error
       content:
@@ -23,7 +23,7 @@ put:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/vehicle-association.yaml
+          $ref: ../components/schemas/vehicle.yaml
   tags:
     - Vehicle
   security:

@@ -6,7 +6,7 @@ properties:
     enum:
       - inline
   entity:
-    $ref: ./vehicle-association.yaml
+    $ref: ./vehicle.yaml
   description:
     description: A free text description of the relationship to the associated entity.
     type: string
