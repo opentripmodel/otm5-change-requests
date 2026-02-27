@@ -6,6 +6,8 @@ description: >
   the progressive introduction of increasingly stringent standards.
   
   See also [European emission standards - Wikipedia](https://en.wikipedia.org/wiki/European_emission_standards#Emission_standards_for_trucks_and_buses).
+  Next to the euro codes, the value Z is added from RDW (Netherlands Vehicle Authority)
+  which classifies for the cleanest emission standard. It is short for zero emission.
 type: string
 enum:
   - euro0
