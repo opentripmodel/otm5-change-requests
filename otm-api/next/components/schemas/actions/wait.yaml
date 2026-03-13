@@ -1,55 +1,10 @@
-example:
-  id: e2b597bd-feb5-4951-a070-e143eae22a29
-  lifecycle: planned
-  remark: attaching a trailer
-  vehicle:
-    entity:
-      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
-      name: Bob's Boxtruck
-      vehicleType: boxtruck
-      fuel: electricity
-      loadCapacities:
-        - value: 1000
-          unit: kg
-      length:
-        value: 8
-        unit: m
-      height:
-        value: 2.8
-        unit: m
-      width:
-        value: 2
-        unit: m
-      licensePlate: AB-12-CD
-      emptyWeight:
-        value: 2000
-        unit: kg
-    associationType: inline
-  transportEquipment:
-    entity:
-      id: a29905bb-9af8-4118-896a-71b1eaf07cc0
-      description: A trailer
-      width:
-        value: 2.46
-        unit: m
-      height:
-        value: 2.7
-        unit: m
-      length:
-        value: 13.62
-        unit: m
-      licensePlate: 123-ABC
-    associationType: inline
-  startTime: '2021-06-23T15:15:00Z'
-  endTime: '2021-06-23T15:20:00Z'
-  actionType: attachTransportEquipment
 type: object
 properties:
   actionType:
-    example: attachTransportEquipment
+    example: wait
     type: string
     enum:
-      - attachTransportEquipment
+      - wait
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -87,7 +42,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -100,7 +55,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -118,38 +73,7 @@ properties:
       - actual
       - realized
   result:
-    description: >-
-      The result of the action, can only be present in the actual or realized
-      lifecycles. The result has a
-
-      required status and optional additional info, like a remark and reason (in
-      the case of failure).
-    type: object
-    properties:
-      status:
-        description: >-
-          The status of the result, either succeeded, failed, partially
-          succeeded or cancelled.
-        type: string
-        enum:
-          - succeeded
-          - failed
-          - partiallySucceeded
-          - cancelled
-      remark:
-        description: >-
-          The remark of the result, usually only interesting in case the result
-          was failed or partially succeedded. Note that
-
-          differs from the remark on an action, which is a remark that is
-          relevant before the execution of the action. Whereas
-
-          this remark is relevant for the result after execution.
-        type: string
-      reason:
-        $ref: ./action-result-reason.yaml
-    required:
-      - status
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -159,56 +83,35 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
-  vehicle:
-    description: The vehicle that is involved in this action.
-    oneOf:
-      - $ref: ./vehicle-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./vehicle-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  transportEquipment:
+  reason:
     description: >-
-      The transport equipment that is being attached/detached to the associated
-      vehicle.
-    oneOf:
-      - $ref: ./transport-equipment-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./transport-equipment-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  stop:
-    description: The stop that is associated with this action.
-    oneOf:
-      - $ref: ./attach-stop-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./attach-stop-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+      Reason why the driver has to wait, for example because the dock is
+      occupied.
+    type: string
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ./action-location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../action-location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./action-location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../action-location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  trip:
+    description: The trip this action takes place on.
+    oneOf:
+      - $ref: ../trip-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../trip-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -248,14 +151,14 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./action-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../wait-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./action-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../wait-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - actionType

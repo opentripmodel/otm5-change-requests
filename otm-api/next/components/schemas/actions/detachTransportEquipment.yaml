@@ -1,7 +1,7 @@
 example:
-  id: d348a354-78c9-4c1f-a011-99c048b977a3
+  id: a2d2595f-9554-45a3-8c7d-df2d1923ef51
   lifecycle: planned
-  remark: need to fill the tank again!
+  remark: attaching a trailer
   vehicle:
     entity:
       id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
@@ -25,16 +25,20 @@ example:
         value: 2000
         unit: kg
     associationType: inline
-  startTime: '2021-06-23T15:35:00Z'
-  endTime: '2021-06-23T15:37:00Z'
-  actionType: refuel
+  transportEquipment:
+    uuid: a29905bb-9af8-4118-896a-71b1eaf07cc0
+    entityType: transportEquipment
+    associationType: reference
+  startTime: '2021-06-23T15:20:00Z'
+  endTime: '2021-06-23T15:30:00Z'
+  actionType: detachTransportEquipment
 type: object
 properties:
   actionType:
-    example: refuel
+    example: detachTransportEquipment
     type: string
     enum:
-      - refuel
+      - detachTransportEquipment
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -72,7 +76,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -85,7 +89,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -103,38 +107,7 @@ properties:
       - actual
       - realized
   result:
-    description: >-
-      The result of the action, can only be present in the actual or realized
-      lifecycles. The result has a
-
-      required status and optional additional info, like a remark and reason (in
-      the case of failure).
-    type: object
-    properties:
-      status:
-        description: >-
-          The status of the result, either succeeded, failed, partially
-          succeeded or cancelled.
-        type: string
-        enum:
-          - succeeded
-          - failed
-          - partiallySucceeded
-          - cancelled
-      remark:
-        description: >-
-          The remark of the result, usually only interesting in case the result
-          was failed or partially succeedded. Note that
-
-          differs from the remark on an action, which is a remark that is
-          relevant before the execution of the action. Whereas
-
-          this remark is relevant for the result after execution.
-        type: string
-      reason:
-        $ref: ./action-result-reason.yaml
-    required:
-      - status
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -147,39 +120,53 @@ properties:
   vehicle:
     description: The vehicle that is involved in this action.
     oneOf:
-      - $ref: ./vehicle-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./vehicle-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../vehicle-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  transportEquipment:
+    description: >-
+      The transport equipment that is being attached/detached to the associated
+      vehicle.
+    oneOf:
+      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../transport-equipment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   stop:
     description: The stop that is associated with this action.
     oneOf:
-      - $ref: ./refuel-stop-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../detach-stop-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./refuel-stop-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../detach-stop-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ./action-location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../action-location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./action-location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../action-location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -219,14 +206,14 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./action-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../action-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./action-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../action-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - actionType

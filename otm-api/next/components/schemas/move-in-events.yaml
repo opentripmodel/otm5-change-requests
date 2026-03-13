@@ -130,38 +130,7 @@ properties:
       - actual
       - realized
   result:
-    description: >-
-      The result of the action, can only be present in the actual or realized
-      lifecycles. The result has a
-
-      required status and optional additional info, like a remark and reason (in
-      the case of failure).
-    type: object
-    properties:
-      status:
-        description: >-
-          The status of the result, either succeeded, failed, partially
-          succeeded or cancelled.
-        type: string
-        enum:
-          - succeeded
-          - failed
-          - partiallySucceeded
-          - cancelled
-      remark:
-        description: >-
-          The remark of the result, usually only interesting in case the result
-          was failed or partially succeedded. Note that
-
-          differs from the remark on an action, which is a remark that is
-          relevant before the execution of the action. Whereas
-
-          this remark is relevant for the result after execution.
-        type: string
-      reason:
-        $ref: ./action-result-reason.yaml
-    required:
-      - status
+    $ref: ./action-result.yaml
   transportMode:
     description: >-
       Method of transport used for the carriage of goods on this move, can

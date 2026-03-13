@@ -1,10 +1,17 @@
+example:
+  id: 64d42a96-2ac3-4ae5-bce2-726536f1616d
+  lifecycle: planned
+  description: Adding fuel to the truck
+  startTime: '2021-06-23T16:00:00Z'
+  endTime: '2021-06-23T16:05:00Z'
+  actionType: genericAction
 type: object
 properties:
   actionType:
-    example: break
+    example: genericAction
     type: string
     enum:
-      - break
+      - genericAction
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -42,7 +49,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -55,7 +62,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -73,38 +80,7 @@ properties:
       - actual
       - realized
   result:
-    description: >-
-      The result of the action, can only be present in the actual or realized
-      lifecycles. The result has a
-
-      required status and optional additional info, like a remark and reason (in
-      the case of failure).
-    type: object
-    properties:
-      status:
-        description: >-
-          The status of the result, either succeeded, failed, partially
-          succeeded or cancelled.
-        type: string
-        enum:
-          - succeeded
-          - failed
-          - partiallySucceeded
-          - cancelled
-      remark:
-        description: >-
-          The remark of the result, usually only interesting in case the result
-          was failed or partially succeedded. Note that
-
-          differs from the remark on an action, which is a remark that is
-          relevant before the execution of the action. Whereas
-
-          this remark is relevant for the result after execution.
-        type: string
-      reason:
-        $ref: ./action-result-reason.yaml
-    required:
-      - status
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -114,30 +90,22 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
-  location:
-    description: The location at which this action is taking place.
-    oneOf:
-      - $ref: ./action-location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./action-location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+  description:
+    type: string
   trip:
-    description: The trip this action takes place on.
+    description: >-
+      The trip in which this action takes place, only provided if the trip is
+      not clear from the context.
     oneOf:
-      - $ref: ./trip-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../trip-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./trip-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../trip-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -174,17 +142,37 @@ properties:
     example: PT168H
     type: string
     format: duration
+  actions:
+    description: All actions that are done as part of this action.
+    type: array
+    items:
+      $ref: ../associations-actions.yaml
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./break-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../generic-action-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./break-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../generic-action-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  move:
+    description: >-
+      The trip in which this Move takes place, only provided if the trip is not
+      clear from the context.
+    oneOf:
+      - $ref: ../move-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../move-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - actionType
+  - description

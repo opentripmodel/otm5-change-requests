@@ -1,0 +1,44 @@
+type: object
+description: >-
+  The result of the action, can only be present in the actual or realized lifecycles.
+  The result has a required status and optional additional info, like a remark and
+  reason (in the case of failure).
+required:
+  - status
+properties:
+  status:
+    description: >-
+      The status of the result, either succeeded, failed, partially succeeded or cancelled.
+    type: string
+    enum:
+      - succeeded
+      - failed
+      - partiallySucceeded
+      - cancelled
+  remark:
+    description: >-
+      The remark of the result, usually only interesting in case the result was failed
+      or partially succeedded.
+      
+      Note that differs from the remark on an action, which is a remark that is relevant
+      before the execution of the action. Whereas this remark is relevant for the result
+      after execution.
+    type: string
+  reason:
+    $ref: ./action-result-reason.yaml
+  references:
+    description: >-
+      References to other entities that are relevant for this result. For example in case
+      of a failed loading action, the reference could be to the damaged transport equipment.
+    type: array
+    items:
+      $ref: ./entity1.yaml
+  results:
+    description: >-
+      In some cases, there can be multiple sub results that are relevant.
+      For example the unload action can be succeeded for certain goods and failed for others,
+      in which case the overall result would be partially succeeded and the sub results would
+      indicate which goods were unloaded successfully and which were not.
+    type: array
+    items:
+      $ref: ./action-result-sub-result.yaml

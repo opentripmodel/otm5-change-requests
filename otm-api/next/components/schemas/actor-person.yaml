@@ -1,7 +1,9 @@
 # Think of allOf like a "merge"
 allOf:
-  - $ref: ./actor.yaml
+  - $ref: ./actor-base.yaml
   - type: object
+    required:
+      - type
     properties:
       firstName:
         description: The first name.
@@ -10,7 +12,11 @@ allOf:
         description: The last name.
         type: string
       role:
-        description: The role/function title in relation to where the person works.
+        description: >-
+          The role/function title in relation to where the person works.
+          
+          Note! This is not the same as the role(s) that an actor can have in relation to an entity
+          (e.g. Carrier, Consignee, Driver, etc). Those roles are defined in the actor-roles.yaml schema.
         type: string
       department:
         type: string

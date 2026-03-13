@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.1.0
 info:
   title: Open Trip Model
   version: v5-next
@@ -37,7 +37,55 @@ info:
     **Unreleased changes**
 
 
+    **Version 5.8 (released on 2026-03-13)**
+
+    * Remove several duplicate definitions of the same entity or fields e.g. unit of measure
+
+    * Add actions property for vehicle entity. This allows to relate actions to a vehicle without the 
+    need to relate them to a trip. E.g. to indicate that a vehicle has a trailer (i.e. transport equipment) attached.
+    [See 108](https://github.com/opentripmodel/otm5-change-requests/issues/108)
+
+    * Better explain the difference between fields `actors[].entity.role` and `actors[].roles`
+    [See 109](https://github.com/opentripmodel/otm5-change-requests/issues/109)
+
+    * Fix inconsistencies in the specification of use of actor entity.
+    [See 110](https://github.com/opentripmodel/otm5-change-requests/issues/110)
+
+    * Add volume property to transport equipment and goods items.
+    This can be provided by means of value and unit (e.g. 120 m3).
+    [See 111](https://github.com/opentripmodel/otm5-change-requests/issues/111)
+
+    * Add support for multiple vehicle fuel types. This deprecated the fields:
+    'fuel', 'otherFuelType' and 'averageFuelConsumption' on the vehicle entity,
+    and replaces it with a new field 'fuels' that allows for multiple fuel types,
+    each with their own average fuel consumption.
+    [See 112](https://github.com/opentripmodel/otm5-change-requests/issues/112)
+
+    * Extend list of possible fuel types
+    [See 113](https://github.com/opentripmodel/otm5-change-requests/issues/113)
+
+    * Add the possibility to reference entities in the action result and
+    specificy sub results. For example the unload action can be succeeded for
+    certain goods and failed for others, in which case the overall result would
+    be partially succeeded and the sub results would indicate which goods were
+    unloaded successfully and which were not.
+    [See 115](https://github.com/opentripmodel/otm5-change-requests/issues/115)
+
+    * Extend list of possible emission standards with value Z
+    [See 117](https://github.com/opentripmodel/otm5-change-requests/issues/117)
+
+    * Fix missing entityType property for goods sub types items and transport equipment.
+    [See 118](https://github.com/opentripmodel/otm5-change-requests/issues/118)
+
+    * Fix circular polymorphic pattern for actor, person and company.
+    [See 119](https://github.com/opentripmodel/otm5-change-requests/issues/119)
+
+    * Add missing actions property in consignment entity.
+    [See 121](https://github.com/opentripmodel/otm5-change-requests/issues/121)
+
+
     **Version 5.7 (released on 2025-05-23)**
+
 
     * Fix broken link to goods packaging type codes.
     [See 87](https://github.com/opentripmodel/otm5-change-requests/issues/87).

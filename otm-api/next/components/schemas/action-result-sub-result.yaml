@@ -1,0 +1,38 @@
+type: object
+description: >-
+  The sub result of an action is a result that is relevant in the context of a parent result.
+  For example, in case of a failed loading action, the overall result would be failed,
+  but there could be sub results for each good that indicate whether the loading of that
+  good succeeded or failed.
+  A sub result has the same structure as a regular result, but cannot have sub results itself
+  to avoid infinite nesting.
+required:
+  - status
+properties:
+  status:
+    description: >-
+      The status of the result, either succeeded, failed, partially succeeded or cancelled.
+    type: string
+    enum:
+      - succeeded
+      - failed
+      - partiallySucceeded
+      - cancelled
+  remark:
+    description: >-
+      The remark of the result, usually only interesting in case the result was failed
+      or partially succeedded.
+      
+      Note that differs from the remark on an action, which is a remark that is relevant
+      before the execution of the action. Whereas this remark is relevant for the result
+      after execution.
+    type: string
+  reason:
+    $ref: ./action-result-reason.yaml
+  references:
+    description: >-
+      References to other entities that are relevant for this result. For example in case
+      of a failed loading action, the reference could be to the damaged transport equipment.
+    type: array
+    items:
+      $ref: ./entity1.yaml

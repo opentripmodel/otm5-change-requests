@@ -1,3 +1,5 @@
+required:
+  - entityType
 oneOf:
   - $ref: ./trip.yaml
   - $ref: ./sensor.yaml

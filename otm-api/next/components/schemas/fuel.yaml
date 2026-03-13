@@ -1,0 +1,43 @@
+type: object
+required:
+  - fuelType
+properties:
+  fuelType:
+    type: string
+    # Note! Keep this list in sync with the one in fuel-types.yaml
+    # The list below don't include `other` since that is deprecated and should not be used anymore.
+    enum:
+      - petrol
+      - diesel
+      - electricity
+      - hydrogen
+      - lng
+      - bioLng
+      - cng
+      - bioCng
+      - adBlue
+      - ethanol
+      - hvo # biodiesel HVO
+      - fame # biodiesel FAME
+  averageConsumption:
+    description: The average fuel consumption for this vehicle.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ./uom.yaml
+    required:
+      - value
+      - unit
+examples:
+  - fuelType: electricity
+    averageConsumption:
+      value: 20.0
+      unit: kWh/100km
+  - fuelType: petrol
+    averageConsumption:
+      value: 5.5
+      unit: l/100km

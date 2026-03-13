@@ -7,15 +7,7 @@ properties:
       - emissionStandardConstraint
   minimum:
     description: The minimum required emission standard that is required for the vehicle.
-    type: string
-    enum:
-      - euro0
-      - euro1
-      - euro2
-      - euro3
-      - euro4
-      - euro5
-      - euro6
+    $ref: ./emissionStandard.yaml
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined
