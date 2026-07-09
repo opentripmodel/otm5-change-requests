@@ -10,6 +10,7 @@ oneOf:
   - $ref: ./actions/break.yaml
   - $ref: ./actions/wait.yaml
   - $ref: ./actions/genericAction.yaml
+  - $ref: ./actions/weigh.yaml
 discriminator:
   propertyName: actionType
   mapping:
@@ -24,3 +25,4 @@ discriminator:
     break: ./actions/break.yaml
     wait: ./actions/wait.yaml
     genericAction: ./actions/genericAction.yaml
+    weigh: ./actions/weigh.yaml

@@ -385,6 +385,7 @@ tags:
          original waiting time was expected to be 15 minutes because of an occupied dock, but the driver is 10 minutes
          late, the waiting time can be shortened to 5 minutes until the dock is free.
        - The **GenericAction** for whenever any of the above actions cannot model the situation appropriately.
+       - The **Weigh** action for whenever a vehicle is weighed at a certain location. This can be used to indicate that the vehicle is weighed at a weigh station, or at a loading/unloading location.
   - name: Goods
     description: >-
       Goods are the items to be transported as part of a consignment. Goods can
