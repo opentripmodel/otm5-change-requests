@@ -1,22 +1,40 @@
 example:
-  name: temperature sensor
-  creationDate: '2021-06-23T10:00:00Z'
+  id: ad324860-ee07-488a-8908-9794326c6e29
+  creationDate: '2023-02-09T13:33:22Z'
   lifecycle: actual
-  sensor:
-    uuid: 9d2f8c40-ced5-4d48-89a2-6377b0362d2a
-    entityType: sensor
-    associationType: reference
-  value:
-    value: -20
-    unit: °C
-  eventType: sensorUpdateEvent
+  vehicle:
+    entity:
+      licensePlate: AA-11-BB
+    associationType: inline
+  geoReference:
+    lat: 52.1938879
+    lon: 5.4066468
+    speed:
+      value: 50
+      unit: km/h
+    heading:
+      value: 20
+      unit: degrees
+    type: latLonPointGeoReference
+  actors:
+    - entity:
+        name: some-shipper
+      roles:
+        - shipper
+      associationType: inline
+    - entity:
+        name: and-a-carrier
+      roles:
+        - carrier
+      associationType: inline
+  eventType: locationUpdateEvent
 type: object
 properties:
   eventType:
-    example: sensorUpdateEvent
+    example: locationUpdateEvent
     type: string
     enum:
-      - sensorUpdateEvent
+      - locationUpdateEvent
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -54,20 +72,12 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
-    description: >
-      External attributes are a simple way to add information in an
-      OpenTripModel message that could not fit into one of
-        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
-        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
-
-       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
-         it was intended.
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -84,30 +94,40 @@ properties:
       - projected
       - actual
       - realized
-  sensor:
-    description: The value that is measured by the sensor at the specified time.
+  vehicle:
+    description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ./sensor-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./sensor-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  value:
-    type: object
-    properties:
-      value:
-        description: Value in the given unit.
-        type: number
-        format: double
-      unit:
-        $ref: ./uom.yaml
-    required:
-      - value
-      - unit
+        inline: ../vehicle-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  geoReference:
+    description: >-
+      The location that is registered at the specified time, often using a
+      single latitude/longitude combination.
+    oneOf:
+      - $ref: ../latLonPointGeoReference.yaml
+      - $ref: ../latLonArrayGeoReference.yaml
+      - $ref: ../Feature.yaml
+      - $ref: ../openLRGeoReference.yaml
+      - $ref: ../tmcLocationGeoReference.yaml
+      - $ref: ../tmcArrayGeoReference.yaml
+      - $ref: ../addressGeoReference.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        latLonPointGeoReference: ../latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
+        Feature: ../Feature.yaml
+        openLRGeoReference: ../openLRGeoReference.yaml
+        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
+        addressGeoReference: ../addressGeoReference.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper
@@ -115,15 +135,15 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
 required:
   - eventType
-  - value
+  - geoReference

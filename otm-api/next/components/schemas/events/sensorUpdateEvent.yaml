@@ -1,10 +1,22 @@
+example:
+  name: temperature sensor
+  creationDate: '2021-06-23T10:00:00Z'
+  lifecycle: actual
+  sensor:
+    uuid: 9d2f8c40-ced5-4d48-89a2-6377b0362d2a
+    entityType: sensor
+    associationType: reference
+  value:
+    value: -20
+    unit: °C
+  eventType: sensorUpdateEvent
 type: object
 properties:
   eventType:
-    example: fuelConsumedEvent
+    example: sensorUpdateEvent
     type: string
     enum:
-      - fuelConsumedEvent
+      - sensorUpdateEvent
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -42,7 +54,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -55,7 +67,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -72,50 +84,19 @@ properties:
       - projected
       - actual
       - realized
-  vehicle:
-    description: The vehicle that is relevant for this event
+  sensor:
+    description: The value that is measured by the sensor at the specified time.
     oneOf:
-      - $ref: ./vehicle-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../sensor-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./vehicle-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  trip:
-    description: The trip that is relevant for this event
-    oneOf:
-      - $ref: ./trip-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./trip-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  consignment:
-    description: The consignment that is relevant for this event
-    oneOf:
-      - $ref: ./consignment-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./consignment-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  fuel:
-    description: >-
-      The type of fuel consumed in this event.
-      Note, it is strongly recommended to use the fuel types as also used in the vehicle entity. However,
-      for backwards compatibility reasons, it is still possible to use any string to indicate the fuel type.
-    type: string
-  amount:
-    description: The amount of fuel consumed in this event.
+        inline: ../sensor-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  value:
     type: object
     properties:
       value:
@@ -123,7 +104,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -134,15 +115,15 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
 required:
   - eventType
-  - amount
+  - value

@@ -1,10 +1,41 @@
+example:
+  id: 706d7796-269e-46d4-b292-a8eea0b360c5
+  lifecycle: actual
+  vehicle:
+    entity:
+      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
+      name: Bob's Boxtruck
+      vehicleType: boxtruck
+      fuel: electricity
+      loadCapacities:
+        - value: 1000
+          unit: kg
+      length:
+        value: 8
+        unit: m
+      height:
+        value: 2.8
+        unit: m
+      width:
+        value: 2
+        unit: m
+      licensePlate: AB-12-CD
+      emptyWeight:
+        value: 2000
+        unit: kg
+    associationType: inline
+  geoReference:
+    lat: 52.0905356
+    lon: 5.1124527
+    type: latLonPointGeoReference
+  eventType: stopMovingEvent
 type: object
 properties:
   eventType:
-    example: updateEvent
+    example: stopMovingEvent
     type: string
     enum:
-      - updateEvent
+      - stopMovingEvent
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -42,14 +73,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
-  entity:
-    description: >-
-      The _fields_ of the entity that need to be updated. All fields that are
-      not present remain **unchanged**. If you want to unset a field explicitly
-      use null
-    allOf:
-      - $ref: ./entity.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -62,7 +86,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
     description: >-
       A lifecycle models _when_ the data in the action is taking place. You can
@@ -79,6 +103,40 @@ properties:
       - projected
       - actual
       - realized
+  vehicle:
+    description: The vehicle that is relevant for this event
+    oneOf:
+      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../vehicle-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  geoReference:
+    description: >-
+      The location that is registered at the specified time, often using a
+      single latitude/longitude combination.
+    oneOf:
+      - $ref: ../latLonPointGeoReference.yaml
+      - $ref: ../latLonArrayGeoReference.yaml
+      - $ref: ../Feature.yaml
+      - $ref: ../openLRGeoReference.yaml
+      - $ref: ../tmcLocationGeoReference.yaml
+      - $ref: ../tmcArrayGeoReference.yaml
+      - $ref: ../addressGeoReference.yaml
+    discriminator:
+      propertyName: type
+      mapping:
+        latLonPointGeoReference: ../latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
+        Feature: ../Feature.yaml
+        openLRGeoReference: ../openLRGeoReference.yaml
+        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
+        addressGeoReference: ../addressGeoReference.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper
@@ -86,15 +144,15 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
 required:
   - eventType
-  - entity
+  - geoReference
