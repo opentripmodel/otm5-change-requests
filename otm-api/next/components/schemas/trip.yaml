@@ -123,6 +123,14 @@ properties:
           inline: ./associated-actors-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
+  actions:
+    description: >-
+      All actions that are/were happening on this trip, such as
+      stopping at certain locations and loading and unloading of
+      consignments.
+    type: array
+    items:
+      $ref: ./associations-actions.yaml
   constraint:
     description: >-
       Constraints this trip has to abide to, such as the start and end date
