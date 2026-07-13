@@ -356,6 +356,8 @@ tags:
       - The **FuelConsumedEvent** that contains information about how much fuel
       was consumed during a move / on a trip / per consignment.
         Can be provided as an actual value, projected based on some calculation, or realized as measured by some sensor.
+      - The **WeighEvent** that contains information about the weights of the vehicle or transport equipment. This can be
+      from a weighbridge, tare weight, manual or from a sensor.
 
       **Updates on earlier provided data**:
        - The **UpdateEvent** that is used to update an earlier provided entity with new information. Note that only the changed data has to be provided.
