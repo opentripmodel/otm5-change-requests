@@ -45,6 +45,7 @@ properties:
       - stopMoving
       - startEngine
       - stopEngine
+      - weigh
   description:
     type: string
 required:

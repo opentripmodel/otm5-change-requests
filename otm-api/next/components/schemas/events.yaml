@@ -11,6 +11,7 @@ oneOf:
   - $ref: ./events/stopEngineEvent.yaml
   - $ref: ./events/stopMovingEvent.yaml
   - $ref: ./events/updateEvent.yaml
+  - $ref: ./events/weighEvent.yaml
 discriminator:
   propertyName: eventType
   mapping:
@@ -26,3 +27,4 @@ discriminator:
     stopEngineEvent: ./events/stopEngineEvent.yaml
     stopMovingEvent: ./events/stopMovingEvent.yaml
     updateEvent: ./events/updateEvent.yaml
+    weighEvent: ./events/weighEvent.yaml
