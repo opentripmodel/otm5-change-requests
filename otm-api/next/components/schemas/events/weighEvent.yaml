@@ -122,6 +122,11 @@ properties:
         required:
           - value
           - unit
+      remark:
+        description: >-
+          The remark of the result, usually only interesting in case the result was failed
+          or partially succeedded. For example, a discrepancy in the reported waste stream.
+        type: string
       weighbridgeId:
         description: >-
           The ID of the weighbridge that was used to measure the weight. This can
