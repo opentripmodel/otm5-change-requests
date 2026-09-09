@@ -36,6 +36,9 @@ info:
 
     **Unreleased changes**
 
+    * Add `cargoHandler` to `actors[].roles`.
+    [See 135](https://github.com/opentripmodel/otm5-change-requests/issues/135)
+
     * Add `freightForwarder` to `actors[].roles`.
     [See 116](https://github.com/opentripmodel/otm5-change-requests/issues/116)
 
