@@ -4,6 +4,8 @@ description: >-
   - **Carrier**: the actor which is responsible for physically delivering
   the goods from one place to another. Note that the actual transport can
   be delegated to another party (subcontractor), but the carrier remains responsible.
+  - **Cargo Handler**: the actor that physically handles and processes cargo,
+  for example in terminal or airport operations.
   - **Freight Forwarder**: the actor that organizes the transport and procures
   transport capacity on behalf of the shipper.
   - **Shipper**: the actor that engages in shipping goods and is the main
@@ -45,6 +47,7 @@ items:
   enum:
     - shipper
     - carrier
+    - cargoHandler
     - freightForwarder
     - consignee
     - consignor
