@@ -4,6 +4,8 @@ description: >-
   - **Carrier**: the actor which is responsible for physically delivering
   the goods from one place to another. Note that the actual transport can
   be delegated to another party (subcontractor), but the carrier remains responsible.
+  - **Freight Forwarder**: the actor that organizes the transport and procures
+  transport capacity on behalf of the shipper.
   - **Shipper**: the actor that engages in shipping goods and is the main
   contractor, ensuring the shipment takes place.
   - **Consignee**: the actor that is the buyer of the goods.
@@ -43,6 +45,7 @@ items:
   enum:
     - shipper
     - carrier
+    - freightForwarder
     - consignee
     - consignor
     - receiver
