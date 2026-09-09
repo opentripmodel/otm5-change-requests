@@ -39,6 +39,9 @@ info:
     * Add `weigh` action and `weighEvent` event to model weighing a vehicle or transport equipment.
     [See 138](https://github.com/opentripmodel/otm5-change-requests/issues/138)
 
+    * Add `euralCode` to `goods[].items[].classificationLines[]` to support waste classification with EURAL.
+    [See 64](https://github.com/opentripmodel/otm5-change-requests/issues/64)
+
 
     **Version 5.8 (released on 2026-03-13)**
 
