@@ -1,5 +1,7 @@
 plugins:
   - plugins/refs-plugin.js
 rules:
+  operation-operationId: error
+  operation-operationId-unique: error
   refs-plugin/no-refs-siblings: warn
   refs-plugin/no-circular-refs: warn

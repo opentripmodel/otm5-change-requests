@@ -1,4 +1,5 @@
 get:
+  operationId: getTransportOrderByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -34,6 +35,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteTransportOrderByUuid
   responses:
     '204':
       description: Deleted transportOrder with the provided UUID

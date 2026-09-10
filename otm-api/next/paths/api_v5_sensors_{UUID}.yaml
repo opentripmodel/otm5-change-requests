@@ -1,4 +1,5 @@
 get:
+  operationId: getSensorByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -161,6 +162,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteSensorByUuid
   responses:
     '204':
       description: Deleted sensor with the provided UUID

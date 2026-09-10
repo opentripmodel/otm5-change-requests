@@ -1,4 +1,5 @@
 get:
+  operationId: getLocationByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -259,6 +260,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteLocationByUuid
   responses:
     '204':
       description: Deleted location with the provided UUID

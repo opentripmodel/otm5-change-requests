@@ -1,4 +1,5 @@
 put:
+  operationId: createAction
   responses:
     '200':
       description: The same entity
