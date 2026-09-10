@@ -36,6 +36,12 @@ info:
 
     **Unreleased changes**
 
+    * Add `operationId` to all API endpoints.
+    [See 125](https://github.com/opentripmodel/otm5-change-requests/issues/125)
+
+    * Define lifecycle as a shared enum schema and reference it from lifecycle properties.
+    [See 122](https://github.com/opentripmodel/otm5-change-requests/issues/122)
+
     * Add `type` to `vehicles[].loadCapacities[]` to distinguish capacity meanings such as axle and combined masses.
     [See 127](https://github.com/opentripmodel/otm5-change-requests/issues/127)
 
