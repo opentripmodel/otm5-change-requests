@@ -57,6 +57,9 @@ info:
     * Add `euralCode` to `goods[].items[].classificationLines[]` to support waste classification with EURAL.
     [See 64](https://github.com/opentripmodel/otm5-change-requests/issues/64)
 
+    * Add `rejected` as a status enum value for consignment and trip.
+    [See 128](https://github.com/opentripmodel/otm5-change-requests/issues/128)
+
 
     **Version 5.8 (released on 2026-03-13)**
 
