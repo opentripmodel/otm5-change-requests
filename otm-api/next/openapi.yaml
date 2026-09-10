@@ -60,6 +60,9 @@ info:
     * Add `rejected` as a status enum value for consignment and trip.
     [See 128](https://github.com/opentripmodel/otm5-change-requests/issues/128)
 
+    * Add `closed` as a status enum value for all status fields.
+    [See 137](https://github.com/opentripmodel/otm5-change-requests/issues/137)
+
 
     **Version 5.8 (released on 2026-03-13)**
 
