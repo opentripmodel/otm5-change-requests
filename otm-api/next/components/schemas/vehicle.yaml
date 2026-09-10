@@ -137,6 +137,21 @@ properties:
     items:
       type: object
       properties:
+        type:
+          description: >
+            The type of load capacity.
+
+            - `maximumWeightPerAxle`: Maximum permissible laden mass per axle.
+            - `combinedTechnicalMaximumMass`: Maximum total mass of the vehicle
+            combination based on technical design limits.
+            - `combinedPermissibleMaximumMass`: Maximum total mass of the
+            vehicle combination legally allowed on public roads in the country
+            of registration.
+          type: string
+          enum:
+            - maximumWeightPerAxle
+            - combinedTechnicalMaximumMass
+            - combinedPermissibleMaximumMass
         value:
           description: Value in the given unit.
           type: number

@@ -36,6 +36,9 @@ info:
 
     **Unreleased changes**
 
+    * Add `type` to `vehicles[].loadCapacities[]` to distinguish capacity meanings such as axle and combined masses.
+    [See 127](https://github.com/opentripmodel/otm5-change-requests/issues/127)
+
     * Add `cargoHandler` to `actors[].roles`.
     [See 135](https://github.com/opentripmodel/otm5-change-requests/issues/135)
 
