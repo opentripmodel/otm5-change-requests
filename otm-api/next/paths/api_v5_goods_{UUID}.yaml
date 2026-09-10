@@ -1,4 +1,5 @@
 get:
+  operationId: getGoodsByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -41,6 +42,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteGoodsByUuid
   responses:
     '204':
       description: Deleted goods with the provided UUID

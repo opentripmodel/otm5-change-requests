@@ -1,4 +1,5 @@
 get:
+  operationId: getConstraintByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -125,6 +126,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteConstraintByUuid
   responses:
     '204':
       description: Deleted constraint with the provided UUID
