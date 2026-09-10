@@ -1,0 +1,18 @@
+description: >-
+  Status defines whether this entity (e.g. trip or consignment) is a draft,
+  requested, confirmed, in transit, completed, rejected or cancelled.
+
+  The values accepted (replaced by confirmed) and modified (replaced the
+  lastModified field on every entity) are deprecated since OTM5.1, but
+  will be supported for the whole OTM5.X line.
+type: string
+enum:
+  - draft
+  - requested
+  - rejected
+  - confirmed
+  - inTransit
+  - completed
+  - cancelled
+  - accepted
+  - modified
