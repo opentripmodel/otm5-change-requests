@@ -27,6 +27,11 @@ example:
   emptyWeight:
     value: 2000
     unit: kg
+  emissionClasses:
+    - type: emissionClassCO2
+      value: '1'
+    - type: emissionStandard
+      value: euro6
 type: object
 properties:
   entityType:
@@ -115,6 +120,13 @@ properties:
     required:
       - value
       - unit
+  emissionClasses:
+    description: >-
+      Classification labels that can be used to indicate regulatory classes
+      for this vehicle, such as Euro emission standard and CO2 emission class.
+    type: array
+    items:
+      $ref: ./emissionClass.yaml
   emissionStandard:
     $ref: ./emissionStandard.yaml
   maxLinks:

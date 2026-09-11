@@ -1,0 +1,8 @@
+oneOf:
+  - $ref: ./emissionClassCO2Classification.yaml
+  - $ref: ./emissionStandardClassification.yaml
+discriminator:
+  propertyName: type
+  mapping:
+    emissionClassCO2: ./emissionClassCO2Classification.yaml
+    emissionStandard: ./emissionStandardClassification.yaml
