@@ -27,6 +27,10 @@ example:
       roles:
         - carrier
       associationType: inline
+  references:
+    - associationType: reference
+      entityType: consignment
+      uuid: dd082bbb-749b-5f6a-bcf0-189c5c684c59
   eventType: locationUpdateEvent
 type: object
 properties:
@@ -130,6 +134,14 @@ properties:
           inline: ../associated-actors-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
+  references:
+    description: >-
+      References to other entities that are relevant for this location update.
+      For example, the location update can refer to a consignment, trip,
+      or transport equipment that was moved.
+    type: array
+    items:
+      $ref: ../entity1.yaml
 required:
   - eventType
   - geoReference
