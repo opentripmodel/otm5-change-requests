@@ -36,36 +36,35 @@ info:
 
     **Unreleased changes**
 
-    * Add `operationId` to all API endpoints.
-    [See 125](https://github.com/opentripmodel/otm5-change-requests/issues/125)
+    * Add `euralCode` to `goods[].items[].classificationLines[]` to support waste classification with EURAL.
+    [See 64](https://github.com/opentripmodel/otm5-change-requests/issues/64)
+
+    * Add `freightForwarder` to `actors[].roles`.
+    [See 116](https://github.com/opentripmodel/otm5-change-requests/issues/116)
 
     * Define lifecycle as a shared enum schema and reference it from lifecycle properties.
     [See 122](https://github.com/opentripmodel/otm5-change-requests/issues/122)
 
+    * Add `operationId` to all API endpoints.
+    [See 125](https://github.com/opentripmodel/otm5-change-requests/issues/125)
+
     * Add `type` to `vehicles[].loadCapacities[]` to distinguish capacity meanings such as axle and combined masses.
     [See 127](https://github.com/opentripmodel/otm5-change-requests/issues/127)
+
+    * Add `rejected` as a status enum value for consignment and trip.
+    [See 128](https://github.com/opentripmodel/otm5-change-requests/issues/128)
 
     * Add `cargoHandler` to `actors[].roles`.
     [See 135](https://github.com/opentripmodel/otm5-change-requests/issues/135)
 
-    * Add `freightForwarder` to `actors[].roles`.
-    [See 116](https://github.com/opentripmodel/otm5-change-requests/issues/116)
+    * Add `closed` as a status enum value for all status fields.
+    [See 137](https://github.com/opentripmodel/otm5-change-requests/issues/137)
 
     * Add `weigh` action and `weighEvent` event to model weighing a vehicle or transport equipment.
     [See 138](https://github.com/opentripmodel/otm5-change-requests/issues/138)
 
     * Add `references` array to `locationUpdateEvent` and `weighEvent` to reference other entities that are relevant for these events.
     [See 140](https://github.com/opentripmodel/otm5-change-requests/issues/140)
-
-    * Add `euralCode` to `goods[].items[].classificationLines[]` to support waste classification with EURAL.
-    [See 64](https://github.com/opentripmodel/otm5-change-requests/issues/64)
-
-    * Add `rejected` as a status enum value for consignment and trip.
-    [See 128](https://github.com/opentripmodel/otm5-change-requests/issues/128)
-
-    * Add `closed` as a status enum value for all status fields.
-    [See 137](https://github.com/opentripmodel/otm5-change-requests/issues/137)
-
 
     **Version 5.8 (released on 2026-03-13)**
 
