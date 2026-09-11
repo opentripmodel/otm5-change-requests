@@ -4,7 +4,7 @@ oneOf:
   - $ref: ./trip.yaml
   - $ref: ./sensor.yaml
   - $ref: ./route.yaml
-  - $ref: ./location.yaml
+  - $ref: ./location-with-type.yaml
   - $ref: ./actor.yaml
   - $ref: ./constraint.yaml
   - $ref: ./transportOrder.yaml
@@ -29,7 +29,7 @@ discriminator:
     trip: ./trip.yaml
     sensor: ./sensor.yaml
     route: ./route.yaml
-    location: ./location.yaml
+    location: ./location-with-type.yaml
     actor: ./actor.yaml
     constraint: ./constraint.yaml
     transportOrder: ./transportOrder.yaml
