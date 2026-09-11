@@ -150,7 +150,7 @@ properties:
       or other entity that was being weighted.
     type: array
     items:
-      $ref: ../entity1.yaml
+      $ref: ../entity-reference.yaml
 required:
   - eventType
   - weighingResult

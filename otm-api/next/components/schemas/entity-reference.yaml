@@ -1,10 +1,10 @@
 oneOf:
-  - $ref: ./entity2-inline.yaml
+  - $ref: ./entity-inline.yaml
   - $ref: ./reference.yaml
   - $ref: ./attributeRestriction.yaml
 discriminator:
   propertyName: associationType
   mapping:
-    inline: ./entity2-inline.yaml
+    inline: ./entity-inline.yaml
     reference: ./reference.yaml
     attributeRestriction: ./attributeRestriction.yaml

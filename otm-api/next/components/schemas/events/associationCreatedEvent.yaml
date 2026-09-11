@@ -97,14 +97,14 @@ properties:
       the order of the entities is unimportant, an association created works
       both ways.
     allOf:
-      - $ref: ../entity1.yaml
+      - $ref: ../entity-reference.yaml
   entity2:
     description: >-
       One of the two entities between which an association is created. Note that
       the order of the entities is unimportant, an association created works
       both ways.
     allOf:
-      - $ref: ../entity2.yaml
+      - $ref: ../entity-reference.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper

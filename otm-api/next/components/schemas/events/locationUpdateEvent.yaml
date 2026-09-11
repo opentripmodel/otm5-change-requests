@@ -141,7 +141,7 @@ properties:
       or transport equipment that was moved.
     type: array
     items:
-      $ref: ../entity1.yaml
+      $ref: ../entity-reference.yaml
 required:
   - eventType
   - geoReference
