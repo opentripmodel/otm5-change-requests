@@ -54,6 +54,9 @@ info:
     * Add `rejected` as a status enum value for consignment and trip.
     [See 128](https://github.com/opentripmodel/otm5-change-requests/issues/128)
 
+    * Add `emissionClasses` to vehicle with support for `emissionStandard` and `emissionClassCO2`, and deprecate vehicle field `emissionStandard`.
+    [See 131](https://github.com/opentripmodel/otm5-change-requests/issues/131)
+
     * Add `cargoHandler` to `actors[].roles`.
     [See 135](https://github.com/opentripmodel/otm5-change-requests/issues/135)
 
