@@ -128,7 +128,12 @@ properties:
     items:
       $ref: ./emissionClass.yaml
   emissionStandard:
-    $ref: ./emissionStandard.yaml
+    allOf:
+      - description: >-
+          Deprecated: use `emissionClasses` with type `emissionStandard`
+          instead.
+        deprecated: true
+      - $ref: ./enums/emissionStandard.yaml
   maxLinks:
     description: >-
       Maximum number of links to other `Vehicle` s. Typical values are 0, 1 or
