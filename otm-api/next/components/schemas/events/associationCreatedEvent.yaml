@@ -1,22 +1,43 @@
 example:
-  name: temperature sensor
-  creationDate: '2021-06-23T10:00:00Z'
-  lifecycle: actual
-  sensor:
-    uuid: 9d2f8c40-ced5-4d48-89a2-6377b0362d2a
-    entityType: sensor
+  id: fc6b2b0c-2f0a-40c6-a580-212c5c7984c8
+  name: couple vehicle to trip
+  lifecycle: planned
+  entity1:
+    uuid: 50824123-0924-4563-ac1e-ca0e37487823
+    entityType: trip
     associationType: reference
-  value:
-    value: -20
-    unit: °C
-  eventType: sensorUpdateEvent
+  entity2:
+    entity:
+      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
+      name: Bob's Boxtruck
+      vehicleType: boxtruck
+      fuel: electricity
+      loadCapacities:
+        - value: 1000
+          unit: kg
+      length:
+        value: 8
+        unit: m
+      height:
+        value: 2.8
+        unit: m
+      width:
+        value: 2
+        unit: m
+      licensePlate: AB-12-CD
+      emptyWeight:
+        value: 2000
+        unit: kg
+      entityType: vehicle
+    associationType: inline
+  eventType: associationCreatedEvent
 type: object
 properties:
   eventType:
-    example: sensorUpdateEvent
+    example: associationCreatedEvent
     type: string
     enum:
-      - sensorUpdateEvent
+      - associationCreatedEvent
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -54,7 +75,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -67,47 +88,23 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
+    $ref: ../enums/lifecycle.yaml
+  entity1:
     description: >-
-      A lifecycle models _when_ the data in the action is taking place. You can
-      provide the same action in multiple
-
-      lifecycles to model how it changes over time. For example the planned and
-      realized time of an action taking place
-
-      can differ because of unforseen circumstances (such as traffic jams).
-    type: string
-    enum:
-      - requested
-      - planned
-      - projected
-      - actual
-      - realized
-  sensor:
-    description: The value that is measured by the sensor at the specified time.
-    oneOf:
-      - $ref: ./sensor-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./sensor-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  value:
-    type: object
-    properties:
-      value:
-        description: Value in the given unit.
-        type: number
-        format: double
-      unit:
-        $ref: ./uom.yaml
-    required:
-      - value
-      - unit
+      One of the two entities between which an association is created. Note that
+      the order of the entities is unimportant, an association created works
+      both ways.
+    allOf:
+      - $ref: ../entity1.yaml
+  entity2:
+    description: >-
+      One of the two entities between which an association is created. Note that
+      the order of the entities is unimportant, an association created works
+      both ways.
+    allOf:
+      - $ref: ../entity2.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper
@@ -115,15 +112,16 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
 required:
   - eventType
-  - value
+  - entity1
+  - entity2

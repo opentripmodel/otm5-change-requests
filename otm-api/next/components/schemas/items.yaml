@@ -409,6 +409,14 @@ properties:
             code used by all members of the World Customs Organization (WCO) to
             classify goods for customs purposes.
           type: string
+        euralCode:
+          description: >-
+            EURAL codes (European Waste Catalogue) are standardized 6-digit
+            identifiers used across the European Union to classify waste.
+            They identify the waste's origin, the industrial process that
+            produced it, and indicate whether the material is classified as
+            hazardous or non-hazardous.
+          type: string
         description:
           description: The description of this classification line.
           type: string

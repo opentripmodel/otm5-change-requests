@@ -114,21 +114,7 @@ properties:
     additionalProperties:
       $ref: ./unrestricted_json.yaml
   lifecycle:
-    description: >-
-      A lifecycle models _when_ the data in the action is taking place. You can
-      provide the same action in multiple
-
-      lifecycles to model how it changes over time. For example the planned and
-      realized time of an action taking place
-
-      can differ because of unforseen circumstances (such as traffic jams).
-    type: string
-    enum:
-      - requested
-      - planned
-      - projected
-      - actual
-      - realized
+    $ref: ./enums/lifecycle.yaml
   result:
     $ref: ./action-result.yaml
   transportMode:

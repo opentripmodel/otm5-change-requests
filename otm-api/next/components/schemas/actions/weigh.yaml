@@ -1,48 +1,20 @@
 example:
-  id: e81a7aa3-23a6-4089-b916-52b854c7b6f1
+  actionType: weigh
+  id: f3c1e2d4-5b6a-7c8d-9e0f-1a2b3c4d5e6f
   lifecycle: planned
-  remark: loading a consignment
   consignment:
     uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
     entityType: consignment
     associationType: reference
   startTime: '2021-06-23T14:00:00Z'
   endTime: '2021-06-23T14:15:00Z'
-  constraint:
-    entity:
-      id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
-      name: Example combined constraint
-      value:
-        and:
-          - startTime: '2021-06-23T10:00:00Z'
-            endTime: '2021-06-23T13:00:00Z'
-            description: alert-threshold
-            type: timeWindowConstraint
-          - constraintType: maximum
-            maximum:
-              value: 5
-              unit: C
-            type: temperatureConstraint
-          - or:
-              - fuelTypes:
-                  - battery
-                type: fuelTypeConstraint
-              - fuelTypes:
-                  - biodiesel
-                type: fuelTypeConstraint
-              - minimum: euro5
-                type: emissionStandardConstraint
-            type: orConstraint
-        type: andConstraint
-    associationType: inline
-  actionType: load
 type: object
 properties:
   actionType:
-    example: load
+    example: weigh
     type: string
     enum:
-      - load
+      - weigh
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -99,6 +71,33 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
+  vehicle:
+    description: The vehicle that is involved in this action.
+    oneOf:
+      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../vehicle-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  transportEquipment:
+    description: >-
+      The transport equipment that is weighted. This applies in particular to transport equipment of type trailer.
+      Seperate weigh actions can be defined for multiple attached trailers.
+      Several weigh actions can be performed on the same transport equipment, for example to measure the weight of the trailer when empty and when loaded.
+    oneOf:
+      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../transport-equipment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   stop:
     description: The stop that is associated with this action.
     oneOf:
@@ -109,30 +108,6 @@ properties:
       propertyName: associationType
       mapping:
         inline: ../load-stop-inline.yaml
-        reference: ../reference.yaml
-        attributeRestriction: ../attributeRestriction.yaml
-  consignment:
-    description: The consignment that is the subject of this action.
-    oneOf:
-      - $ref: ../consignment-association-inline.yaml
-      - $ref: ../reference.yaml
-      - $ref: ../attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ../consignment-association-inline.yaml
-        reference: ../reference.yaml
-        attributeRestriction: ../attributeRestriction.yaml
-  transportEquipment:
-    description: The transport equipment the consignment is loaded in/unloaded from.
-    oneOf:
-      - $ref: ../transport-equipment-association-inline.yaml
-      - $ref: ../reference.yaml
-      - $ref: ../attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ../transport-equipment-association-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   documents:

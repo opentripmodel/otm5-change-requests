@@ -27,6 +27,10 @@ example:
       roles:
         - carrier
       associationType: inline
+  references:
+    - associationType: reference
+      entityType: consignment
+      uuid: dd082bbb-749b-5f6a-bcf0-189c5c684c59
   eventType: locationUpdateEvent
 type: object
 properties:
@@ -72,62 +76,48 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
-    description: >-
-      A lifecycle models _when_ the data in the action is taking place. You can
-      provide the same action in multiple
-
-      lifecycles to model how it changes over time. For example the planned and
-      realized time of an action taking place
-
-      can differ because of unforseen circumstances (such as traffic jams).
-    type: string
-    enum:
-      - requested
-      - planned
-      - projected
-      - actual
-      - realized
+    $ref: ../enums/lifecycle.yaml
   vehicle:
     description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ./vehicle-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./vehicle-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../vehicle-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   geoReference:
     description: >-
       The location that is registered at the specified time, often using a
       single latitude/longitude combination.
     oneOf:
-      - $ref: ./latLonPointGeoReference.yaml
-      - $ref: ./latLonArrayGeoReference.yaml
-      - $ref: ./Feature.yaml
-      - $ref: ./openLRGeoReference.yaml
-      - $ref: ./tmcLocationGeoReference.yaml
-      - $ref: ./tmcArrayGeoReference.yaml
-      - $ref: ./addressGeoReference.yaml
+      - $ref: ../latLonPointGeoReference.yaml
+      - $ref: ../latLonArrayGeoReference.yaml
+      - $ref: ../Feature.yaml
+      - $ref: ../openLRGeoReference.yaml
+      - $ref: ../tmcLocationGeoReference.yaml
+      - $ref: ../tmcArrayGeoReference.yaml
+      - $ref: ../addressGeoReference.yaml
     discriminator:
       propertyName: type
       mapping:
-        latLonPointGeoReference: ./latLonPointGeoReference.yaml
-        latLonArrayGeoReference: ./latLonArrayGeoReference.yaml
-        Feature: ./Feature.yaml
-        openLRGeoReference: ./openLRGeoReference.yaml
-        tmcLocationGeoReference: ./tmcLocationGeoReference.yaml
-        tmcArrayGeoReference: ./tmcArrayGeoReference.yaml
-        addressGeoReference: ./addressGeoReference.yaml
+        latLonPointGeoReference: ../latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
+        Feature: ../Feature.yaml
+        openLRGeoReference: ../openLRGeoReference.yaml
+        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
+        addressGeoReference: ../addressGeoReference.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper
@@ -135,15 +125,23 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
+  references:
+    description: >-
+      References to other entities that are relevant for this location update.
+      For example, the location update can refer to a consignment, trip,
+      or transport equipment that was moved.
+    type: array
+    items:
+      $ref: ../entity1.yaml
 required:
   - eventType
   - geoReference

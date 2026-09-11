@@ -1,4 +1,5 @@
 put:
+  operationId: createTransportOrder
   responses:
     '200':
       description: The same entity

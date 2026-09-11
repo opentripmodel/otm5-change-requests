@@ -58,24 +58,7 @@ properties:
     additionalProperties:
       $ref: ./unrestricted_json.yaml
   status:
-    description: >-
-      Whether this trip is a draft, requested, confirmed, in transit, completed
-      or cancelled. The values accepted
-
-      (replaced by confirmed) and modified (replaced the lastModified field on
-      every entity) are deprecated since
-
-      OTM5.1, but will be supported for the whole OTM5.X line.
-    type: string
-    enum:
-      - draft
-      - requested
-      - confirmed
-      - inTransit
-      - completed
-      - cancelled
-      - accepted
-      - modified
+    $ref: ./enums/status.yaml
   transportMode:
     description: >-
       Method of transport used for the carriage of goods on this trip, can
@@ -123,6 +106,14 @@ properties:
           inline: ./associated-actors-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
+  actions:
+    description: >-
+      All actions that are/were happening on this trip, such as
+      stopping at certain locations and loading and unloading of
+      consignments.
+    type: array
+    items:
+      $ref: ./associations-actions.yaml
   constraint:
     description: >-
       Constraints this trip has to abide to, such as the start and end date

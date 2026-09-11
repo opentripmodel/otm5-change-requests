@@ -1,4 +1,5 @@
 get:
+  operationId: getVehicleByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -34,6 +35,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteVehicleByUuid
   responses:
     '204':
       description: Deleted vehicle with the provided UUID

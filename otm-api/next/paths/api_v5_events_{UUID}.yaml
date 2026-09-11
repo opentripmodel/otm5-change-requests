@@ -1,4 +1,5 @@
 get:
+  operationId: getEventByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -34,6 +35,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteEventByUuid
   responses:
     '204':
       description: Deleted event with the provided UUID

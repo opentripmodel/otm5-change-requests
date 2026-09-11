@@ -1,4 +1,5 @@
 get:
+  operationId: getActorByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
@@ -34,6 +35,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteActorByUuid
   responses:
     '204':
       description: Deleted actor with the provided UUID
