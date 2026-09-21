@@ -171,12 +171,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./relatedConsignments-association-inline.yaml
+        - $ref: ./consignment-association-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./relatedConsignments-association-inline.yaml
+          inline: ./consignment-association-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
