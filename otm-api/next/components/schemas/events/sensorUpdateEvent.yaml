@@ -73,13 +73,13 @@ properties:
   sensor:
     description: The value that is measured by the sensor at the specified time.
     oneOf:
-      - $ref: ../sensor-association-inline.yaml
+      - $ref: ../entity/sensor-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../sensor-association-inline.yaml
+        inline: ../entity/sensor-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   value:

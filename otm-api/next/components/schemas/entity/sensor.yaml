@@ -63,12 +63,12 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./event.yaml
+      $ref: ../event.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   placement:
     description: >-
       Sometimes more than one sensor can be associated with a single entity.
@@ -92,15 +92,15 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./actor-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../actor-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./actor-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../actor-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
     description: >
       In the context of a `Sensor`, only `sensorValueConstraint`s really make
@@ -112,12 +112,12 @@ properties:
       > **ℹ Note** that constraints can be nested and combined using the
       `andConstraint`, `orConstraint` and `notConstraint`.
     oneOf:
-      - $ref: ./constraints/sensor-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/sensor-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/sensor-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/sensor-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml

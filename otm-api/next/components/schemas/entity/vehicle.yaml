@@ -265,12 +265,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../sensors-association-inline.yaml
+        - $ref: ./sensor-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../sensors-association-inline.yaml
+          inline: ./sensor-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
