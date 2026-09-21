@@ -114,7 +114,7 @@ get:
                   different from the officially registered location, this holds
                   the latter
                 allOf:
-                  - $ref: ../components/schemas/Address.yaml
+                  - $ref: ../components/schemas/geoReference/address.yaml
               contactDetails:
                 $ref: ../components/schemas/contactDetails/contactDetails.yaml
               remark:
