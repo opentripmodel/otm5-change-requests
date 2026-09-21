@@ -72,24 +72,7 @@ get:
                 description: >-
                   Describes a geographic reference, this is the primary way to
                   link a `Location` entity to a physical, geographic location.
-                oneOf:
-                  - $ref: ../components/schemas/latLonPointGeoReference.yaml
-                  - $ref: ../components/schemas/latLonArrayGeoReference.yaml
-                  - $ref: ../components/schemas/Feature.yaml
-                  - $ref: ../components/schemas/openLRGeoReference.yaml
-                  - $ref: ../components/schemas/tmcLocationGeoReference.yaml
-                  - $ref: ../components/schemas/tmcArrayGeoReference.yaml
-                  - $ref: ../components/schemas/addressGeoReference.yaml
-                discriminator:
-                  propertyName: type
-                  mapping:
-                    latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
-                    latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
-                    Feature: ../components/schemas/Feature.yaml
-                    openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
-                    tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
-                    tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
-                    addressGeoReference: ../components/schemas/addressGeoReference.yaml
+                $ref: ../components/schemas/geoReference/geoReference.yaml
               externalAttributes:
                 type: object
                 properties: {}

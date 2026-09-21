@@ -105,24 +105,7 @@ properties:
     description: >-
       The location that is registered at the specified time, often using a
       single latitude/longitude combination.
-    oneOf:
-      - $ref: ../latLonPointGeoReference.yaml
-      - $ref: ../latLonArrayGeoReference.yaml
-      - $ref: ../Feature.yaml
-      - $ref: ../openLRGeoReference.yaml
-      - $ref: ../tmcLocationGeoReference.yaml
-      - $ref: ../tmcArrayGeoReference.yaml
-      - $ref: ../addressGeoReference.yaml
-    discriminator:
-      propertyName: type
-      mapping:
-        latLonPointGeoReference: ../latLonPointGeoReference.yaml
-        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
-        Feature: ../Feature.yaml
-        openLRGeoReference: ../openLRGeoReference.yaml
-        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
-        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
-        addressGeoReference: ../addressGeoReference.yaml
+    $ref: ../geoReference/geoReference.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper

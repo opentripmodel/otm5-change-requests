@@ -79,45 +79,11 @@ put:
                   $ref: ../components/schemas/unrestricted_json.yaml
               geoReference:
                 description: Geographic representation of this route.
-                oneOf:
-                  - $ref: ../components/schemas/latLonPointGeoReference.yaml
-                  - $ref: ../components/schemas/latLonArrayGeoReference.yaml
-                  - $ref: ../components/schemas/Feature.yaml
-                  - $ref: ../components/schemas/openLRGeoReference.yaml
-                  - $ref: ../components/schemas/tmcLocationGeoReference.yaml
-                  - $ref: ../components/schemas/tmcArrayGeoReference.yaml
-                  - $ref: ../components/schemas/addressGeoReference.yaml
-                discriminator:
-                  propertyName: type
-                  mapping:
-                    latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
-                    latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
-                    Feature: ../components/schemas/Feature.yaml
-                    openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
-                    tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
-                    tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
-                    addressGeoReference: ../components/schemas/addressGeoReference.yaml
+                $ref: ../components/schemas/geoReference/geoReference.yaml
               geoReferences:
                 deprecated: true
                 description: Geographic representation of this route. This property is deprecated; use geoReferece (not plural) instead.
-                oneOf:
-                  - $ref: ../components/schemas/latLonPointGeoReference.yaml
-                  - $ref: ../components/schemas/latLonArrayGeoReference.yaml
-                  - $ref: ../components/schemas/Feature.yaml
-                  - $ref: ../components/schemas/openLRGeoReference.yaml
-                  - $ref: ../components/schemas/tmcLocationGeoReference.yaml
-                  - $ref: ../components/schemas/tmcArrayGeoReference.yaml
-                  - $ref: ../components/schemas/addressGeoReference.yaml
-                discriminator:
-                  propertyName: type
-                  mapping:
-                    latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
-                    latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
-                    Feature: ../components/schemas/Feature.yaml
-                    openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
-                    tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
-                    tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
-                    addressGeoReference: ../components/schemas/addressGeoReference.yaml
+                $ref: ../components/schemas/geoReference/geoReference.yaml
               actors:
                 description: >-
                   Actors associated with this route, for instance the Company
@@ -245,45 +211,11 @@ put:
                 $ref: ../components/schemas/unrestricted_json.yaml
             geoReference:
               description: Geographic representation of this route.
-              oneOf:
-                - $ref: ../components/schemas/latLonPointGeoReference.yaml
-                - $ref: ../components/schemas/latLonArrayGeoReference.yaml
-                - $ref: ../components/schemas/Feature.yaml
-                - $ref: ../components/schemas/openLRGeoReference.yaml
-                - $ref: ../components/schemas/tmcLocationGeoReference.yaml
-                - $ref: ../components/schemas/tmcArrayGeoReference.yaml
-                - $ref: ../components/schemas/addressGeoReference.yaml
-              discriminator:
-                propertyName: type
-                mapping:
-                  latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
-                  latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
-                  Feature: ../components/schemas/Feature.yaml
-                  openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
-                  tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
-                  tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
-                  addressGeoReference: ../components/schemas/addressGeoReference.yaml
+              $ref: ../components/schemas/geoReference/geoReference.yaml
             geoReferences:
               deprecated: true
               description: Geographic representation of this route. This property is deprecated; use geoReferece (not plural) instead.
-              oneOf:
-                - $ref: ../components/schemas/latLonPointGeoReference.yaml
-                - $ref: ../components/schemas/latLonArrayGeoReference.yaml
-                - $ref: ../components/schemas/Feature.yaml
-                - $ref: ../components/schemas/openLRGeoReference.yaml
-                - $ref: ../components/schemas/tmcLocationGeoReference.yaml
-                - $ref: ../components/schemas/tmcArrayGeoReference.yaml
-                - $ref: ../components/schemas/addressGeoReference.yaml
-              discriminator:
-                propertyName: type
-                mapping:
-                  latLonPointGeoReference: ../components/schemas/latLonPointGeoReference.yaml
-                  latLonArrayGeoReference: ../components/schemas/latLonArrayGeoReference.yaml
-                  Feature: ../components/schemas/Feature.yaml
-                  openLRGeoReference: ../components/schemas/openLRGeoReference.yaml
-                  tmcLocationGeoReference: ../components/schemas/tmcLocationGeoReference.yaml
-                  tmcArrayGeoReference: ../components/schemas/tmcArrayGeoReference.yaml
-                  addressGeoReference: ../components/schemas/addressGeoReference.yaml
+              $ref: ../components/schemas/geoReference/geoReference.yaml
             actors:
               description: >-
                 Actors associated with this route, for instance the Company that

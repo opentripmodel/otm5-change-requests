@@ -6,24 +6,7 @@ properties:
     enum:
       - routeConstraint
   route:
-    oneOf:
-      - $ref: ../latLonPointGeoReference.yaml
-      - $ref: ../latLonArrayGeoReference.yaml
-      - $ref: ../Feature.yaml
-      - $ref: ../openLRGeoReference.yaml
-      - $ref: ../tmcLocationGeoReference.yaml
-      - $ref: ../tmcArrayGeoReference.yaml
-      - $ref: ../addressGeoReference.yaml
-    discriminator:
-      propertyName: type
-      mapping:
-        latLonPointGeoReference: ../latLonPointGeoReference.yaml
-        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
-        Feature: ../Feature.yaml
-        openLRGeoReference: ../openLRGeoReference.yaml
-        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
-        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
-        addressGeoReference: ../addressGeoReference.yaml
+    $ref: ../geoReference/geoReference.yaml
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined

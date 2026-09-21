@@ -10,21 +10,21 @@ properties:
       A [GeoJSON](https://tools.ietf.org/html/rfc7946)
       [Geometry](https://tools.ietf.org/html/rfc7946#section-3.1) object.
     oneOf:
-      - $ref: ./Point.yaml
-      - $ref: ./LineString.yaml
-      - $ref: ./Polygon.yaml
-      - $ref: ./MultiPoint.yaml
-      - $ref: ./MultiLineString.yaml
-      - $ref: ./MultiPolygon.yaml
+      - $ref: ./point.yaml
+      - $ref: ./lineString.yaml
+      - $ref: ./polygon.yaml
+      - $ref: ./multiPoint.yaml
+      - $ref: ./multiLineString.yaml
+      - $ref: ./multiPolygon.yaml
     discriminator:
       propertyName: type
       mapping:
-        Point: ./Point.yaml
-        LineString: ./LineString.yaml
-        Polygon: ./Polygon.yaml
-        MultiPoint: ./MultiPoint.yaml
-        MultiLineString: ./MultiLineString.yaml
-        MultiPolygon: ./MultiPolygon.yaml
+        Point: ./point.yaml
+        LineString: ./lineString.yaml
+        Polygon: ./polygon.yaml
+        MultiPoint: ./multiPoint.yaml
+        MultiLineString: ./multiLineString.yaml
+        MultiPolygon: ./multiPolygon.yaml
   properties:
     description: >-
       [GeoJSON](https://tools.ietf.org/html/rfc7946)
