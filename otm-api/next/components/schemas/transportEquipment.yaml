@@ -223,13 +223,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./containedGoods-inline.yaml
+        - $ref: ./goods-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./containedGoods-inline.yaml
+          inline: ./goods-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   equipmentType:
