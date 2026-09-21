@@ -144,7 +144,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '404':
       description: ''
     '500':
@@ -152,7 +152,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Get a specific Document by its UUID
   parameters:
     - name: UUID
@@ -176,13 +176,13 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '500':
       description: Server error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Deletes a Document
   parameters:
     - name: UUID
