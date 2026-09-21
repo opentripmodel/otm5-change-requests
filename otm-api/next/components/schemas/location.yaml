@@ -203,13 +203,13 @@ properties:
       > **ℹ Note** that constraints can be nested and combined using the
       `andConstraint`, `orConstraint` and `notConstraint`.
     oneOf:
-      - $ref: ./location-constraint-inline.yaml
+      - $ref: ./constraints/location-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./location-constraint-inline.yaml
+        inline: ./constraints/location-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:

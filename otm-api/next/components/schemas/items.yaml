@@ -580,13 +580,13 @@ properties:
       the solution. When possible, prefer to put the constraint on the
       consignment of the goods.
     oneOf:
-      - $ref: ./goods-constraint-inline.yaml
+      - $ref: ./constraints/goods-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./goods-constraint-inline.yaml
+        inline: ./constraints/goods-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:

@@ -62,9 +62,9 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   value:
-    $ref: ./constraintValue.yaml
+    $ref: ../constraintValue.yaml
   enforceability:
     description: >-
       The enforceability of the constraint. Indicates whether or not the
@@ -87,6 +87,6 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
 required:
   - value

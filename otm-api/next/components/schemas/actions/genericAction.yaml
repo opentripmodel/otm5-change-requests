@@ -136,13 +136,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../generic-action-constraint-inline.yaml
+      - $ref: ../constraints/generic-action-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../generic-action-constraint-inline.yaml
+        inline: ../constraints/generic-action-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   move:

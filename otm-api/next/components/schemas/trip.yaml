@@ -119,13 +119,13 @@ properties:
       Constraints this trip has to abide to, such as the start and end date
       times in which it has to be completed.
     oneOf:
-      - $ref: ./trip-constraint-inline.yaml
+      - $ref: ./constraints/trip-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./trip-constraint-inline.yaml
+        inline: ./constraints/trip-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:

@@ -144,13 +144,13 @@ get:
                   Constraints of using this route, for instance it might only be
                   used by vehicles with below a certain weight.
                 oneOf:
-                  - $ref: ../components/schemas/route-constraint-inline.yaml
+                  - $ref: ../components/schemas/constraints/route-constraint-inline.yaml
                   - $ref: ../components/schemas/reference.yaml
                   - $ref: ../components/schemas/attributeRestriction.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/route-constraint-inline.yaml
+                    inline: ../components/schemas/constraints/route-constraint-inline.yaml
                     reference: ../components/schemas/reference.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction.yaml
             required:

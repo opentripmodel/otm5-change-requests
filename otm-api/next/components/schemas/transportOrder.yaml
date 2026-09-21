@@ -110,12 +110,12 @@ properties:
       Constraints this transport order has to abide to, such as the expected
       delivery time windows.
     oneOf:
-      - $ref: ./transport-order-constraint-inline.yaml
+      - $ref: ./constraints/transport-order-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./transport-order-constraint-inline.yaml
+        inline: ./constraints/transport-order-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml

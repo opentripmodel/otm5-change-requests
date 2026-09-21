@@ -137,13 +137,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../wait-constraint-inline.yaml
+      - $ref: ../constraints/wait-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../wait-constraint-inline.yaml
+        inline: ../constraints/wait-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

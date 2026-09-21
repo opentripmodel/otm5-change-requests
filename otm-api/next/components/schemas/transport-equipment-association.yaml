@@ -427,12 +427,12 @@ properties:
       the solution. When possible, prefer to put the constraint on the
       consignment of the goods.
     oneOf:
-      - $ref: ./transport-equipment-constraint-inline.yaml
+      - $ref: ./constraints/transport-equipment-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./transport-equipment-constraint-inline.yaml
+        inline: ./constraints/transport-equipment-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml

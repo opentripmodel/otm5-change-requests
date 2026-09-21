@@ -147,13 +147,13 @@ properties:
 
       possible.
     oneOf:
-      - $ref: ./consignment-constraint-inline.yaml
+      - $ref: ./constraints/consignment-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./consignment-constraint-inline.yaml
+        inline: ./constraints/consignment-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   relatedConsignments:

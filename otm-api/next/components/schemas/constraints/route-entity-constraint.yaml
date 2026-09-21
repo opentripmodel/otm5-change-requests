@@ -55,7 +55,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -68,48 +68,48 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   geoReference:
     description: Geographic representation of this route.
     oneOf:
-      - $ref: ./latLonPointGeoReference.yaml
-      - $ref: ./latLonArrayGeoReference.yaml
-      - $ref: ./Feature.yaml
-      - $ref: ./openLRGeoReference.yaml
-      - $ref: ./tmcLocationGeoReference.yaml
-      - $ref: ./tmcArrayGeoReference.yaml
-      - $ref: ./addressGeoReference.yaml
+      - $ref: ../latLonPointGeoReference.yaml
+      - $ref: ../latLonArrayGeoReference.yaml
+      - $ref: ../Feature.yaml
+      - $ref: ../openLRGeoReference.yaml
+      - $ref: ../tmcLocationGeoReference.yaml
+      - $ref: ../tmcArrayGeoReference.yaml
+      - $ref: ../addressGeoReference.yaml
     discriminator:
       propertyName: type
       mapping:
-        latLonPointGeoReference: ./latLonPointGeoReference.yaml
-        latLonArrayGeoReference: ./latLonArrayGeoReference.yaml
-        Feature: ./Feature.yaml
-        openLRGeoReference: ./openLRGeoReference.yaml
-        tmcLocationGeoReference: ./tmcLocationGeoReference.yaml
-        tmcArrayGeoReference: ./tmcArrayGeoReference.yaml
-        addressGeoReference: ./addressGeoReference.yaml
+        latLonPointGeoReference: ../latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
+        Feature: ../Feature.yaml
+        openLRGeoReference: ../openLRGeoReference.yaml
+        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
+        addressGeoReference: ../addressGeoReference.yaml
   geoReferences:
     deprecated: true
     description: Geographic representation of this route. This property is deprecated; use geoReferece (not plural) instead.
     oneOf:
-      - $ref: ./latLonPointGeoReference.yaml
-      - $ref: ./latLonArrayGeoReference.yaml
-      - $ref: ./Feature.yaml
-      - $ref: ./openLRGeoReference.yaml
-      - $ref: ./tmcLocationGeoReference.yaml
-      - $ref: ./tmcArrayGeoReference.yaml
-      - $ref: ./addressGeoReference.yaml
+      - $ref: ../latLonPointGeoReference.yaml
+      - $ref: ../latLonArrayGeoReference.yaml
+      - $ref: ../Feature.yaml
+      - $ref: ../openLRGeoReference.yaml
+      - $ref: ../tmcLocationGeoReference.yaml
+      - $ref: ../tmcArrayGeoReference.yaml
+      - $ref: ../addressGeoReference.yaml
     discriminator:
       propertyName: type
       mapping:
-        latLonPointGeoReference: ./latLonPointGeoReference.yaml
-        latLonArrayGeoReference: ./latLonArrayGeoReference.yaml
-        Feature: ./Feature.yaml
-        openLRGeoReference: ./openLRGeoReference.yaml
-        tmcLocationGeoReference: ./tmcLocationGeoReference.yaml
-        tmcArrayGeoReference: ./tmcArrayGeoReference.yaml
-        addressGeoReference: ./addressGeoReference.yaml
+        latLonPointGeoReference: ../latLonPointGeoReference.yaml
+        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
+        Feature: ../Feature.yaml
+        openLRGeoReference: ../openLRGeoReference.yaml
+        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
+        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
+        addressGeoReference: ../addressGeoReference.yaml
   actors:
     description: >-
       Actors associated with this route, for instance the Company that requires
@@ -117,28 +117,28 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
     description: >-
       Constraints of using this route, for instance it might only be used by
       vehicles with below a certain weight.
     oneOf:
       - $ref: ./route-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
         inline: ./route-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - geoReference

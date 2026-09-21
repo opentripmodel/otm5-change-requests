@@ -248,13 +248,13 @@ properties:
       Constraints which this move action abides to, such as vehicle type or time
       window constraints.
     oneOf:
-      - $ref: ../move-constraint-inline.yaml
+      - $ref: ../constraints/move-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../move-constraint-inline.yaml
+        inline: ../constraints/move-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

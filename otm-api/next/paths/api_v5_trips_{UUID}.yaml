@@ -217,13 +217,13 @@ get:
                   Constraints this trip has to abide to, such as the start and
                   end date times in which it has to be completed.
                 oneOf:
-                  - $ref: ../components/schemas/trip-constraint-inline.yaml
+                  - $ref: ../components/schemas/constraints/trip-constraint-inline.yaml
                   - $ref: ../components/schemas/reference.yaml
                   - $ref: ../components/schemas/attributeRestriction.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/trip-constraint-inline.yaml
+                    inline: ../components/schemas/constraints/trip-constraint-inline.yaml
                     reference: ../components/schemas/reference.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction.yaml
     '400':

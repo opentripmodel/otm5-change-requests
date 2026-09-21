@@ -112,12 +112,12 @@ properties:
       > **ℹ Note** that constraints can be nested and combined using the
       `andConstraint`, `orConstraint` and `notConstraint`.
     oneOf:
-      - $ref: ./sensor-constraint-inline.yaml
+      - $ref: ./constraints/sensor-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./sensor-constraint-inline.yaml
+        inline: ./constraints/sensor-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml

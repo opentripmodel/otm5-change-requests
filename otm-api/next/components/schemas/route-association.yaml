@@ -131,13 +131,13 @@ properties:
       Constraints of using this route, for instance it might only be used by
       vehicles with below a certain weight.
     oneOf:
-      - $ref: ./route-constraint-inline.yaml
+      - $ref: ./constraints/route-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./route-constraint-inline.yaml
+        inline: ./constraints/route-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
 required:

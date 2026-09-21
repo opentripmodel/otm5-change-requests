@@ -125,13 +125,13 @@ get:
                   > **ℹ Note** that constraints can be nested and combined using
                   the `andConstraint`, `orConstraint` and `notConstraint`.
                 oneOf:
-                  - $ref: ../components/schemas/sensor-constraint-inline.yaml
+                  - $ref: ../components/schemas/constraints/sensor-constraint-inline.yaml
                   - $ref: ../components/schemas/reference.yaml
                   - $ref: ../components/schemas/attributeRestriction.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/sensor-constraint-inline.yaml
+                    inline: ../components/schemas/constraints/sensor-constraint-inline.yaml
                     reference: ../components/schemas/reference.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction.yaml
     '400':

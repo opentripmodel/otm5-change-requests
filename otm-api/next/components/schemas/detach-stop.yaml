@@ -130,12 +130,12 @@ properties:
   constraint:
     description: The constraints this stop abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./stop-constraint-inline.yaml
+      - $ref: ./constraints/stop-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./stop-constraint-inline.yaml
+        inline: ./constraints/stop-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
