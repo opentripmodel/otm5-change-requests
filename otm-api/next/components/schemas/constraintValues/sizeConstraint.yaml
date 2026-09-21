@@ -1,23 +1,23 @@
 type: object
 properties:
   type:
-    example: temperatureConstraint
+    example: sizeConstraint
     type: string
     enum:
-      - temperatureConstraint
+      - sizeConstraint
   constraintType:
     description: |
-      The type of temperature constraint. Available types are:
-        - `maximum`: All temperatures below and including the maximum value are allowed.
-        - `minimum`: All temperatures above and including the minimum value are allowed.
-        - `range`: All temperatures in between and including the minimum and maximum values are allowed.
+      The type of size constraint. Available types are:
+        - `maximum`: All sizes below and including the maximum value are allowed.
+        - `minimum`: All sizes above and including the minimum value are allowed.
+        - `range`: All sizes in between and including the minimum and maximum values are allowed.
     type: string
     enum:
       - maximum
       - minimum
       - range
   maximum:
-    description: Maximum temperatures allowed.
+    description: Maximum size allowed.
     type: object
     properties:
       value:
@@ -25,12 +25,12 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
   minimum:
-    description: Minimum temperatures allowed.
+    description: Minimum size allowed.
     type: object
     properties:
       value:
@@ -38,7 +38,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit

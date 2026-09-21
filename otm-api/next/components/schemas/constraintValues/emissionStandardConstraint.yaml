@@ -7,7 +7,7 @@ properties:
       - emissionStandardConstraint
   minimum:
     description: The minimum required emission standard that is required for the vehicle.
-    $ref: ./enums/emissionStandard.yaml
+    $ref: ../enums/emissionStandard.yaml
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined

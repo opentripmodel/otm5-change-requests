@@ -7,15 +7,15 @@ properties:
       - routeEntityConstraint
   route:
     oneOf:
-      - $ref: ./route-entity-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../route-entity-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./route-entity-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../route-entity-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined

@@ -12,7 +12,7 @@ properties:
 
       underlying constraint would not.
     allOf:
-      - $ref: ./constraintValue.yaml
+      - $ref: ../constraintValue.yaml
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined

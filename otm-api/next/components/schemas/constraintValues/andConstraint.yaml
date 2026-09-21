@@ -1,19 +1,19 @@
 type: object
 properties:
   type:
-    example: orConstraint
+    example: andConstraint
     type: string
     enum:
-      - orConstraint
-  or:
+      - andConstraint
+  and:
     description: >-
-      All constraints in the array are combined using a boolean OR relation.
-      This means that the resulting constraint will apply if any of
+      All constraints in the array are combined using a boolean AND relation.
+      This means that the resulting constraint will only apply if
 
-      the constraints in the array would apply.
+      all constraints in the array would apply.
     type: array
     items:
-      $ref: ./constraintValue.yaml
+      $ref: ../constraintValue.yaml
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined
@@ -21,4 +21,4 @@ properties:
     type: string
 required:
   - type
-  - or
+  - and

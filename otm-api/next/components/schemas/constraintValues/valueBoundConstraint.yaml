@@ -1,23 +1,32 @@
 type: object
 properties:
   type:
-    example: sizeConstraint
+    example: valueBoundConstraint
     type: string
     enum:
-      - sizeConstraint
+      - valueBoundConstraint
+  valueType:
+    type: string
+    enum:
+      - height
+      - length
+      - width
+      - weight
+      - speed
+      - temperature
   constraintType:
-    description: |
-      The type of size constraint. Available types are:
-        - `maximum`: All sizes below and including the maximum value are allowed.
-        - `minimum`: All sizes above and including the minimum value are allowed.
-        - `range`: All sizes in between and including the minimum and maximum values are allowed.
+    description: >
+      The upper and lower bounds the value bound constraint required. Available
+      options are:
+        - `maximum`: All sensor values below and including the maximum value are allowed.
+        - `minimum`: All sensor values above and including the minimum value are allowed.
     type: string
     enum:
       - maximum
       - minimum
       - range
   maximum:
-    description: Maximum size allowed.
+    description: Maximum value allowed.
     type: object
     properties:
       value:
@@ -25,12 +34,12 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
   minimum:
-    description: Minimum size allowed.
+    description: Minimum value allowed.
     type: object
     properties:
       value:
@@ -38,7 +47,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -49,4 +58,5 @@ properties:
     type: string
 required:
   - type
+  - valueType
   - constraintType
