@@ -80,13 +80,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./consignment-association-inline.yaml
+        - $ref: ./consignment-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./consignment-association-inline.yaml
+          inline: ./consignment-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   actors:
