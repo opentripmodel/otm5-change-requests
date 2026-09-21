@@ -76,12 +76,12 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   vehicleType:
     description: The type of vehicle
     type: string
@@ -90,7 +90,7 @@ properties:
       The types of fuel the vehicle runs on.
     type: array
     items:
-      $ref: ./fuel.yaml
+      $ref: ../fuel.yaml
   fuel:
     allOf:
       - description: >-
@@ -99,7 +99,7 @@ properties:
           trailers with cooling capabilities, choose the fuel type of the cooling
           engine.
         deprecated: true
-      - $ref: ./fuel-types.yaml
+      - $ref: ../fuel-types.yaml
   otherFuelType:
     deprecated: true
     description: Type of fuel, only to be used when the `fuel` field is set to `other`.
@@ -116,7 +116,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -126,14 +126,14 @@ properties:
       for this vehicle, such as Euro emission standard and CO2 emission class.
     type: array
     items:
-      $ref: ./emissionClass.yaml
+      $ref: ../emissionClass.yaml
   emissionStandard:
     allOf:
       - description: >-
           Deprecated: use `emissionClasses` with type `emissionStandard`
           instead.
         deprecated: true
-      - $ref: ./enums/emissionStandard.yaml
+      - $ref: ../enums/emissionStandard.yaml
   maxLinks:
     description: >-
       Maximum number of links to other `Vehicle` s. Typical values are 0, 1 or
@@ -174,7 +174,7 @@ properties:
           type: number
           format: double
         unit:
-          $ref: ./uom.yaml
+          $ref: ../uom.yaml
       required:
         - value
         - unit
@@ -187,7 +187,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -200,7 +200,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -213,7 +213,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -229,7 +229,7 @@ properties:
         type: number
         format: double
       unit:
-        $ref: ./uom.yaml
+        $ref: ../uom.yaml
     required:
       - value
       - unit
@@ -240,22 +240,22 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../associated-actors-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
   actions:
     description: >-
       All actions that are/were related to this vehicle, such as
       attaching or detaching transport equipment.
     type: array
     items:
-      $ref: ./associations-actions.yaml
+      $ref: ../associations-actions.yaml
   sensors:
     description: >-
       Vehicles might have some sensors that are permanently attached, these can
@@ -265,12 +265,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./sensors-association-inline.yaml
-        - $ref: ./reference.yaml
-        - $ref: ./attributeRestriction.yaml
+        - $ref: ../sensors-association-inline.yaml
+        - $ref: ../reference.yaml
+        - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./sensors-association-inline.yaml
-          reference: ./reference.yaml
-          attributeRestriction: ./attributeRestriction.yaml
+          inline: ../sensors-association-inline.yaml
+          reference: ../reference.yaml
+          attributeRestriction: ../attributeRestriction.yaml

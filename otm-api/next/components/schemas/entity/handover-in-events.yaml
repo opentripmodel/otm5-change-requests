@@ -1,16 +1,19 @@
 example:
-  id: 64d42a96-2ac3-4ae5-bce2-726536f1616d
-  lifecycle: planned
-  description: Adding fuel to the truck
-  startTime: '2021-06-23T16:00:00Z'
-  endTime: '2021-06-23T16:05:00Z'
+  id: 84506b63-3da2-44d4-aaef-d034ae6e3afe
+  remark: Handing over a consignment from one party to another
+  consignment:
+    uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
+    entityType: consignment
+    associationType: reference
+  startTime: '2021-06-23T15:05:00Z'
+  endTime: '2021-06-23T15:10:00Z'
 type: object
 properties:
   entityType:
-    example: genericAction
+    example: handOver
     type: string
     enum:
-      - genericAction
+      - handOver
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -48,7 +51,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -61,11 +64,11 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
-    $ref: ./enums/lifecycle.yaml
+    $ref: ../enums/lifecycle.yaml
   result:
-    $ref: ./action-result.yaml
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -75,22 +78,70 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
-  description:
-    type: string
-  trip:
-    description: >-
-      The trip in which this action takes place, only provided if the trip is
-      not clear from the context.
+  from:
+    description: The party that is handing over the consignment/goods.
     oneOf:
-      - $ref: ./trip-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../handover-from-actor-inline.yaml
+      - $ref: ../reference-roles.yaml
+      - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./trip-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../handover-from-actor-inline.yaml
+        reference: ../reference-roles.yaml
+        attributeRestriction: ../attributeRestriction-roles.yaml
+  to:
+    description: The party that is receiving the consignments/goods.
+    oneOf:
+      - $ref: ../handover-to-actor-inline.yaml
+      - $ref: ../reference-roles.yaml
+      - $ref: ../attributeRestriction-roles.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../handover-to-actor-inline.yaml
+        reference: ../reference-roles.yaml
+        attributeRestriction: ../attributeRestriction-roles.yaml
+  consignment:
+    description: The consignment that is the subject of this action.
+    oneOf:
+      - $ref: ../consignment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../consignment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  documents:
+    description: >-
+      Documents that are relevant for this action. Such as a proof-of-delivery
+      photo, or scanned CMR.
+    type: array
+    items:
+      oneOf:
+        - $ref: ../documents-inline.yaml
+        - $ref: ../reference.yaml
+        - $ref: ../attributeRestriction.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ../documents-inline.yaml
+          reference: ../reference.yaml
+          attributeRestriction: ../attributeRestriction.yaml
+  location:
+    description: The location at which this action is taking place.
+    oneOf:
+      - $ref: ../location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -130,29 +181,14 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./constraints/generic-action-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/handover-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/generic-action-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  move:
-    description: >-
-      The trip in which this Move takes place, only provided if the trip is not
-      clear from the context.
-    oneOf:
-      - $ref: ./move-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./move-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/handover-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - entityType
-  - description

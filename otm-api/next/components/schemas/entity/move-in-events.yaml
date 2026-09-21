@@ -107,16 +107,16 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
-    $ref: ./enums/lifecycle.yaml
+    $ref: ../enums/lifecycle.yaml
   result:
-    $ref: ./action-result.yaml
+    $ref: ../action-result.yaml
   transportMode:
     description: >-
       Method of transport used for the carriage of goods on this move, can
@@ -150,39 +150,39 @@ properties:
       The trip in which this Move takes place, only provided if the trip is not
       clear from the context.
     oneOf:
-      - $ref: ./trip-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../trip-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./trip-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../trip-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   from:
     description: The location from which the move action is started.
     oneOf:
-      - $ref: ./location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   to:
     description: The location where the move action is ended.
     oneOf:
-      - $ref: ./location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -224,32 +224,32 @@ properties:
       The distance between `from` and `to` locations of this move action.
       The difference between calculated and actually driven distance can be specified using multiple move actions with a different
       lifecycle (e.g. 'projected' vs 'actual')
-    $ref: ./value-with-unit.yaml
+    $ref: ../value-with-unit.yaml
   route:
     description: The route from location A to location B that is travelled.
     oneOf:
-      - $ref: ./route-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../route-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./route-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../route-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   constraint:
     description: >-
       Constraints which this move action abides to, such as vehicle type or time
       window constraints.
     oneOf:
-      - $ref: ./constraints/move-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/move-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/move-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/move-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - entityType

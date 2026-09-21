@@ -10,19 +10,19 @@ oneOf:
   - $ref: ./transportOrder.yaml
   - $ref: ./goods.yaml
   - $ref: ./consignment.yaml
-  - $ref: ./vehicle.yaml
-  - $ref: ./document.yaml
-  - $ref: ./load-in-events.yaml
-  - $ref: ./unload-in-events.yaml
-  - $ref: ./stop-in-events.yaml
-  - $ref: ./move-in-events.yaml
-  - $ref: ./handover-in-events.yaml
-  - $ref: ./attach-in-events.yaml
-  - $ref: ./detach-in-events.yaml
-  - $ref: ./refuel-in-events.yaml
-  - $ref: ./break-in-events.yaml
-  - $ref: ./wait-in-events.yaml
-  - $ref: ./generic-in-events.yaml
+  - $ref: ./entity/vehicle.yaml
+  - $ref: ./entity/document.yaml
+  - $ref: ./entity/load-in-events.yaml
+  - $ref: ./entity/unload-in-events.yaml
+  - $ref: ./entity/stop-in-events.yaml
+  - $ref: ./entity/move-in-events.yaml
+  - $ref: ./entity/handover-in-events.yaml
+  - $ref: ./entity/attach-in-events.yaml
+  - $ref: ./entity/detach-in-events.yaml
+  - $ref: ./entity/refuel-in-events.yaml
+  - $ref: ./entity/break-in-events.yaml
+  - $ref: ./entity/wait-in-events.yaml
+  - $ref: ./entity/generic-in-events.yaml
 discriminator:
   propertyName: entityType
   mapping:
@@ -35,16 +35,16 @@ discriminator:
     transportOrder: ./transportOrder.yaml
     goods: ./goods.yaml
     consignment: ./consignment.yaml
-    vehicle: ./vehicle.yaml
-    document: ./document.yaml
-    load: ./load-in-events.yaml
-    unload: ./unload-in-events.yaml
-    stop: ./stop-in-events.yaml
-    move: ./move-in-events.yaml
-    handOver: ./handover-in-events.yaml
-    attachTransportEquipment: ./attach-in-events.yaml
-    detachTransportEquipment: ./detach-in-events.yaml
-    refuel: ./refuel-in-events.yaml
-    break: ./break-in-events.yaml
-    wait: ./wait-in-events.yaml
-    genericAction: ./generic-in-events.yaml
+    vehicle: ./entity/vehicle.yaml
+    document: ./entity/document.yaml
+    load: ./entity/load-in-events.yaml
+    unload: ./entity/unload-in-events.yaml
+    stop: ./entity/stop-in-events.yaml
+    move: ./entity/move-in-events.yaml
+    handOver: ./entity/handover-in-events.yaml
+    attachTransportEquipment: ./entity/attach-in-events.yaml
+    detachTransportEquipment: ./entity/detach-in-events.yaml
+    refuel: ./entity/refuel-in-events.yaml
+    break: ./entity/break-in-events.yaml
+    wait: ./entity/wait-in-events.yaml
+    genericAction: ./entity/generic-in-events.yaml

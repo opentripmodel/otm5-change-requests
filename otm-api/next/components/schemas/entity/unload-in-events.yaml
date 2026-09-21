@@ -1,39 +1,47 @@
 example:
-  id: d348a354-78c9-4c1f-a011-99c048b977a3
+  id: a5f5fc23-744a-46f7-81b4-bfe26629ad4f
   lifecycle: planned
-  remark: need to fill the tank again!
-  vehicle:
+  remark: unloading a consignment
+  consignment:
+    uuid: 047cfa4d-fd8b-47ba-b8e9-87067294d2fa
+    entityType: consignment
+    associationType: reference
+  startTime: '2021-06-23T15:00:00Z'
+  endTime: '2021-06-23T15:15:00Z'
+  constraint:
     entity:
-      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
-      name: Bob's Boxtruck
-      vehicleType: boxtruck
-      fuel: electricity
-      loadCapacities:
-        - value: 1000
-          unit: kg
-      length:
-        value: 8
-        unit: m
-      height:
-        value: 2.8
-        unit: m
-      width:
-        value: 2
-        unit: m
-      licensePlate: AB-12-CD
-      emptyWeight:
-        value: 2000
-        unit: kg
+      id: 89a7bb4d-8720-4db9-aef7-4c3309186c3e
+      name: Example combined constraint
+      value:
+        and:
+          - startTime: '2021-06-23T10:00:00Z'
+            endTime: '2021-06-23T13:00:00Z'
+            description: alert-threshold
+            type: timeWindowConstraint
+          - constraintType: maximum
+            maximum:
+              value: 5
+              unit: C
+            type: temperatureConstraint
+          - or:
+              - fuelTypes:
+                  - battery
+                type: fuelTypeConstraint
+              - fuelTypes:
+                  - biodiesel
+                type: fuelTypeConstraint
+              - minimum: euro5
+                type: emissionStandardConstraint
+            type: orConstraint
+        type: andConstraint
     associationType: inline
-  startTime: '2021-06-23T15:35:00Z'
-  endTime: '2021-06-23T15:37:00Z'
 type: object
 properties:
   entityType:
-    example: refuel
+    example: unload
     type: string
     enum:
-      - refuel
+      - unload
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -71,24 +79,16 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
-    description: >
-      External attributes are a simple way to add information in an
-      OpenTripModel message that could not fit into one of
-        the OTM fields otherwise. The `externalAttributes` member is meant for additional meta data and/or additional
-        ID's of an entity. This can also help to identify an OTM entity in a system by the ID of that system.
-
-       > Please, use this with caution: having too many external attributes can be a sign of not using OpenTripModel as
-         it was intended.
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
-    $ref: ./enums/lifecycle.yaml
+    $ref: ../enums/lifecycle.yaml
   result:
-    $ref: ./action-result.yaml
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -98,30 +98,58 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
-  vehicle:
-    description: The vehicle that is involved in this action.
+  consignment:
+    description: The consignment that is the subject of this action.
     oneOf:
-      - $ref: ./vehicle-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../consignment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./vehicle-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../consignment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  transportEquipment:
+    description: The transport equipment the consignment is loaded in/unloaded from.
+    oneOf:
+      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../transport-equipment-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  documents:
+    description: >-
+      Documents that are relevant for this action. Such as a proof-of-delivery
+      photo, or scanned CMR.
+    type: array
+    items:
+      oneOf:
+        - $ref: ../documents-inline.yaml
+        - $ref: ../reference.yaml
+        - $ref: ../attributeRestriction.yaml
+      discriminator:
+        propertyName: associationType
+        mapping:
+          inline: ../documents-inline.yaml
+          reference: ../reference.yaml
+          attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ./location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../location-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../location-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -161,14 +189,14 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./constraints/action-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/action-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/action-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/action-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - entityType

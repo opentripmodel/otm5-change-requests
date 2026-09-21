@@ -1,54 +1,16 @@
 example:
-  id: e2b597bd-feb5-4951-a070-e143eae22a29
+  id: 64d42a96-2ac3-4ae5-bce2-726536f1616d
   lifecycle: planned
-  remark: attaching a trailer
-  vehicle:
-    entity:
-      id: b9bb914d-845e-46f2-91ff-31fa4bac2fbe
-      name: Bob's Boxtruck
-      vehicleType: boxtruck
-      fuel: electricity
-      loadCapacities:
-        - value: 1000
-          unit: kg
-      length:
-        value: 8
-        unit: m
-      height:
-        value: 2.8
-        unit: m
-      width:
-        value: 2
-        unit: m
-      licensePlate: AB-12-CD
-      emptyWeight:
-        value: 2000
-        unit: kg
-    associationType: inline
-  transportEquipment:
-    entity:
-      id: a29905bb-9af8-4118-896a-71b1eaf07cc0
-      description: A trailer
-      width:
-        value: 2.46
-        unit: m
-      height:
-        value: 2.7
-        unit: m
-      length:
-        value: 13.62
-        unit: m
-      licensePlate: 123-ABC
-    associationType: inline
-  startTime: '2021-06-23T15:15:00Z'
-  endTime: '2021-06-23T15:20:00Z'
+  description: Adding fuel to the truck
+  startTime: '2021-06-23T16:00:00Z'
+  endTime: '2021-06-23T16:05:00Z'
 type: object
 properties:
   entityType:
-    example: attachTransportEquipment
+    example: genericAction
     type: string
     enum:
-      - attachTransportEquipment
+      - genericAction
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -86,7 +48,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -99,11 +61,11 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   lifecycle:
-    $ref: ./enums/lifecycle.yaml
+    $ref: ../enums/lifecycle.yaml
   result:
-    $ref: ./action-result.yaml
+    $ref: ../action-result.yaml
   remark:
     description: Free text field for adding an on remark on this action.
     type: string
@@ -113,44 +75,22 @@ properties:
       Can be used to indicate order when no times are present
     type: integer
     format: int64
-  vehicle:
-    description: The vehicle that is involved in this action.
-    oneOf:
-      - $ref: ./vehicle-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./vehicle-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  transportEquipment:
+  description:
+    type: string
+  trip:
     description: >-
-      The transport equipment that is being attached/detached to the associated
-      vehicle.
+      The trip in which this action takes place, only provided if the trip is
+      not clear from the context.
     oneOf:
-      - $ref: ./transport-equipment-association-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../trip-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./transport-equipment-association-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
-  location:
-    description: The location at which this action is taking place.
-    oneOf:
-      - $ref: ./location-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
-    discriminator:
-      propertyName: associationType
-      mapping:
-        inline: ./location-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../trip-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
     default: dateTime
     type: string
@@ -190,14 +130,29 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ./constraints/action-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/generic-action-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/action-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/generic-action-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
+  move:
+    description: >-
+      The trip in which this Move takes place, only provided if the trip is not
+      clear from the context.
+    oneOf:
+      - $ref: ../move-association-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
+    discriminator:
+      propertyName: associationType
+      mapping:
+        inline: ../move-association-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - entityType
+  - description
