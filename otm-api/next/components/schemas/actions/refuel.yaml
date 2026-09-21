@@ -114,13 +114,13 @@ properties:
   stop:
     description: The stop that is associated with this action.
     oneOf:
-      - $ref: ../refuel-stop-inline.yaml
+      - $ref: ../entity/stop-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../refuel-stop-inline.yaml
+        inline: ../entity/stop-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   location:
