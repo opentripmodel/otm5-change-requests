@@ -211,7 +211,7 @@ get:
                   consignments.
                 type: array
                 items:
-                  $ref: ../components/schemas/associations-actions.yaml
+                  $ref: ../components/schemas/action-association.yaml
               constraint:
                 description: >-
                   Constraints this trip has to abide to, such as the start and

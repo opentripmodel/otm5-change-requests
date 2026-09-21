@@ -255,7 +255,7 @@ properties:
       attaching or detaching transport equipment.
     type: array
     items:
-      $ref: ../associations-actions.yaml
+      $ref: ../action-association.yaml
   sensors:
     description: >-
       Vehicles might have some sensors that are permanently attached, these can

@@ -113,7 +113,7 @@ properties:
       consignments.
     type: array
     items:
-      $ref: ./associations-actions.yaml
+      $ref: ./action-association.yaml
   constraint:
     description: >-
       Constraints this trip has to abide to, such as the start and end date

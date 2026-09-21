@@ -234,7 +234,7 @@ properties:
       unloading all consignments/goods.
     type: array
     items:
-      $ref: ../associations-actions.yaml
+      $ref: ../action-association.yaml
   constraint:
     description: The constraints this stop abides to, such as start and end time windows.
     oneOf:

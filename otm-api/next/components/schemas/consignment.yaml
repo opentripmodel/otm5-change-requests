@@ -133,7 +133,7 @@ properties:
       loading, unloading, hand over, drop of.
     type: array
     items:
-      $ref: ./associations-actions.yaml
+      $ref: ./action-association.yaml
   constraint:
     description: >-
       Constraints this consignment has to abide to, such special equipment (tail

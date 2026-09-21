@@ -104,7 +104,7 @@ get:
                 description: All the actions that need to be executed on this route.
                 type: array
                 items:
-                  $ref: ../components/schemas/associations-actions.yaml
+                  $ref: ../components/schemas/action-association.yaml
               constraint:
                 description: >-
                   Constraints of using this route, for instance it might only be

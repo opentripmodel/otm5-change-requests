@@ -166,7 +166,7 @@ put:
                   location.
                 type: array
                 items:
-                  $ref: ../components/schemas/associations-actions.yaml
+                  $ref: ../components/schemas/action-association.yaml
               constraint:
                 description: >-
                   In the context of a `Location`, access to the location is only
@@ -362,7 +362,7 @@ put:
                 location.
               type: array
               items:
-                $ref: ../components/schemas/associations-actions.yaml
+                $ref: ../components/schemas/action-association.yaml
             constraint:
               description: >-
                 In the context of a `Location`, access to the location is only

@@ -132,7 +132,7 @@ properties:
     description: All actions that are done as part of this action.
     type: array
     items:
-      $ref: ../associations-actions.yaml
+      $ref: ../action-association.yaml
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:

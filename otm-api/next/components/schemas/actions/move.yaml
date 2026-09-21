@@ -242,7 +242,7 @@ properties:
     description: All actions that are done between the from and the to location.
     type: array
     items:
-      $ref: ../associations-actions.yaml
+      $ref: ../action-association.yaml
   constraint:
     description: >-
       Constraints which this move action abides to, such as vehicle type or time
