@@ -63,35 +63,7 @@ properties:
     additionalProperties:
       $ref: ./unrestricted_json.yaml
   contactDetails:
-    description: Contact details for this `Actor`.
-    type: array
-    items:
-      oneOf:
-        - $ref: ./phone.yaml
-        - $ref: ./mobilePhone.yaml
-        - $ref: ./email.yaml
-        - $ref: ./firstName.yaml
-        - $ref: ./lastName.yaml
-        - $ref: ./name.yaml
-        - $ref: ./vatCode.yaml
-        - $ref: ./gln.yaml
-        - $ref: ./iban.yaml
-        - $ref: ./eori.yaml
-        - $ref: ./other.yaml
-      discriminator:
-        propertyName: type
-        mapping:
-          phone: ./phone.yaml
-          mobilePhone: ./mobilePhone.yaml
-          email: ./email.yaml
-          firstName: ./firstName.yaml
-          lastName: ./lastName.yaml
-          name: ./name.yaml
-          vatCode: ./vatCode.yaml
-          gln: ./gln.yaml
-          iban: ./iban.yaml
-          eori: ./eori.yaml
-          other: ./other.yaml
+    $ref: ./contactDetails/contactDetails.yaml
   locations:
     description: Locations for this `Actor`.
     type: array

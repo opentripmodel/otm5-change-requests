@@ -133,35 +133,7 @@ put:
                 allOf:
                   - $ref: ../components/schemas/Address.yaml
               contactDetails:
-                description: Contact details for this `Location`.
-                type: array
-                items:
-                  oneOf:
-                    - $ref: ../components/schemas/phone.yaml
-                    - $ref: ../components/schemas/mobilePhone.yaml
-                    - $ref: ../components/schemas/email.yaml
-                    - $ref: ../components/schemas/firstName.yaml
-                    - $ref: ../components/schemas/lastName.yaml
-                    - $ref: ../components/schemas/name.yaml
-                    - $ref: ../components/schemas/vatCode.yaml
-                    - $ref: ../components/schemas/gln.yaml
-                    - $ref: ../components/schemas/iban.yaml
-                    - $ref: ../components/schemas/eori.yaml
-                    - $ref: ../components/schemas/other.yaml
-                  discriminator:
-                    propertyName: type
-                    mapping:
-                      phone: ../components/schemas/phone.yaml
-                      mobilePhone: ../components/schemas/mobilePhone.yaml
-                      email: ../components/schemas/email.yaml
-                      firstName: ../components/schemas/firstName.yaml
-                      lastName: ../components/schemas/lastName.yaml
-                      name: ../components/schemas/name.yaml
-                      vatCode: ../components/schemas/vatCode.yaml
-                      gln: ../components/schemas/gln.yaml
-                      iban: ../components/schemas/iban.yaml
-                      eori: ../components/schemas/eori.yaml
-                      other: ../components/schemas/other.yaml
+                $ref: ../components/schemas/contactDetails/contactDetails.yaml
               remark:
                 description: >-
                   Remark about the location. Please don't misuse this field for
@@ -375,35 +347,7 @@ put:
               allOf:
                 - $ref: ../components/schemas/Address.yaml
             contactDetails:
-              description: Contact details for this `Location`.
-              type: array
-              items:
-                oneOf:
-                  - $ref: ../components/schemas/phone.yaml
-                  - $ref: ../components/schemas/mobilePhone.yaml
-                  - $ref: ../components/schemas/email.yaml
-                  - $ref: ../components/schemas/firstName.yaml
-                  - $ref: ../components/schemas/lastName.yaml
-                  - $ref: ../components/schemas/name.yaml
-                  - $ref: ../components/schemas/vatCode.yaml
-                  - $ref: ../components/schemas/gln.yaml
-                  - $ref: ../components/schemas/iban.yaml
-                  - $ref: ../components/schemas/eori.yaml
-                  - $ref: ../components/schemas/other.yaml
-                discriminator:
-                  propertyName: type
-                  mapping:
-                    phone: ../components/schemas/phone.yaml
-                    mobilePhone: ../components/schemas/mobilePhone.yaml
-                    email: ../components/schemas/email.yaml
-                    firstName: ../components/schemas/firstName.yaml
-                    lastName: ../components/schemas/lastName.yaml
-                    name: ../components/schemas/name.yaml
-                    vatCode: ../components/schemas/vatCode.yaml
-                    gln: ../components/schemas/gln.yaml
-                    iban: ../components/schemas/iban.yaml
-                    eori: ../components/schemas/eori.yaml
-                    other: ../components/schemas/other.yaml
+              $ref: ../components/schemas/contactDetails/contactDetails.yaml
             remark:
               description: >-
                 Remark about the location. Please don't misuse this field for
