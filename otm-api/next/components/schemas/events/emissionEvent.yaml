@@ -73,13 +73,13 @@ properties:
   trip:
     description: The trip that is relevant for this event
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../entity/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../entity/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   consignment:

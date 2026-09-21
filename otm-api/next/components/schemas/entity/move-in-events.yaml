@@ -150,13 +150,13 @@ properties:
       The trip in which this Move takes place, only provided if the trip is not
       clear from the context.
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../entity/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../entity/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   from:

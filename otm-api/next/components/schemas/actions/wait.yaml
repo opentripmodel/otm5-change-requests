@@ -89,13 +89,13 @@ properties:
   trip:
     description: The trip this action takes place on.
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../entity/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../entity/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:

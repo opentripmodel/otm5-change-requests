@@ -51,14 +51,14 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ../events.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   status:
-    $ref: ./enums/status.yaml
+    $ref: ../enums/status.yaml
   transportMode:
     description: >-
       Method of transport used for the carriage of goods on this trip, can
@@ -81,15 +81,15 @@ properties:
   vehicle:
     description: The `Vehicle` that is driving this trip.
     oneOf:
-      - $ref: ./entity/vehicle-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ./vehicle-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./entity/vehicle-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ./vehicle-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
   actors:
     description: >-
       The actors associated with this trip, for instance the client or the
@@ -97,15 +97,15 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./actor-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../actor-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./actor-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../actor-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
   actions:
     description: >-
       All actions that are/were happening on this trip, such as
@@ -113,20 +113,20 @@ properties:
       consignments.
     type: array
     items:
-      $ref: ./action-association.yaml
+      $ref: ../action-association.yaml
   constraint:
     description: >-
       Constraints this trip has to abide to, such as the start and end date
       times in which it has to be completed.
     oneOf:
-      - $ref: ./constraints/trip-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/trip-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/trip-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/trip-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - entityType

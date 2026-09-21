@@ -1,7 +1,7 @@
 required:
   - entityType
 oneOf:
-  - $ref: ./trip.yaml
+  - $ref: ./entity/trip-with-type.yaml
   - $ref: ./sensor.yaml
   - $ref: ./route.yaml
   - $ref: ./location-with-type.yaml
@@ -26,7 +26,7 @@ oneOf:
 discriminator:
   propertyName: entityType
   mapping:
-    trip: ./trip.yaml
+    trip: ./entity/trip-with-type.yaml
     sensor: ./sensor.yaml
     route: ./route.yaml
     location: ./location-with-type.yaml
