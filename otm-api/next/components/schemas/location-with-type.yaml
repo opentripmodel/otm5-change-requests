@@ -173,13 +173,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-locations-inline.yaml
+        - $ref: ./location-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-locations-inline.yaml
+          inline: ./location-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   actors:

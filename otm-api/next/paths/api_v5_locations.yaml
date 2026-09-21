@@ -178,13 +178,13 @@ put:
                 type: array
                 items:
                   oneOf:
-                    - $ref: ../components/schemas/associated-locations-inline.yaml
+                    - $ref: ../components/schemas/location-inline.yaml
                     - $ref: ../components/schemas/reference.yaml
                     - $ref: ../components/schemas/attributeRestriction.yaml
                   discriminator:
                     propertyName: associationType
                     mapping:
-                      inline: ../components/schemas/associated-locations-inline.yaml
+                      inline: ../components/schemas/location-inline.yaml
                       reference: ../components/schemas/reference.yaml
                       attributeRestriction: ../components/schemas/attributeRestriction.yaml
               actors:
@@ -419,13 +419,13 @@ put:
               type: array
               items:
                 oneOf:
-                  - $ref: ../components/schemas/associated-locations-inline.yaml
+                  - $ref: ../components/schemas/location-inline.yaml
                   - $ref: ../components/schemas/reference.yaml
                   - $ref: ../components/schemas/attributeRestriction.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/associated-locations-inline.yaml
+                    inline: ../components/schemas/location-inline.yaml
                     reference: ../components/schemas/reference.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction.yaml
             actors:

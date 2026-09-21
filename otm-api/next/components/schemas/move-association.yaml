@@ -157,25 +157,25 @@ properties:
   from:
     description: The location from which the move action is started.
     oneOf:
-      - $ref: ./from-location-move-inline.yaml
+      - $ref: ./location-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./from-location-move-inline.yaml
+        inline: ./location-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   to:
     description: The location where the move action is ended.
     oneOf:
-      - $ref: ./to-location-move-inline.yaml
+      - $ref: ./location-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./to-location-move-inline.yaml
+        inline: ./location-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   timeFormat:

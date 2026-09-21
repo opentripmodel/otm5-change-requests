@@ -154,13 +154,13 @@ properties:
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../action-location-inline.yaml
+      - $ref: ../location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../action-location-inline.yaml
+        inline: ../location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
