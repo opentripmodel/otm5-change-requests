@@ -6,7 +6,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/events.yaml
+            $ref: ../components/schemas/event.yaml
     '400':
       description: Client error
       content:

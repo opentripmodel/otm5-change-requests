@@ -70,7 +70,7 @@ put:
                   vehicle, you can include that event in the context.
                 type: array
                 items:
-                  $ref: ../components/schemas/events.yaml
+                  $ref: ../components/schemas/event.yaml
               value:
                 $ref: ../components/schemas/constraintValue.yaml
               enforceability:
@@ -179,7 +179,7 @@ put:
                 vehicle, you can include that event in the context.
               type: array
               items:
-                $ref: ../components/schemas/events.yaml
+                $ref: ../components/schemas/event.yaml
             value:
               $ref: ../components/schemas/constraintValue.yaml
             enforceability:

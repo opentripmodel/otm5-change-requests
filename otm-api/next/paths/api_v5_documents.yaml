@@ -67,7 +67,7 @@ put:
                   vehicle, you can include that event in the context.
                 type: array
                 items:
-                  $ref: ../components/schemas/events.yaml
+                  $ref: ../components/schemas/event.yaml
               content:
                 description: >-
                   The content of the document. There are two different options
@@ -217,7 +217,7 @@ put:
                 vehicle, you can include that event in the context.
               type: array
               items:
-                $ref: ../components/schemas/events.yaml
+                $ref: ../components/schemas/event.yaml
             content:
               description: >-
                 The content of the document. There are two different options on

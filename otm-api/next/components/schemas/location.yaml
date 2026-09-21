@@ -59,7 +59,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ./event.yaml
   geoReference:
     description: >-
       Describes a geographic reference, this is the primary way to link a

@@ -75,7 +75,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -97,14 +97,14 @@ properties:
       the order of the entities is unimportant, an association removed works
       both ways.
     allOf:
-      - $ref: ../entity-reference.yaml
+      - $ref: ../entity-association.yaml
   entity2:
     description: >-
       One of the two entities between which an association is created. Note that
       the order of the entities is unimportant, an association created works
       both ways.
     allOf:
-      - $ref: ../entity-reference.yaml
+      - $ref: ../entity-association.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper

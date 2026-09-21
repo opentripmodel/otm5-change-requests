@@ -86,7 +86,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an

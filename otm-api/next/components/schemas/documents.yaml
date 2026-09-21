@@ -59,7 +59,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ./event.yaml
   content:
     description: >-
       The content of the document. There are two different options on how the
