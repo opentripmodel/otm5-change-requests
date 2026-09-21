@@ -87,13 +87,13 @@ properties:
   vehicle:
     description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../entity/vehicle-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../vehicle-association-inline.yaml
+        inline: ../entity/vehicle-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   geoReference:

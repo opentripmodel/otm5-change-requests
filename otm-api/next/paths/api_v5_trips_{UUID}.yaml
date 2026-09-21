@@ -179,13 +179,13 @@ get:
               vehicle:
                 description: The `Vehicle` that is driving this trip.
                 oneOf:
-                  - $ref: ../components/schemas/vehicle-association-inline.yaml
+                  - $ref: ../components/schemas/entity/vehicle-inline.yaml
                   - $ref: ../components/schemas/reference.yaml
                   - $ref: ../components/schemas/attributeRestriction.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/vehicle-association-inline.yaml
+                    inline: ../components/schemas/entity/vehicle-inline.yaml
                     reference: ../components/schemas/reference.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction.yaml
               actors:
