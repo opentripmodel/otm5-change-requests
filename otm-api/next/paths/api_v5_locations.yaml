@@ -150,13 +150,13 @@ put:
                 type: array
                 items:
                   oneOf:
-                    - $ref: ../components/schemas/associated-actors-inline.yaml
+                    - $ref: ../components/schemas/actor-inline.yaml
                     - $ref: ../components/schemas/reference-roles.yaml
                     - $ref: ../components/schemas/attributeRestriction-roles.yaml
                   discriminator:
                     propertyName: associationType
                     mapping:
-                      inline: ../components/schemas/associated-actors-inline.yaml
+                      inline: ../components/schemas/actor-inline.yaml
                       reference: ../components/schemas/reference-roles.yaml
                       attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
               actions:
@@ -346,13 +346,13 @@ put:
               type: array
               items:
                 oneOf:
-                  - $ref: ../components/schemas/associated-actors-inline.yaml
+                  - $ref: ../components/schemas/actor-inline.yaml
                   - $ref: ../components/schemas/reference-roles.yaml
                   - $ref: ../components/schemas/attributeRestriction-roles.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/associated-actors-inline.yaml
+                    inline: ../components/schemas/actor-inline.yaml
                     reference: ../components/schemas/reference-roles.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
             actions:

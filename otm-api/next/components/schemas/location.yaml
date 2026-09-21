@@ -140,13 +140,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./actor-inline.yaml
         - $ref: ./reference-roles.yaml
         - $ref: ./attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
+          inline: ./actor-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
   constraint:
