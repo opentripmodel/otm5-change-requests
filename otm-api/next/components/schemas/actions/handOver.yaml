@@ -82,25 +82,25 @@ properties:
   from:
     description: The party that is handing over the consignment/goods.
     oneOf:
-      - $ref: ../handover-from-actor-inline.yaml
+      - $ref: ../associated-actors-inline.yaml
       - $ref: ../reference-roles.yaml
       - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-from-actor-inline.yaml
+        inline: ../associated-actors-inline.yaml
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
   to:
     description: The party that is receiving the consignments/goods.
     oneOf:
-      - $ref: ../handover-to-actor-inline.yaml
+      - $ref: ../associated-actors-inline.yaml
       - $ref: ../reference-roles.yaml
       - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-to-actor-inline.yaml
+        inline: ../associated-actors-inline.yaml
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
   stop:
