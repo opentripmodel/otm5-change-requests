@@ -55,7 +55,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./event.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -68,13 +68,14 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   geoReference:
-    $ref: ./geoReference/geoReference.yaml
+    description: Geographic representation of this route.
+    $ref: ../geoReference/geoReference.yaml
   geoReferences:
     deprecated: true
     description: Geographic representation of this route. This property is deprecated; use geoReferece (not plural) instead.
-    $ref: ./geoReference/geoReference.yaml
+    $ref: ../geoReference/geoReference.yaml
   actors:
     description: >-
       Actors associated with this route, for instance the Company that requires
@@ -82,28 +83,28 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./actor-inline.yaml
-        - $ref: ./reference-roles.yaml
-        - $ref: ./attributeRestriction-roles.yaml
+        - $ref: ../actor-inline.yaml
+        - $ref: ../reference-roles.yaml
+        - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./actor-inline.yaml
-          reference: ./reference-roles.yaml
-          attributeRestriction: ./attributeRestriction-roles.yaml
+          inline: ../actor-inline.yaml
+          reference: ../reference-roles.yaml
+          attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
     description: >-
       Constraints of using this route, for instance it might only be used by
       vehicles with below a certain weight.
     oneOf:
-      - $ref: ./constraints/route-constraint-inline.yaml
-      - $ref: ./reference.yaml
-      - $ref: ./attributeRestriction.yaml
+      - $ref: ../constraints/route-constraint-inline.yaml
+      - $ref: ../reference.yaml
+      - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/route-constraint-inline.yaml
-        reference: ./reference.yaml
-        attributeRestriction: ./attributeRestriction.yaml
+        inline: ../constraints/route-constraint-inline.yaml
+        reference: ../reference.yaml
+        attributeRestriction: ../attributeRestriction.yaml
 required:
   - geoReference

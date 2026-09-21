@@ -223,13 +223,13 @@ properties:
   route:
     description: The route from location A to location B that is travelled.
     oneOf:
-      - $ref: ../route-association-inline.yaml
+      - $ref: ./route-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../route-association-inline.yaml
+        inline: ./route-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   constraint:
