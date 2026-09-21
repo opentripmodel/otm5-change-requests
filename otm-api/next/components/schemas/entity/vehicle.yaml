@@ -99,7 +99,7 @@ properties:
           trailers with cooling capabilities, choose the fuel type of the cooling
           engine.
         deprecated: true
-      - $ref: ../fuel-types.yaml
+      - $ref: ../enums/fuelTypes.yaml
   otherFuelType:
     deprecated: true
     description: Type of fuel, only to be used when the `fuel` field is set to `other`.
