@@ -114,13 +114,13 @@ get:
                   The actor who owns the document. If not provided, the creator
                   will be assumed to be the owner.
                 oneOf:
-                  - $ref: ../components/schemas/document-creator-inline.yaml
+                  - $ref: ../components/schemas/actor-inline.yaml
                   - $ref: ../components/schemas/reference-roles.yaml
                   - $ref: ../components/schemas/attributeRestriction-roles.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/document-creator-inline.yaml
+                    inline: ../components/schemas/actor-inline.yaml
                     reference: ../components/schemas/reference-roles.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
               owner:
@@ -128,13 +128,13 @@ get:
                   The actor who owns the document. If not provided, the creator
                   will be assumed to be the owner.
                 oneOf:
-                  - $ref: ../components/schemas/document-owner-inline.yaml
+                  - $ref: ../components/schemas/actor-inline.yaml
                   - $ref: ../components/schemas/reference-roles.yaml
                   - $ref: ../components/schemas/attributeRestriction-roles.yaml
                 discriminator:
                   propertyName: associationType
                   mapping:
-                    inline: ../components/schemas/document-owner-inline.yaml
+                    inline: ../components/schemas/actor-inline.yaml
                     reference: ../components/schemas/reference-roles.yaml
                     attributeRestriction: ../components/schemas/attributeRestriction-roles.yaml
             required:
