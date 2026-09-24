@@ -77,6 +77,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   unCode:
     description: >-
       the United Nations Code for Trade and Transport Locations, is a geographic

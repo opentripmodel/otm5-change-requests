@@ -72,6 +72,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   description:
     description: >-
       A free text description of this transport order, e.g. boxes of fruit

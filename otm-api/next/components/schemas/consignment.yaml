@@ -50,6 +50,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ./unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ./externalIdentifiers.yaml
   description:
     description: >-
       General description of consignment in Free text. e.g 20 europallets fruit.

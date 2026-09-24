@@ -76,6 +76,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   placement:
     description: >-
       Sometimes more than one sensor can be associated with a single entity.

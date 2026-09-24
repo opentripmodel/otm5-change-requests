@@ -76,6 +76,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   geoReference:
     description: Geographic representation of this route.
     $ref: ../geoReference/geoReference.yaml
