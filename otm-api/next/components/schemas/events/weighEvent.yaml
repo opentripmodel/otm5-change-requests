@@ -75,13 +75,13 @@ properties:
       The transport equipment that is weighted. This applies in particular to transport equipment of type trailer.
       Seperate weigh events can be defined for multiple attached trailers.
     oneOf:
-      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../entity/transportEquipment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../transport-equipment-association-inline.yaml
+        inline: ../entity/transportEquipment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   weighingResult:

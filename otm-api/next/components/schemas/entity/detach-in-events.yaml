@@ -119,13 +119,13 @@ properties:
       The transport equipment that is being attached/detached to the associated
       vehicle.
     oneOf:
-      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../entity/transportEquipment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../transport-equipment-association-inline.yaml
+        inline: ../entity/transportEquipment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   location:

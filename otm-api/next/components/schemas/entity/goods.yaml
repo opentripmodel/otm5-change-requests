@@ -1,8 +1,8 @@
 oneOf:
-  - $ref: ./items.yaml
+  - $ref: ../entity/items-with-type.yaml
   - $ref: ./transportEquipment.yaml
 discriminator:
   propertyName: type
   mapping:
-    items: ./items.yaml
+    items: ../entity/items-with-type.yaml
     transportEquipment: ./transportEquipment.yaml

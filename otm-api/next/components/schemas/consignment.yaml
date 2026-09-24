@@ -68,13 +68,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./goods-inline.yaml
+        - $ref: ./entity/goods-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./goods-inline.yaml
+          inline: ./entity/goods-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   transportOrder:

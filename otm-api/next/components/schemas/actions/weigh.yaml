@@ -89,13 +89,13 @@ properties:
       Seperate weigh actions can be defined for multiple attached trailers.
       Several weigh actions can be performed on the same transport equipment, for example to measure the weight of the trailer when empty and when loaded.
     oneOf:
-      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../entity/transportEquipment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../transport-equipment-association-inline.yaml
+        inline: ../entity/transportEquipment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   stop:
