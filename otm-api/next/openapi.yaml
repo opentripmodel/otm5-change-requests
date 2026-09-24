@@ -69,6 +69,10 @@ info:
     * Add `references` array to `locationUpdateEvent` and `weighEvent` to reference other entities that are relevant for these events.
     [See 140](https://github.com/opentripmodel/otm5-change-requests/issues/140)
 
+    * Add `format: date-time` to date/time fields such as `startTime`, `endTime`, `startDateTime`, and `endDateTime`.
+    [See 120](https://github.com/opentripmodel/otm5-change-requests/issues/120)
+
+
     **Version 5.8 (released on 2026-03-13)**
 
     * Remove several duplicate definitions of the same entity or fields e.g. unit of measure
