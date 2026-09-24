@@ -72,25 +72,25 @@ properties:
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../entity/location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   trip:
     description: The trip this action takes place on.
     oneOf:
-      - $ref: ../entity/trip-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/trip-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -132,13 +132,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../constraints/break-constraint-inline.yaml
+      - $ref: ../associations/break-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/break-constraint-inline.yaml
+        inline: ../associations/break-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

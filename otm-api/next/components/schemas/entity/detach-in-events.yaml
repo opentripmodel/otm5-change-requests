@@ -105,13 +105,13 @@ properties:
   vehicle:
     description: The vehicle that is involved in this action.
     oneOf:
-      - $ref: ../entity/vehicle-inline.yaml
+      - $ref: ../associations/vehicle-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/vehicle-inline.yaml
+        inline: ../associations/vehicle-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   transportEquipment:
@@ -119,25 +119,25 @@ properties:
       The transport equipment that is being attached/detached to the associated
       vehicle.
     oneOf:
-      - $ref: ../entity/transportEquipment-inline.yaml
+      - $ref: ../associations/transportEquipment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/transportEquipment-inline.yaml
+        inline: ../associations/transportEquipment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../entity/location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -179,13 +179,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../constraints/action-constraint-inline.yaml
+      - $ref: ../associations/action-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/action-constraint-inline.yaml
+        inline: ../associations/action-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

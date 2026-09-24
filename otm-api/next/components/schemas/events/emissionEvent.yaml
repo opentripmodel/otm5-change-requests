@@ -61,37 +61,37 @@ properties:
   vehicle:
     description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ../entity/vehicle-inline.yaml
+      - $ref: ../associations/vehicle-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/vehicle-inline.yaml
+        inline: ../associations/vehicle-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   trip:
     description: The trip that is relevant for this event
     oneOf:
-      - $ref: ../entity/trip-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/trip-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   consignment:
     description: The consignment that is relevant for this event
     oneOf:
-      - $ref: ../consignment-inline.yaml
+      - $ref: ../associations/consignment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../consignment-inline.yaml
+        inline: ../associations/consignment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   method:
@@ -119,13 +119,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
 required:

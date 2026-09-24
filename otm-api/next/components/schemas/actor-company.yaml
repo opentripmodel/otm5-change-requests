@@ -16,13 +16,13 @@ allOf:
         type: array
         items:
           oneOf:
-            - $ref: ./actor-inline.yaml
+            - $ref: ./associations/actor-inline.yaml
             - $ref: ./reference-roles.yaml
             - $ref: ./attributeRestriction-roles.yaml
           discriminator:
             propertyName: associationType
             mapping:
-              inline: ./actor-inline.yaml
+              inline: ./associations/actor-inline.yaml
               reference: ./reference-roles.yaml
               attributeRestriction: ./attributeRestriction-roles.yaml
       website:
@@ -31,13 +31,13 @@ allOf:
         type: string
       headoffice:
         oneOf:
-          - $ref: ./entity/location-inline.yaml
+          - $ref: ./associations/location-inline.yaml
           - $ref: ./reference.yaml
           - $ref: ./attributeRestriction.yaml
         discriminator:
           propertyName: associationType
           mapping:
-            inline: ./entity/location-inline.yaml
+            inline: ./associations/location-inline.yaml
             reference: ./reference.yaml
             attributeRestriction: ./attributeRestriction.yaml
       gln:

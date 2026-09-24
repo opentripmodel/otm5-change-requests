@@ -82,13 +82,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../consignment-inline.yaml
+        - $ref: ../associations/consignment-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../consignment-inline.yaml
+          inline: ../associations/consignment-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   actors:
@@ -98,13 +98,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
@@ -112,12 +112,12 @@ properties:
       Constraints this transport order has to abide to, such as the expected
       delivery time windows.
     oneOf:
-      - $ref: ../constraints/transport-order-constraint-inline.yaml
+      - $ref: ../associations/transport-order-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/transport-order-constraint-inline.yaml
+        inline: ../associations/transport-order-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml

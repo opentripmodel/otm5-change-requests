@@ -61,13 +61,13 @@ properties:
   vehicle:
     description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ../entity/vehicle-inline.yaml
+      - $ref: ../associations/vehicle-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/vehicle-inline.yaml
+        inline: ../associations/vehicle-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml  
   transportEquipment:
@@ -75,13 +75,13 @@ properties:
       The transport equipment that is weighted. This applies in particular to transport equipment of type trailer.
       Seperate weigh events can be defined for multiple attached trailers.
     oneOf:
-      - $ref: ../entity/transportEquipment-inline.yaml
+      - $ref: ../associations/transportEquipment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/transportEquipment-inline.yaml
+        inline: ../associations/transportEquipment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   weighingResult:
@@ -134,13 +134,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   references:

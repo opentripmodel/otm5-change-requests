@@ -97,13 +97,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
@@ -117,13 +117,13 @@ properties:
       > **ℹ Note** that constraints can be nested and combined using the
       `andConstraint`, `orConstraint` and `notConstraint`.
     oneOf:
-      - $ref: ../constraints/sensor-constraint-inline.yaml
+      - $ref: ../associations/sensor-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/sensor-constraint-inline.yaml
+        inline: ../associations/sensor-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

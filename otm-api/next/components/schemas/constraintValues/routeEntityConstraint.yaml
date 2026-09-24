@@ -7,13 +7,13 @@ properties:
       - routeEntityConstraint
   route:
     oneOf:
-      - $ref: ../constraints/route-entity-constraint-inline.yaml
+      - $ref: ../associations/route-entity-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/route-entity-constraint-inline.yaml
+        inline: ../associations/route-entity-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   description:

@@ -81,37 +81,37 @@ properties:
   from:
     description: The party that is handing over the consignment/goods.
     oneOf:
-      - $ref: ../actor-inline.yaml
+      - $ref: ../associations/actor-inline.yaml
       - $ref: ../reference-roles.yaml
       - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../actor-inline.yaml
+        inline: ../associations/actor-inline.yaml
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
   to:
     description: The party that is receiving the consignments/goods.
     oneOf:
-      - $ref: ../actor-inline.yaml
+      - $ref: ../associations/actor-inline.yaml
       - $ref: ../reference-roles.yaml
       - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../actor-inline.yaml
+        inline: ../associations/actor-inline.yaml
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
   consignment:
     description: The consignment that is the subject of this action.
     oneOf:
-      - $ref: ../consignment-inline.yaml
+      - $ref: ../associations/consignment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../consignment-inline.yaml
+        inline: ../associations/consignment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   documents:
@@ -121,25 +121,25 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../entity/document-inline.yaml
+        - $ref: ../associations/document-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../entity/document-inline.yaml
+          inline: ../associations/document-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../entity/location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -181,13 +181,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../constraints/handover-constraint-inline.yaml
+      - $ref: ../associations/handover-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/handover-constraint-inline.yaml
+        inline: ../associations/handover-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

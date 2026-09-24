@@ -223,13 +223,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref:  ./goods-inline.yaml
+        - $ref:  ../associations/goods-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./goods-inline.yaml
+          inline: ../associations/goods-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   equipmentType:
@@ -416,13 +416,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
@@ -439,13 +439,13 @@ properties:
       the solution. When possible, prefer to put the constraint on the
       consignment of the goods.
     oneOf:
-      - $ref: ../constraints/transport-equipment-constraint-inline.yaml
+      - $ref: ../associations/transport-equipment-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/transport-equipment-constraint-inline.yaml
+        inline: ../associations/transport-equipment-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

@@ -68,25 +68,25 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./entity/goods-inline.yaml
+        - $ref: ./associations/goods-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./entity/goods-inline.yaml
+          inline: ./associations/goods-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   transportOrder:
     description: The transport order this consignment belongs to.
     oneOf:
-      - $ref: ./entity/transportOrder-inline.yaml
+      - $ref: ./associations/transportOrder-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./entity/transportOrder-inline.yaml
+        inline: ./associations/transportOrder-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   documents:
@@ -96,13 +96,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./entity/document-inline.yaml
+        - $ref: ./associations/document-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./entity/document-inline.yaml
+          inline: ./associations/document-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   remark:
@@ -118,13 +118,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./actor-inline.yaml
+        - $ref: ./associations/actor-inline.yaml
         - $ref: ./reference-roles.yaml
         - $ref: ./attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./actor-inline.yaml
+          inline: ./associations/actor-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
   actions:
@@ -147,13 +147,13 @@ properties:
 
       possible.
     oneOf:
-      - $ref: ./constraints/consignment-constraint-inline.yaml
+      - $ref: ./associations/consignment-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./constraints/consignment-constraint-inline.yaml
+        inline: ./associations/consignment-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   relatedConsignments:
@@ -171,12 +171,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./consignment-inline.yaml
+        - $ref: ./associations/consignment-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./consignment-inline.yaml
+          inline: ./associations/consignment-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml

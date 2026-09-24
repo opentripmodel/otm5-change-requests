@@ -79,12 +79,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./entity/location-inline.yaml
+        - $ref: ./associations/location-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./entity/location-inline.yaml
+          inline: ./associations/location-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml

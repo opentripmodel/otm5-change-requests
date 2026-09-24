@@ -240,13 +240,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   actions:
@@ -265,12 +265,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./sensor-inline.yaml
+        - $ref: ../associations/sensor-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./sensor-inline.yaml
+          inline: ../associations/sensor-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml

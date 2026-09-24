@@ -70,25 +70,25 @@ properties:
       The trip that this stop belongs too, usually is only provided if the trip
       is not clear from the context.
     oneOf:
-      - $ref: ../entity/trip-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/trip-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location of this stop.
     oneOf:
-      - $ref: ../entity/location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../entity/location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -130,12 +130,12 @@ properties:
   constraint:
     description: The constraints this stop abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../constraints/stop-constraint-inline.yaml
+      - $ref: ../associations/stop-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/stop-constraint-inline.yaml
+        inline: ../associations/stop-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml

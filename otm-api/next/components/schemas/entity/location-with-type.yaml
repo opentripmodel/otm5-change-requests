@@ -128,13 +128,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./location-inline.yaml
+        - $ref: ../associations/location-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./location-inline.yaml
+          inline: ../associations/location-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   actors:
@@ -145,13 +145,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../actor-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../actor-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   constraint:
@@ -163,13 +163,13 @@ properties:
       > **ℹ Note** that constraints can be nested and combined using the
       `andConstraint`, `orConstraint` and `notConstraint`.
     oneOf:
-      - $ref: ../constraints/location-constraint-inline.yaml
+      - $ref: ../associations/location-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../constraints/location-constraint-inline.yaml
+        inline: ../associations/location-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:
