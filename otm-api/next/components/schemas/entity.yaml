@@ -12,7 +12,7 @@ oneOf:
   - $ref: ./entity/route-with-type.yaml
 
   # Miscellaneous
-  - $ref: ./entity/document.yaml
+  - $ref: ./entity/document-with-type.yaml
   - $ref: ./entity/sensor-with-type.yaml
   - $ref: ./entity/constraint-with-type.yaml
   
@@ -40,7 +40,7 @@ discriminator:
     goods: ./entity/goods.yaml
     route: ./entity/route-with-type.yaml
 
-    document: ./entity/document.yaml
+    document: ./entity/document-with-type.yaml
     sensor: ./entity/sensor-with-type.yaml
     constraint: ./entity/constraint-with-type.yaml
     

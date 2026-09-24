@@ -22,6 +22,11 @@ example:
     associationType: reference
 type: object
 properties:
+  entityType:
+    example: document
+    type: string
+    enum:
+      - document
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -59,7 +64,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./event.yaml
+      $ref: ../event.yaml
   content:
     description: >-
       The content of the document. There are two different options on how the
@@ -68,7 +73,7 @@ properties:
       an external link to where the content lives. Or directly as an encoded
       base64 string.
     allOf:
-      - $ref: ./content.yaml
+      - $ref: ../content.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -81,7 +86,7 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
   documentType:
     description: The type of the document, such as a photo, text document, PDF etc.
     type: string
@@ -102,28 +107,29 @@ properties:
       The actor who owns the document. If not provided, the creator will be
       assumed to be the owner.
     oneOf:
-      - $ref: ./actor-inline.yaml
-      - $ref: ./reference-roles.yaml
-      - $ref: ./attributeRestriction-roles.yaml
+      - $ref: ../actor-inline.yaml
+      - $ref: ../reference-roles.yaml
+      - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./actor-inline.yaml
-        reference: ./reference-roles.yaml
-        attributeRestriction: ./attributeRestriction-roles.yaml
+        inline: ../actor-inline.yaml
+        reference: ../reference-roles.yaml
+        attributeRestriction: ../attributeRestriction-roles.yaml
   owner:
     description: >-
       The actor who owns the document. If not provided, the creator will be
       assumed to be the owner.
     oneOf:
-      - $ref: ./actor-inline.yaml
-      - $ref: ./reference-roles.yaml
-      - $ref: ./attributeRestriction-roles.yaml
+      - $ref: ../actor-inline.yaml
+      - $ref: ../reference-roles.yaml
+      - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./actor-inline.yaml
-        reference: ./reference-roles.yaml
-        attributeRestriction: ./attributeRestriction-roles.yaml
+        inline: ../actor-inline.yaml
+        reference: ../reference-roles.yaml
+        attributeRestriction: ../attributeRestriction-roles.yaml
 required:
+  - entityType
   - content

@@ -129,13 +129,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../documents-inline.yaml
+        - $ref: ../entity/document-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../documents-inline.yaml
+          inline: ../entity/document-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   location:

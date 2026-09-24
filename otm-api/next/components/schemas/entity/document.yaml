@@ -22,11 +22,6 @@ example:
     associationType: reference
 type: object
 properties:
-  entityType:
-    example: document
-    type: string
-    enum:
-      - document
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -131,5 +126,4 @@ properties:
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
 required:
-  - entityType
   - content
