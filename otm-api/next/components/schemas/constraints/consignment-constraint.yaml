@@ -90,5 +90,7 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
 required:
   - value
