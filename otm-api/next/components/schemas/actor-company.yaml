@@ -5,6 +5,10 @@ allOf:
     required:
       - type
     properties:
+      type:
+        type: string
+        enum:
+          - company
       coc:
         description: Chamber of Commerce number.
         type: string
