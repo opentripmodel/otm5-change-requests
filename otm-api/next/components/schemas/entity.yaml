@@ -14,7 +14,7 @@ oneOf:
   # Miscellaneous
   - $ref: ./entity/document.yaml
   - $ref: ./entity/sensor-with-type.yaml
-  - $ref: ./constraint.yaml
+  - $ref: ./entity/constraint-with-type.yaml
   
   # Actions
   - $ref: ./entity/load-in-events.yaml
@@ -42,7 +42,7 @@ discriminator:
 
     document: ./entity/document.yaml
     sensor: ./entity/sensor-with-type.yaml
-    constraint: ./constraint.yaml
+    constraint: ./entity/constraint-with-type.yaml
     
     load: ./entity/load-in-events.yaml
     unload: ./entity/unload-in-events.yaml

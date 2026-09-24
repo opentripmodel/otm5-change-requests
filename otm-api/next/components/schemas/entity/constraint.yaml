@@ -25,11 +25,6 @@ example:
     type: andConstraint
 type: object
 properties:
-  entityType:
-    example: constraint
-    type: string
-    enum:
-      - constraint
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -67,9 +62,9 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./event.yaml
+      $ref: ../event.yaml
   value:
-    $ref: ./constraintValue.yaml
+    $ref: ../constraintValue.yaml
   enforceability:
     description: >-
       The enforceability of the constraint. Indicates whether or not the
@@ -92,7 +87,6 @@ properties:
     type: object
     properties: {}
     additionalProperties:
-      $ref: ./unrestricted_json.yaml
+      $ref: ../unrestricted_json.yaml
 required:
-  - entityType
   - value
