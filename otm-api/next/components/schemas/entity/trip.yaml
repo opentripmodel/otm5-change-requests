@@ -27,11 +27,13 @@ properties:
   creationDate:
     description: The creation date of this entity.
     type: string
+    format: date-time
   lastModified:
     description: >-
       The last modified date of this entity. If none is given the creation date
       is used instead.
     type: string
+    format: date-time
   contextEvents:
     description: >-
       The context events provides some optional information about the events
