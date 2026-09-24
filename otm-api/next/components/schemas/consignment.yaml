@@ -80,13 +80,13 @@ properties:
   transportOrder:
     description: The transport order this consignment belongs to.
     oneOf:
-      - $ref: ./transportOrder-association-inline.yaml
+      - $ref: ./entity/transportOrder-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./transportOrder-association-inline.yaml
+        inline: ./entity/transportOrder-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   documents:

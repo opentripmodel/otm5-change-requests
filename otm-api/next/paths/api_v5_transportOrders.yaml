@@ -6,7 +6,7 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/transportOrder.yaml
+            $ref: ../components/schemas/entity/transportOrder.yaml
     '400':
       description: Client error
       content:
@@ -24,7 +24,7 @@ put:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/transportOrder.yaml
+          $ref: ../components/schemas/entity/transportOrder.yaml
   tags:
     - TransportOrder
   security:

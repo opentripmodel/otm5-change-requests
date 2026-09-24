@@ -6,7 +6,7 @@ oneOf:
   - $ref: ./entity/location-with-type.yaml
   - $ref: ./entity/vehicle.yaml
   - $ref: ./actor.yaml
-  - $ref: ./transportOrder.yaml
+  - $ref: ./entity/transportOrder-with-type.yaml
   - $ref: ./consignment.yaml
   - $ref: ./entity/goods.yaml
   - $ref: ./entity/route-with-type.yaml
@@ -35,7 +35,7 @@ discriminator:
     location: ./entity/location-with-type.yaml
     vehicle: ./entity/vehicle.yaml
     actor: ./actor.yaml
-    transportOrder: ./transportOrder.yaml
+    transportOrder: ./entity/transportOrder-with-type.yaml
     consignment: ./consignment.yaml
     goods: ./entity/goods.yaml
     route: ./entity/route-with-type.yaml
