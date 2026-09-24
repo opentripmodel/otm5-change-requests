@@ -22,6 +22,11 @@ example:
   remark: The cafe around the corner has the best coffee in town.
 type: object
 properties:
+  entityType:
+    example: location
+    type: string
+    enum:
+      - location
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to

@@ -18,6 +18,11 @@ example:
     type: Feature
 type: object
 properties:
+  entityType:
+    example: route
+    type: string
+    enum:
+      - route
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to

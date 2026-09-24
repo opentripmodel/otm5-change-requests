@@ -223,7 +223,7 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../associations/goods-inline.yaml
+        - $ref:  ../associations/goods-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
@@ -448,3 +448,5 @@ properties:
         inline: ../associations/transport-equipment-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
+required:
+  - type

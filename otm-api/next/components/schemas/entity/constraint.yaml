@@ -25,6 +25,11 @@ example:
     type: andConstraint
 type: object
 properties:
+  entityType:
+    example: constraint
+    type: string
+    enum:
+      - constraint
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to

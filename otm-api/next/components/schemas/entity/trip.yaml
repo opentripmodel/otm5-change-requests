@@ -9,6 +9,11 @@ example:
     associationType: reference
 type: object
 properties:
+  entityType:
+    example: trip
+    type: string
+    enum:
+      - trip
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to

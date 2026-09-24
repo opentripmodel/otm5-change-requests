@@ -1,18 +1,37 @@
 example:
-  id: a29905bb-9af8-4118-896a-71b1eaf07cc0
+  id: 903807df-ee62-47aa-bf8e-7efd747618ce
   entityType: goods
-  type: transportEquipment
-  description: A trailer
-  width:
-    value: 2.46
-    unit: m
-  height:
-    value: 2.7
-    unit: m
-  length:
-    value: 13.62
-    unit: m
-  licensePlate: 123-ABC
+  type: items
+  description: Box of bananas
+  remark: Please deliver in time, we want fresh bananas
+  barCode: CSE370
+  productType: Fruit
+  packagingMaterial: Box
+  constraint:
+    entity:
+      value:
+        and:
+          - startTime: '2021-06-23T10:00:00Z'
+            endTime: '2021-06-23T13:00:00Z'
+            description: alert-threshold
+            type: timeWindowConstraint
+          - constraintType: maximum
+            maximum:
+              value: 5
+              unit: C
+            type: temperatureConstraint
+          - or:
+              - fuelTypes:
+                  - battery
+                type: fuelTypeConstraint
+              - fuelTypes:
+                  - biodiesel
+                type: fuelTypeConstraint
+              - minimum: euro5
+                type: emissionStandardConstraint
+            type: orConstraint
+        type: andConstraint
+    associationType: inline
 type: object
 properties:
   entityType:
@@ -21,10 +40,10 @@ properties:
     enum:
       - goods
   type:
-    example: transportEquipment
+    example: items
     type: string
     enum:
-      - transportEquipment
+      - items
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
@@ -91,21 +110,18 @@ properties:
     type: string
   quantity:
     description: >-
-      A quantity determines how many of a certain transport equipment you have.
-      An example could be when you have
+      A quantity determines how many of a certain good you have. Note that all
+      other measurements are measured 
 
-      multiple pallets that contain the same goods
+      for a **single** product, not for the total of products.
     type: integer
     format: int32
   weight:
     description: >-
-      The net weight of a 'single' transportEquipment, so this does not include
-      the weight of the goods it is
+      The net weight of a 'single' good, the total weight can be calculated by
+      using the quantity and multiplying it
 
-      carrying. You can calculate the total net weight of all transport
-      equipments by taking the quantity and
-
-      multiplying it with this weight.
+      with this weight.
     type: object
     properties:
       value:
@@ -119,13 +135,10 @@ properties:
       - unit
   grossWeight:
     description: >-
-      The gross weight of a 'single' transportEquipment, this includes both the
-      equipment and the goods it is
+      The gross weight of a 'single' good, the total weight can be calculated by
+      using the quantity and multiplying it
 
-      carrying. You can calculate the total gross weight of all transport
-      equipments by taking the quantity and
-
-      multiplying it with this weight.
+      with this weight.
     type: object
     properties:
       value:
@@ -139,8 +152,8 @@ properties:
       - unit
   width:
     description: >-
-      The width of a 'single' transport equipment, the total width can be
-      calculated by using the quantity and multiplying it
+      The width of a 'single' good, the total width can be calculated by using
+      the quantity and multiplying it
 
       with this width.
     type: object
@@ -156,8 +169,8 @@ properties:
       - unit
   height:
     description: >-
-      The height of a 'single' transport equipment, the total height can be
-      calculated by using the quantity and multiplying
+      The height of a 'single' good, the total height can be calculated by using
+      the quantity and multiplying
 
       it with this height.
     type: object
@@ -173,8 +186,8 @@ properties:
       - unit
   length:
     description: >-
-      The length of a 'single' transport equipment, the total length can be
-      calculated by using the quantity and multiplying
+      The length of a 'single' good, the total length can be calculated by using
+      the quantity and multiplying
 
       it with this length.
     type: object
@@ -190,7 +203,7 @@ properties:
       - unit
   volume:
     description: >-
-      The volume of a 'single' transport equipment.
+      The volume of a 'single' good.
     type: object
     properties:
       value:
@@ -202,57 +215,177 @@ properties:
     required:
       - value
       - unit
-  loadMeters:
-    description: >-
-      The loading meter is used as a unit to account for goods that can not be
-      stacked or where you can't stack on top of it.
-       One loading meter corresponds to one running meter of cargo space in a vehicle
+  adr:
+    description: Information about the potentially dangerous properties of these goods.
     type: object
     properties:
-      value:
-        description: Value in the given unit.
-        type: number
-        format: double
-      unit:
-        $ref: ../uom.yaml
+      UNNumber:
+        description: >-
+          A UN number (United Nations number) is a four-digit number that
+          identifies hazardous materials, and articles
+
+          (such as explosives, flammable liquids, oxidizers, toxic liquids,
+          etc.) in the framework of international
+
+          transport. The list of UN numbers can be found in the
+
+          [official
+          specification](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf).
+        type: string
+      waste:
+        description: Indicator to be used in case commodity is classified as waste
+        type: boolean
+      description:
+        description: >-
+          Contains in upper case chararacters, the name of the substance or
+          article, if the substance or article has
+
+          been assigned its own specific UN number, or otherwise the proper
+          shipping name shall be used. See 3.1.2 for
+
+          further details
+        type: string
+      technicalName:
+        description: >-
+          The technical name which shall supplement the proper shipping name
+          shall be the ISO common name. A
+
+          recognized chemical name, if relevant a biological name, or other name
+          currently used in scientific and
+
+          technical handbooks, journals and texts. (see 3.1.2.8.1.1 in
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+        type: string
+      dangerLabels:
+        description: >-
+          The model number(s) of the labels/placards (see 5.2.2.2 and 5.3.1.7
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+          that have to be
+
+          affixed to packages, containers, tank containers, portable tanks,
+          MEGC’s and veh
+        type: array
+        items:
+          type: string
+      class:
+        description: >-
+          Number of the class, whose heading covers the dangerous substance or
+          article. 2.1.1.1 The classes of
+
+          dangerous goods according to ADR are the following:
+
+
+          - Class 1 Explosive substances and articles
+
+          - Class 2 Gases
+
+          - Class 3 Flammable liquids
+
+          - Class 4.1 Flammable solids, self reactive substances, polymerizing
+          substances and solid desensitized
+            explosives
+          - Class 4.2 Substances liable to spontaneous combustion
+
+          - Class 4.3 Substances which, in contact with water, emit flammable
+          gases
+
+          - Class 5.1 Oxidizing substances
+
+          - Class 5.2 Organic peroxides
+
+          - Class6.1 Toxic substances
+
+          - Class 6.2 Infectious substances
+
+          - Class 7 Radioactive material
+
+          - Class 8 Corrosive substances
+
+          - Class 9 Miscellaneous dangerous substances and articles
+        type: string
+      classificationCode:
+        description: >-
+          The classification code of the dangerous substance or article. The
+          code consists out of a division number
+
+          and compatibility group letter depending on the class
+        type: string
+      packagingGroup:
+        description: >-
+          Packing Group means a group of which, for packing purposes, certain
+          substances may be assigned in accordance
+
+          with their degree of danger. Packing group values: I, II and II
+        type: string
+      tunnelCode:
+        description: >-
+          Code to indicate tunnel category where restrictions apply to the
+          passage of vehicles carrying dangerous goods.
+
+          Categories A.B.C.D. and E as defined in 1.9.5.2.2.
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+        type: string
+      environmentallyHazardous:
+        description: Indicator to be used to label waste as environmentally hazardous.
+        type: boolean
+      language:
+        description: >-
+          Marks shall be in an official language of the country of origin and
+          also, if that language is not English,
+
+          French or German, in English, French or German, unless agreements, if
+          any, concluded between the countries
+
+          concerned in transport operations provide otherwise.
+        type: string
+      specialProvisions:
+        description: >-
+          Contains the numeric codes of special provisions that have to be met.
+          Listed in Chapter 3.3
+
+          [ADR2021_Vol1e_0.pdf](https://unece.org/sites/default/files/2021-01/ADR2021_Vol1e_0.pdf)
+        type: string
+      points:
+        description: >-
+          Determines the amount of points the goods being transported are
+          categorized with. The higher the points the
+
+          more dangerous the goods are. The method for calculating ADR points
+          can be found
+
+          [here](https://prosafecon.de/en/the-1000-points-rule-how-are-adr-points-calculated).
+        type: integer
+        format: int32
+      transportCategory:
+        description: >-
+          Determines the type of transport category the goods are categorized
+          with. See
+
+          [this table](https://specialcargo.nl/adr.php) for more information on
+          the different categories.
+        type: string
+        enum:
+          - '0'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
     required:
-      - value
-      - unit
-  containedGoods:
-    description: Goods can contain a subset of more goods that are grouped together.
-    type: array
-    items:
-      oneOf:
-        - $ref:  ../associations/goods-inline.yaml
-        - $ref: ../reference.yaml
-        - $ref: ../attributeRestriction.yaml
-      discriminator:
-        propertyName: associationType
-        mapping:
-          inline: ../associations/goods-inline.yaml
-          reference: ../reference.yaml
-          attributeRestriction: ../attributeRestriction.yaml
-  equipmentType:
-    description: The type of transport equipment that contains the goods.
+      - UNNumber
+      - description
+      - packagingGroup
+      - tunnelCode
+      - language
+  productType:
+    description: The product type of goods, for instance bananas.
     type: string
-    enum:
-      - trailer
-      - box
-      - loadCarrier
-      - pallet
-  equipmentSubType:
+  packagingMaterial:
     description: >-
-      The sub-type of the equipment. For example when the equipmentType is
-      'pallet', the equipmentSubtype can be
-
-      EUR6. OTM5 does not currently enforce the use of valid sub-types for any
-      transport equipment type, but recommends using the
-
-      standards available, such as [euro
-      pallets](https://en.wikipedia.org/wiki/EUR-pallet)
-    type: string
-  licensePlate:
-    description: The license plate of this transport equipment, if applicable.
+      Description of the package type. Use as described by the [GS1
+      standard](https://www.gs1.nl/media/qcdhditc/so-gs1das-guideline-packaging-type.pdf).
     type: string
   classificationLines:
     description: >-
@@ -275,6 +408,14 @@ properties:
 
             code used by all members of the World Customs Organization (WCO) to
             classify goods for customs purposes.
+          type: string
+        euralCode:
+          description: >-
+            EURAL codes (European Waste Catalogue) are standardized 6-digit
+            identifiers used across the European Union to classify waste.
+            They identify the waste's origin, the industrial process that
+            produced it, and indicate whether the material is classified as
+            hazardous or non-hazardous.
           type: string
         description:
           description: The description of this classification line.
@@ -439,15 +580,14 @@ properties:
       the solution. When possible, prefer to put the constraint on the
       consignment of the goods.
     oneOf:
-      - $ref: ../associations/transport-equipment-constraint-inline.yaml
+      - $ref: ../associations/goods-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../associations/transport-equipment-constraint-inline.yaml
+        inline: ../associations/goods-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:
-  - entityType
   - type

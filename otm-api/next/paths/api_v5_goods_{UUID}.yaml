@@ -7,13 +7,13 @@ get:
         application/json:
           schema:
             oneOf:
-              - $ref: ../components/schemas/entity/items-with-type.yaml
-              - $ref: ../components/schemas/entity/transportEquipment-with-type.yaml
+              - $ref: ../components/schemas/entity/items.yaml
+              - $ref: ../components/schemas/entity/transportEquipment.yaml
             discriminator:
               propertyName: type
               mapping:
-                items: ../components/schemas/entity/items-with-type.yaml
-                transportEquipment: ../components/schemas/entity/transportEquipment-with-type.yaml
+                items: ../components/schemas/entity/items.yaml
+                transportEquipment: ../components/schemas/entity/transportEquipment.yaml
     '400':
       description: Client error
       content:

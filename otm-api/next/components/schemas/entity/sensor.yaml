@@ -26,6 +26,11 @@ example:
       associationType: inline
 type: object
 properties:
+  entityType:
+    example: sensor
+    type: string
+    enum:
+      - sensor
   id:
     description: >-
       Uniquely identifies this entity. A URI can be assigned by the client to
