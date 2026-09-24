@@ -2,8 +2,8 @@ example:
   id: 11c11d75-e114-4b5f-9751-b3a4afa23ecf
   name: Main warehouse
   geoReference:
-    lat: 5.4126792
-    lon: 52.1956251
+    lat: 52.1956251
+    lon: 5.4126792
     type: latLonPointGeoReference
   type: warehouse
   administrativeReference:
