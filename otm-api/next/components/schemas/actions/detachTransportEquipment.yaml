@@ -92,6 +92,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   lifecycle:
     $ref: ../enums/lifecycle.yaml
   result:

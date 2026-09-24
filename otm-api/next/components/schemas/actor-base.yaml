@@ -69,6 +69,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ./unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ./externalIdentifiers.yaml
   contactDetails:
     $ref: ./contactDetails/contactDetails.yaml
   locations:

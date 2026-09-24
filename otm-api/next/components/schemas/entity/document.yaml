@@ -89,6 +89,8 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   documentType:
     description: The type of the document, such as a photo, text document, PDF etc.
     type: string
