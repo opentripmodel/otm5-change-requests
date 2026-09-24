@@ -1,17 +1,22 @@
 required:
   - entityType
 oneOf:
+  # Core entities
   - $ref: ./entity/trip-with-type.yaml
-  - $ref: ./entity/sensor-with-type.yaml
-  - $ref: ./entity/route-with-type.yaml
   - $ref: ./location-with-type.yaml
-  - $ref: ./actor.yaml
-  - $ref: ./constraint.yaml
-  - $ref: ./transportOrder.yaml
-  - $ref: ./goods.yaml
-  - $ref: ./consignment.yaml
   - $ref: ./entity/vehicle.yaml
+  - $ref: ./actor.yaml
+  - $ref: ./transportOrder.yaml
+  - $ref: ./consignment.yaml
+  - $ref: ./goods.yaml
+  - $ref: ./entity/route-with-type.yaml
+
+  # Miscellaneous
   - $ref: ./entity/document.yaml
+  - $ref: ./entity/sensor-with-type.yaml
+  - $ref: ./constraint.yaml
+  
+  # Actions
   - $ref: ./entity/load-in-events.yaml
   - $ref: ./entity/unload-in-events.yaml
   - $ref: ./entity/stop-in-events.yaml
@@ -27,16 +32,18 @@ discriminator:
   propertyName: entityType
   mapping:
     trip: ./entity/trip-with-type.yaml
-    sensor: ./entity/sensor-with-type.yaml
-    route: ./entity/route-with-type.yaml
     location: ./location-with-type.yaml
-    actor: ./actor.yaml
-    constraint: ./constraint.yaml
-    transportOrder: ./transportOrder.yaml
-    goods: ./goods.yaml
-    consignment: ./consignment.yaml
     vehicle: ./entity/vehicle.yaml
+    actor: ./actor.yaml
+    transportOrder: ./transportOrder.yaml
+    consignment: ./consignment.yaml
+    goods: ./goods.yaml
+    route: ./entity/route-with-type.yaml
+
     document: ./entity/document.yaml
+    sensor: ./entity/sensor-with-type.yaml
+    constraint: ./constraint.yaml
+    
     load: ./entity/load-in-events.yaml
     unload: ./entity/unload-in-events.yaml
     stop: ./entity/stop-in-events.yaml
