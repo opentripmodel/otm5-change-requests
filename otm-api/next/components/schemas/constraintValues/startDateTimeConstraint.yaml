@@ -8,6 +8,7 @@ properties:
   startDateTime:
     description: This constraint applies from the given start date/time.
     type: string
+    format: date-time
   description:
     description: >-
       The description for this (sub)-constraints. Can be used to make combined

@@ -190,9 +190,11 @@ properties:
   startTime:
     description: The time at which the actions starts in ISO format.
     type: string
+    format: date-time
   endTime:
     description: The time at which the action is completed in ISO format.
     type: string
+    format: date-time
   recurrence:
     description: >-
       The recurrence of the date time, should only be set when `timeFormat` is
