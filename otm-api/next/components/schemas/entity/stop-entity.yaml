@@ -82,13 +82,13 @@ properties:
   location:
     description: The location of this stop.
     oneOf:
-      - $ref: ../location-inline.yaml
+      - $ref: ../entity/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../location-inline.yaml
+        inline: ../entity/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:

@@ -3,7 +3,7 @@ required:
 oneOf:
   # Core entities
   - $ref: ./entity/trip-with-type.yaml
-  - $ref: ./location-with-type.yaml
+  - $ref: ./entity/location-with-type.yaml
   - $ref: ./entity/vehicle.yaml
   - $ref: ./actor.yaml
   - $ref: ./transportOrder.yaml
@@ -32,7 +32,7 @@ discriminator:
   propertyName: entityType
   mapping:
     trip: ./entity/trip-with-type.yaml
-    location: ./location-with-type.yaml
+    location: ./entity/location-with-type.yaml
     vehicle: ./entity/vehicle.yaml
     actor: ./actor.yaml
     transportOrder: ./transportOrder.yaml
