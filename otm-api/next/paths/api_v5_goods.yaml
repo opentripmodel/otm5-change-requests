@@ -1,4 +1,5 @@
 put:
+  operationId: createGoods
   responses:
     '200':
       description: The same entity
@@ -6,38 +7,38 @@ put:
         application/json:
           schema:
             oneOf:
-              - $ref: ../components/schemas/items.yaml
-              - $ref: ../components/schemas/transportEquipment.yaml
+              - $ref: ../components/schemas/entity/items.yaml
+              - $ref: ../components/schemas/entity/transportEquipment.yaml
             discriminator:
               propertyName: type
               mapping:
-                items: ../components/schemas/items.yaml
-                transportEquipment: ../components/schemas/transportEquipment.yaml
+                items: ../components/schemas/entity/items.yaml
+                transportEquipment: ../components/schemas/entity/transportEquipment.yaml
     '400':
       description: Client error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '500':
       description: Server error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Adds a new Goods
   requestBody:
     content:
       application/json:
         schema:
           oneOf:
-            - $ref: ../components/schemas/items.yaml
-            - $ref: ../components/schemas/transportEquipment.yaml
+            - $ref: ../components/schemas/entity/items.yaml
+            - $ref: ../components/schemas/entity/transportEquipment.yaml
           discriminator:
             propertyName: type
             mapping:
-              items: ../components/schemas/items.yaml
-              transportEquipment: ../components/schemas/transportEquipment.yaml
+              items: ../components/schemas/entity/items.yaml
+              transportEquipment: ../components/schemas/entity/transportEquipment.yaml
   tags:
     - Goods
   security:

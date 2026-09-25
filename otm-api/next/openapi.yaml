@@ -36,6 +36,45 @@ info:
 
     **Unreleased changes**
 
+    * Add `euralCode` to `goods[].items[].classificationLines[]` to support waste classification with EURAL.
+    [See 64](https://github.com/opentripmodel/otm5-change-requests/issues/64)
+
+    * Add `freightForwarder` to `actors[].roles`.
+    [See 116](https://github.com/opentripmodel/otm5-change-requests/issues/116)
+
+    * Define lifecycle as a shared enum schema and reference it from lifecycle properties.
+    [See 122](https://github.com/opentripmodel/otm5-change-requests/issues/122)
+
+    * Add `operationId` to all API endpoints.
+    [See 125](https://github.com/opentripmodel/otm5-change-requests/issues/125)
+
+    * Add `type` to `vehicles[].loadCapacities[]` to distinguish capacity meanings such as axle and combined masses.
+    [See 127](https://github.com/opentripmodel/otm5-change-requests/issues/127)
+
+    * Add `rejected` as a status enum value for consignment and trip.
+    [See 128](https://github.com/opentripmodel/otm5-change-requests/issues/128)
+
+    * Add `externalIdentifiers` to all schemas that currently expose `externalAttributes`.
+    [See 130](https://github.com/opentripmodel/otm5-change-requests/issues/130)
+
+    * Add `emissionClasses` to vehicle with support for `emissionStandard` and `emissionClassCO2`, and deprecate vehicle field `emissionStandard`.
+    [See 131](https://github.com/opentripmodel/otm5-change-requests/issues/131)
+
+    * Add `cargoHandler` to `actors[].roles`.
+    [See 135](https://github.com/opentripmodel/otm5-change-requests/issues/135)
+
+    * Add `closed` as a status enum value for all status fields.
+    [See 137](https://github.com/opentripmodel/otm5-change-requests/issues/137)
+
+    * Add `weigh` action and `weighEvent` event to model weighing a vehicle or transport equipment.
+    [See 138](https://github.com/opentripmodel/otm5-change-requests/issues/138)
+
+    * Add `references` array to `locationUpdateEvent` and `weighEvent` to reference other entities that are relevant for these events.
+    [See 140](https://github.com/opentripmodel/otm5-change-requests/issues/140)
+
+    * Add `format: date-time` to date/time fields such as `startTime`, `endTime`, `startDateTime`, and `endDateTime`.
+    [See 120](https://github.com/opentripmodel/otm5-change-requests/issues/120)
+
 
     **Version 5.8 (released on 2026-03-13)**
 
@@ -356,6 +395,8 @@ tags:
       - The **FuelConsumedEvent** that contains information about how much fuel
       was consumed during a move / on a trip / per consignment.
         Can be provided as an actual value, projected based on some calculation, or realized as measured by some sensor.
+      - The **WeighEvent** that contains information about the weights of the vehicle or transport equipment. This can be
+      from a weighbridge, tare weight, manual or from a sensor.
 
       **Updates on earlier provided data**:
        - The **UpdateEvent** that is used to update an earlier provided entity with new information. Note that only the changed data has to be provided.
@@ -385,6 +426,7 @@ tags:
          original waiting time was expected to be 15 minutes because of an occupied dock, but the driver is 10 minutes
          late, the waiting time can be shortened to 5 minutes until the dock is free.
        - The **GenericAction** for whenever any of the above actions cannot model the situation appropriately.
+       - The **Weigh** action for whenever a vehicle is weighed at a certain location. This can be used to indicate that the vehicle is weighed at a weigh station, or at a loading/unloading location.
   - name: Goods
     description: >-
       Goods are the items to be transported as part of a consignment. Goods can

@@ -1,0 +1,19 @@
+type: object
+properties:
+  type:
+    example: endDateTimeConstraint
+    type: string
+    enum:
+      - endDateTimeConstraint
+  endDateTime:
+    description: This constraint applies until the given start date/time.
+    type: string
+    format: date-time
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - endDateTime

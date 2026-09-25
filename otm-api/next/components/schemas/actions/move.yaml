@@ -10,8 +10,8 @@ example:
       id: 11c11d75-e114-4b5f-9751-b3a4afa23ecf
       name: Main warehouse
       geoReference:
-        lat: 5.4126792
-        lon: 52.1956251
+        lat: 52.1956251
+        lon: 5.4126792
         type: latLonPointGeoReference
       type: warehouse
       administrativeReference:
@@ -84,11 +84,13 @@ properties:
   creationDate:
     description: The creation date of this entity.
     type: string
+    format: date-time
   lastModified:
     description: >-
       The last modified date of this entity. If none is given the creation date
       is used instead.
     type: string
+    format: date-time
   contextEvents:
     description: >-
       The context events provides some optional information about the events
@@ -108,28 +110,16 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   lifecycle:
-    description: >-
-      A lifecycle models _when_ the data in the action is taking place. You can
-      provide the same action in multiple
-
-      lifecycles to model how it changes over time. For example the planned and
-      realized time of an action taking place
-
-      can differ because of unforseen circumstances (such as traffic jams).
-    type: string
-    enum:
-      - requested
-      - planned
-      - projected
-      - actual
-      - realized
+    $ref: ../enums/lifecycle.yaml
   result:
     $ref: ../action-result.yaml
   transportMode:
@@ -165,37 +155,37 @@ properties:
       The trip in which this Move takes place, only provided if the trip is not
       clear from the context.
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   from:
     description: The location from which the move action is started.
     oneOf:
-      - $ref: ../from-location-move-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../from-location-move-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   to:
     description: The location where the move action is ended.
     oneOf:
-      - $ref: ../to-location-move-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../to-location-move-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -208,9 +198,11 @@ properties:
   startTime:
     description: The time at which the actions starts in ISO format.
     type: string
+    format: date-time
   endTime:
     description: The time at which the action is completed in ISO format.
     type: string
+    format: date-time
   recurrence:
     description: >-
       The recurrence of the date time, should only be set when `timeFormat` is
@@ -243,32 +235,32 @@ properties:
   route:
     description: The route from location A to location B that is travelled.
     oneOf:
-      - $ref: ../route-association-inline.yaml
+      - $ref: ../associations/route-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../route-association-inline.yaml
+        inline: ../associations/route-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   actions:
     description: All actions that are done between the from and the to location.
     type: array
     items:
-      $ref: ../associations-actions.yaml
+      $ref: ../action-association.yaml
   constraint:
     description: >-
       Constraints which this move action abides to, such as vehicle type or time
       window constraints.
     oneOf:
-      - $ref: ../move-constraint-inline.yaml
+      - $ref: ../associations/move-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../move-constraint-inline.yaml
+        inline: ../associations/move-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

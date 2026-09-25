@@ -18,11 +18,13 @@ properties:
   creationDate:
     description: The creation date of this entity.
     type: string
+    format: date-time
   lastModified:
     description: >-
       The last modified date of this entity. If none is given the creation date
       is used instead.
     type: string
+    format: date-time
   contextEvents:
     description: >-
       The context events provides some optional information about the events
@@ -42,7 +44,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -56,22 +58,10 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   lifecycle:
-    description: >-
-      A lifecycle models _when_ the data in the action is taking place. You can
-      provide the same action in multiple
-
-      lifecycles to model how it changes over time. For example the planned and
-      realized time of an action taking place
-
-      can differ because of unforseen circumstances (such as traffic jams).
-    type: string
-    enum:
-      - requested
-      - planned
-      - projected
-      - actual
-      - realized
+    $ref: ../enums/lifecycle.yaml
   result:
     $ref: ../action-result.yaml
   remark:
@@ -91,25 +81,25 @@ properties:
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../action-location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../action-location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   trip:
     description: The trip this action takes place on.
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -122,9 +112,11 @@ properties:
   startTime:
     description: The time at which the actions starts in ISO format.
     type: string
+    format: date-time
   endTime:
     description: The time at which the action is completed in ISO format.
     type: string
+    format: date-time
   recurrence:
     description: >-
       The recurrence of the date time, should only be set when `timeFormat` is
@@ -151,13 +143,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../wait-constraint-inline.yaml
+      - $ref: ../associations/wait-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../wait-constraint-inline.yaml
+        inline: ../associations/wait-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

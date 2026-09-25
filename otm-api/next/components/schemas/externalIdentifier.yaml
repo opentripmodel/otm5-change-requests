@@ -1,0 +1,20 @@
+example:
+  id: AAA
+  scheme: CAScode
+type: object
+properties:
+  id:
+    description: The identifier value as known in the external system.
+    type: string
+  scheme:
+    description: >-
+      The identifier scheme or external system reference. Values should come
+      from an externally maintained OTM code list that defines the business
+      meaning or issuing system of the identifier, for example a partner code,
+      account number type, or operational code set.
+
+      The codelist is maintained here: https://sutc.semantic-treehouse.nl/codelist-spec/CodelistSpec_f8567db9-d2fb-42b5-846e-cfdc4734add7
+    type: string
+required:
+  - id
+  - scheme

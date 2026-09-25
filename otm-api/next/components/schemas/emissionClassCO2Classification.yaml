@@ -1,0 +1,11 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - emissionClassCO2
+  value:
+    $ref: ./enums/emissionClassCO2.yaml
+required:
+  - type
+  - value

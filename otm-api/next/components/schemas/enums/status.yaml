@@ -1,0 +1,23 @@
+description: >-
+  Status defines whether this entity (e.g. trip or consignment) is a draft,
+  requested, confirmed, in transit, completed, closed, rejected or cancelled.
+
+  Status `closed` is about administrative closure, while `completed` is about
+  the realization of e.g. a trip or consignment. A trip or consignment can be
+  completed but not closed yet, e.g. when the invoice has not been paid yet.
+
+  The values accepted (replaced by confirmed) and modified (replaced the
+  lastModified field on every entity) are deprecated since OTM5.1, but
+  will be supported for the whole OTM5.X line.
+type: string
+enum:
+  - draft
+  - requested
+  - rejected
+  - confirmed
+  - inTransit
+  - completed
+  - closed
+  - cancelled
+  - accepted
+  - modified
