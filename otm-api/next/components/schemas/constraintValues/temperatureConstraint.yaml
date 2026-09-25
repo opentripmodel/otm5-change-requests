@@ -1,0 +1,52 @@
+type: object
+properties:
+  type:
+    example: temperatureConstraint
+    type: string
+    enum:
+      - temperatureConstraint
+  constraintType:
+    description: |
+      The type of temperature constraint. Available types are:
+        - `maximum`: All temperatures below and including the maximum value are allowed.
+        - `minimum`: All temperatures above and including the minimum value are allowed.
+        - `range`: All temperatures in between and including the minimum and maximum values are allowed.
+    type: string
+    enum:
+      - maximum
+      - minimum
+      - range
+  maximum:
+    description: Maximum temperatures allowed.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ../uom.yaml
+    required:
+      - value
+      - unit
+  minimum:
+    description: Minimum temperatures allowed.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ../uom.yaml
+    required:
+      - value
+      - unit
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - constraintType

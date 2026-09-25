@@ -76,7 +76,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     type: object
     properties: {}
@@ -87,37 +87,20 @@ properties:
   vehicle:
     description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../associations/vehicle-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../vehicle-association-inline.yaml
+        inline: ../associations/vehicle-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   geoReference:
     description: >-
       The location that is registered at the specified time, often using a
       single latitude/longitude combination.
-    oneOf:
-      - $ref: ../latLonPointGeoReference.yaml
-      - $ref: ../latLonArrayGeoReference.yaml
-      - $ref: ../Feature.yaml
-      - $ref: ../openLRGeoReference.yaml
-      - $ref: ../tmcLocationGeoReference.yaml
-      - $ref: ../tmcArrayGeoReference.yaml
-      - $ref: ../addressGeoReference.yaml
-    discriminator:
-      propertyName: type
-      mapping:
-        latLonPointGeoReference: ../latLonPointGeoReference.yaml
-        latLonArrayGeoReference: ../latLonArrayGeoReference.yaml
-        Feature: ../Feature.yaml
-        openLRGeoReference: ../openLRGeoReference.yaml
-        tmcLocationGeoReference: ../tmcLocationGeoReference.yaml
-        tmcArrayGeoReference: ../tmcArrayGeoReference.yaml
-        addressGeoReference: ../addressGeoReference.yaml
+    $ref: ../geoReference/geoReference.yaml
   actors:
     description: >-
       The actors that are relevant to this event, such as the carrier or shipper
@@ -125,13 +108,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../associated-actors-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
   references:
@@ -141,7 +124,7 @@ properties:
       or transport equipment that was moved.
     type: array
     items:
-      $ref: ../entity1.yaml
+      $ref: ../entity-association.yaml
 required:
   - eventType
   - geoReference

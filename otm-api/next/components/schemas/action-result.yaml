@@ -32,7 +32,7 @@ properties:
       of a failed loading action, the reference could be to the damaged transport equipment.
     type: array
     items:
-      $ref: ./entity1.yaml
+      $ref: ./entity-association.yaml
   results:
     description: >-
       In some cases, there can be multiple sub results that are relevant.

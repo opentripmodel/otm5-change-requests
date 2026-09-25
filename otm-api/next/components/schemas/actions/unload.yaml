@@ -80,7 +80,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     type: object
     properties: {}
@@ -102,37 +102,37 @@ properties:
   stop:
     description: The stop that is associated with this action.
     oneOf:
-      - $ref: ../unload-stop-inline.yaml
+      - $ref: ../associations/stop-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../unload-stop-inline.yaml
+        inline: ../associations/stop-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   consignment:
     description: The consignment that is the subject of this action.
     oneOf:
-      - $ref: ../consignment-association-inline.yaml
+      - $ref: ../associations/consignment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../consignment-association-inline.yaml
+        inline: ../associations/consignment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   transportEquipment:
     description: The transport equipment the consignment is loaded in/unloaded from.
     oneOf:
-      - $ref: ../transport-equipment-association-inline.yaml
+      - $ref: ../associations/transportEquipment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../transport-equipment-association-inline.yaml
+        inline: ../associations/transportEquipment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   documents:
@@ -142,25 +142,25 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../documents-inline.yaml
+        - $ref: ../associations/document-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../documents-inline.yaml
+          inline: ../associations/document-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../action-location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../action-location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -202,13 +202,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../action-constraint-inline.yaml
+      - $ref: ../associations/action-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../action-constraint-inline.yaml
+        inline: ../associations/action-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

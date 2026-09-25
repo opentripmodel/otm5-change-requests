@@ -42,7 +42,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -61,37 +61,37 @@ properties:
   vehicle:
     description: The vehicle that is relevant for this event
     oneOf:
-      - $ref: ../vehicle-association-inline.yaml
+      - $ref: ../associations/vehicle-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../vehicle-association-inline.yaml
+        inline: ../associations/vehicle-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   trip:
     description: The trip that is relevant for this event
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   consignment:
     description: The consignment that is relevant for this event
     oneOf:
-      - $ref: ../consignment-association-inline.yaml
+      - $ref: ../associations/consignment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../consignment-association-inline.yaml
+        inline: ../associations/consignment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   fuel:
@@ -120,13 +120,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../associated-actors-inline.yaml
+        - $ref: ../associations/actor-inline.yaml
         - $ref: ../reference-roles.yaml
         - $ref: ../attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../associated-actors-inline.yaml
+          inline: ../associations/actor-inline.yaml
           reference: ../reference-roles.yaml
           attributeRestriction: ../attributeRestriction-roles.yaml
 required:

@@ -5,6 +5,10 @@ allOf:
     required:
       - type
     properties:
+      type:
+        type: string
+        enum:
+          - company
       coc:
         description: Chamber of Commerce number.
         type: string
@@ -16,13 +20,13 @@ allOf:
         type: array
         items:
           oneOf:
-            - $ref: ./associated-actors-inline.yaml
+            - $ref: ./associations/actor-inline.yaml
             - $ref: ./reference-roles.yaml
             - $ref: ./attributeRestriction-roles.yaml
           discriminator:
             propertyName: associationType
             mapping:
-              inline: ./associated-actors-inline.yaml
+              inline: ./associations/actor-inline.yaml
               reference: ./reference-roles.yaml
               attributeRestriction: ./attributeRestriction-roles.yaml
       website:
@@ -31,13 +35,13 @@ allOf:
         type: string
       headoffice:
         oneOf:
-          - $ref: ./associated-locations-inline.yaml
+          - $ref: ./associations/location-inline.yaml
           - $ref: ./reference.yaml
           - $ref: ./attributeRestriction.yaml
         discriminator:
           propertyName: associationType
           mapping:
-            inline: ./associated-locations-inline.yaml
+            inline: ./associations/location-inline.yaml
             reference: ./reference.yaml
             attributeRestriction: ./attributeRestriction.yaml
       gln:

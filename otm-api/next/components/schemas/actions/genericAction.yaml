@@ -49,7 +49,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -83,13 +83,13 @@ properties:
       The trip in which this action takes place, only provided if the trip is
       not clear from the context.
     oneOf:
-      - $ref: ../trip-association-inline.yaml
+      - $ref: ../associations/trip-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../trip-association-inline.yaml
+        inline: ../associations/trip-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -132,17 +132,17 @@ properties:
     description: All actions that are done as part of this action.
     type: array
     items:
-      $ref: ../associations-actions.yaml
+      $ref: ../action-association.yaml
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../generic-action-constraint-inline.yaml
+      - $ref: ../associations/generic-action-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../generic-action-constraint-inline.yaml
+        inline: ../associations/generic-action-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   move:
@@ -150,13 +150,13 @@ properties:
       The trip in which this Move takes place, only provided if the trip is not
       clear from the context.
     oneOf:
-      - $ref: ../move-association-inline.yaml
+      - $ref: ../associations/move-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../move-association-inline.yaml
+        inline: ../associations/move-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:
