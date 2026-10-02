@@ -149,9 +149,8 @@ properties:
           attributeRestriction: ../attributeRestriction-roles.yaml
   references:
     description: >-
-      References to other entities that are relevant for this weigh event.
-      For example, the weigh event can refer to a trip, consignment,
-      or other entity that was being weighted.
+      Assocations (references, inline or attributeRestrictions) to other entities that are relevant for this weigh event.
+      For example, the weigh event can refer to a trip, consignment or other entity that was being weighted.
     type: array
     items:
       $ref: ../entity-association.yaml
