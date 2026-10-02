@@ -1,6 +1,6 @@
 example:
   id: AAA
-  scheme: CAScode
+  scheme: CAS
 type: object
 properties:
   id:
