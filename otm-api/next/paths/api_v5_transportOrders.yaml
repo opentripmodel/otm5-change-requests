@@ -1,29 +1,30 @@
 put:
+  operationId: createTransportOrder
   responses:
     '200':
       description: The same entity
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/transportOrder.yaml
+            $ref: ../components/schemas/entity/transportOrder.yaml
     '400':
       description: Client error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '500':
       description: Server error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Adds a new TransportOrder
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/transportOrder.yaml
+          $ref: ../components/schemas/entity/transportOrder.yaml
   tags:
     - TransportOrder
   security:

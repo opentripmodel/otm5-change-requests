@@ -1,0 +1,11 @@
+type: object
+properties:
+  type:
+    type: string
+    enum:
+      - emissionStandard
+  value:
+    $ref: ./enums/emissionStandard.yaml
+required:
+  - type
+  - value

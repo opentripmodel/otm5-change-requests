@@ -28,11 +28,11 @@ properties:
     $ref: ./action-result-reason.yaml
   references:
     description: >-
-      References to other entities that are relevant for this result. For example in case
-      of a failed loading action, the reference could be to the damaged transport equipment.
+      Assocations (references, inline or attributeRestrictions) to other entities that are relevant for this result.
+      For example in case of a failed loading action, the reference could be to the damaged transport equipment.
     type: array
     items:
-      $ref: ./entity1.yaml
+      $ref: ./entity-association.yaml
   results:
     description: >-
       In some cases, there can be multiple sub results that are relevant.

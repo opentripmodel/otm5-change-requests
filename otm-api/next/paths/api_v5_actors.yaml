@@ -1,4 +1,5 @@
 put:
+  operationId: createActor
   responses:
     '200':
       description: The same entity
@@ -11,13 +12,13 @@ put:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '500':
       description: Server error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Adds a new Actor
   requestBody:
     content:

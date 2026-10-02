@@ -5,6 +5,10 @@ allOf:
     required:
       - type
     properties:
+      type:
+        type: string
+        enum:
+          - person
       firstName:
         description: The first name.
         type: string

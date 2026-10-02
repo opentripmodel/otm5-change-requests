@@ -1,0 +1,17 @@
+type: object
+properties:
+  type:
+    example: routeConstraint
+    type: string
+    enum:
+      - routeConstraint
+  route:
+    $ref: ../geoReference/geoReference.yaml
+  description:
+    description: >-
+      The description for this (sub)-constraints. Can be used to make combined
+      constraints using **and**, **or** and **not** easier to process.
+    type: string
+required:
+  - type
+  - route

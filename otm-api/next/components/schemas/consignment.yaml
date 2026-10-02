@@ -18,11 +18,13 @@ properties:
   creationDate:
     description: The creation date of this entity.
     type: string
+    format: date-time
   lastModified:
     description: >-
       The last modified date of this entity. If none is given the creation date
       is used instead.
     type: string
+    format: date-time
   contextEvents:
     description: >-
       The context events provides some optional information about the events
@@ -42,36 +44,21 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ./events.yaml
+      $ref: ./event.yaml
   externalAttributes:
     type: object
     properties: {}
     additionalProperties:
       $ref: ./unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ./externalIdentifiers.yaml
   description:
     description: >-
       General description of consignment in Free text. e.g 20 europallets fruit.
       Meant for human inspection, not for automating processes.
     type: string
   status:
-    description: >-
-      Whether this consignment is a draft, requested, confirmed, in transit,
-      completed or cancelled. The values accepted
-
-      (replaced by confirmed) and modified (replaced the lastModified field on
-      every entity) are deprecated since
-
-      OTM5.1, but will be supported for the whole OTM5.X line.
-    type: string
-    enum:
-      - draft
-      - requested
-      - confirmed
-      - inTransit
-      - completed
-      - cancelled
-      - accepted
-      - modified
+    $ref: ./enums/status.yaml
   type:
     description: >-
       Free text to describe type of consignment. Usually used to indicate the
@@ -85,25 +72,25 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./goods-inline.yaml
+        - $ref: ./associations/goods-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./goods-inline.yaml
+          inline: ./associations/goods-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   transportOrder:
     description: The transport order this consignment belongs to.
     oneOf:
-      - $ref: ./transportOrder-association-inline.yaml
+      - $ref: ./associations/transportOrder-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./transportOrder-association-inline.yaml
+        inline: ./associations/transportOrder-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   documents:
@@ -113,13 +100,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./documents-inline.yaml
+        - $ref: ./associations/document-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./documents-inline.yaml
+          inline: ./associations/document-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml
   remark:
@@ -135,13 +122,13 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./associated-actors-inline.yaml
+        - $ref: ./associations/actor-inline.yaml
         - $ref: ./reference-roles.yaml
         - $ref: ./attributeRestriction-roles.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./associated-actors-inline.yaml
+          inline: ./associations/actor-inline.yaml
           reference: ./reference-roles.yaml
           attributeRestriction: ./attributeRestriction-roles.yaml
   actions:
@@ -150,7 +137,7 @@ properties:
       loading, unloading, hand over, drop of.
     type: array
     items:
-      $ref: ./associations-actions.yaml
+      $ref: ./action-association.yaml
   constraint:
     description: >-
       Constraints this consignment has to abide to, such special equipment (tail
@@ -164,13 +151,13 @@ properties:
 
       possible.
     oneOf:
-      - $ref: ./consignment-constraint-inline.yaml
+      - $ref: ./associations/consignment-constraint-inline.yaml
       - $ref: ./reference.yaml
       - $ref: ./attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ./consignment-constraint-inline.yaml
+        inline: ./associations/consignment-constraint-inline.yaml
         reference: ./reference.yaml
         attributeRestriction: ./attributeRestriction.yaml
   relatedConsignments:
@@ -188,12 +175,12 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ./relatedConsignments-association-inline.yaml
+        - $ref: ./associations/consignment-inline.yaml
         - $ref: ./reference.yaml
         - $ref: ./attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ./relatedConsignments-association-inline.yaml
+          inline: ./associations/consignment-inline.yaml
           reference: ./reference.yaml
           attributeRestriction: ./attributeRestriction.yaml

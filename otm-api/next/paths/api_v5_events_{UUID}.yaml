@@ -1,17 +1,18 @@
 get:
+  operationId: getEventByUuid
   responses:
     '200':
       description: Returned the entity with the provided UUID
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/events.yaml
+            $ref: ../components/schemas/event.yaml
     '400':
       description: Client error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '404':
       description: ''
     '500':
@@ -19,7 +20,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Get a specific Event by its UUID
   parameters:
     - name: UUID
@@ -34,6 +35,7 @@ get:
   security:
     - BearerToken: []
 delete:
+  operationId: deleteEventByUuid
   responses:
     '204':
       description: Deleted event with the provided UUID
@@ -42,13 +44,13 @@ delete:
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/clientError.yaml
+            $ref: ../components/schemas/error/clientError.yaml
     '500':
       description: Server error
       content:
         application/json:
           schema:
-            $ref: ../components/schemas/serverError.yaml
+            $ref: ../components/schemas/error/serverError.yaml
   summary: Deletes a Event
   parameters:
     - name: UUID

@@ -1,0 +1,72 @@
+type: object
+properties:
+  type:
+    example: latLonPointGeoReference
+    type: string
+    enum:
+      - latLonPointGeoReference
+  lat:
+    description: The latitude of a point location.
+    type: number
+    format: double
+  lon:
+    description: The longitude of a point location.
+    type: number
+    format: double
+  speed:
+    description: The speed of a moving vehicle.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ../uom.yaml
+    required:
+      - value
+      - unit
+  heading:
+    description: >-
+      The heading of a vehicle, that is: the direction the "nose" of the vehicle
+      is pointing to.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ../uom.yaml
+    required:
+      - value
+      - unit
+  bearing:
+    description: >-
+      The bearing of a vehicle, that is: the angle between the vehicle and its
+      destination.
+       Either measured _relative_ or _absolute_. See [Wikipedia](https://en.wikipedia.org/wiki/Bearing_(navigation)) for an explanation.
+    type: object
+    properties:
+      value:
+        description: Value in the given unit.
+        type: number
+        format: double
+      unit:
+        $ref: ../uom.yaml
+    required:
+      - value
+      - unit
+  bearingType:
+    description: >-
+      Denotes how the bearing is measured. See
+      [Wikipedia](https://en.wikipedia.org/wiki/Bearing_(navigation)) for an
+      explanation.
+    type: string
+    enum:
+      - absolute
+      - relative
+required:
+  - type
+  - lat
+  - lon

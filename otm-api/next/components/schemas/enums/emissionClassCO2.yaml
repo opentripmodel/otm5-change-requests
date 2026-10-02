@@ -1,0 +1,10 @@
+description: >
+  CO2 emission class used for vehicle classification in tolling and similar
+  regulations.
+type: string
+enum:
+  - '1'
+  - '2'
+  - '3'
+  - '4'
+  - '5'

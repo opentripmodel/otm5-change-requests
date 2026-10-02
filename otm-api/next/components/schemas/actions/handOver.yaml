@@ -28,11 +28,13 @@ properties:
   creationDate:
     description: The creation date of this entity.
     type: string
+    format: date-time
   lastModified:
     description: >-
       The last modified date of this entity. If none is given the creation date
       is used instead.
     type: string
+    format: date-time
   contextEvents:
     description: >-
       The context events provides some optional information about the events
@@ -52,7 +54,7 @@ properties:
       can include that event in the context.
     type: array
     items:
-      $ref: ../events.yaml
+      $ref: ../event.yaml
   externalAttributes:
     description: >
       External attributes are a simple way to add information in an
@@ -66,22 +68,10 @@ properties:
     properties: {}
     additionalProperties:
       $ref: ../unrestricted_json.yaml
+  externalIdentifiers:
+    $ref: ../externalIdentifiers.yaml
   lifecycle:
-    description: >-
-      A lifecycle models _when_ the data in the action is taking place. You can
-      provide the same action in multiple
-
-      lifecycles to model how it changes over time. For example the planned and
-      realized time of an action taking place
-
-      can differ because of unforseen circumstances (such as traffic jams).
-    type: string
-    enum:
-      - requested
-      - planned
-      - projected
-      - actual
-      - realized
+    $ref: ../enums/lifecycle.yaml
   result:
     $ref: ../action-result.yaml
   remark:
@@ -96,49 +86,49 @@ properties:
   from:
     description: The party that is handing over the consignment/goods.
     oneOf:
-      - $ref: ../handover-from-actor-inline.yaml
+      - $ref: ../associations/actor-inline.yaml
       - $ref: ../reference-roles.yaml
       - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-from-actor-inline.yaml
+        inline: ../associations/actor-inline.yaml
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
   to:
     description: The party that is receiving the consignments/goods.
     oneOf:
-      - $ref: ../handover-to-actor-inline.yaml
+      - $ref: ../associations/actor-inline.yaml
       - $ref: ../reference-roles.yaml
       - $ref: ../attributeRestriction-roles.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-to-actor-inline.yaml
+        inline: ../associations/actor-inline.yaml
         reference: ../reference-roles.yaml
         attributeRestriction: ../attributeRestriction-roles.yaml
   stop:
     description: The stop that is associated with this action.
     oneOf:
-      - $ref: ../handover-stop-inline.yaml
+      - $ref: ../associations/stop-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-stop-inline.yaml
+        inline: ../associations/stop-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   consignment:
     description: The consignment that is the subject of this action.
     oneOf:
-      - $ref: ../consignment-association-inline.yaml
+      - $ref: ../associations/consignment-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../consignment-association-inline.yaml
+        inline: ../associations/consignment-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   documents:
@@ -148,25 +138,25 @@ properties:
     type: array
     items:
       oneOf:
-        - $ref: ../documents-inline.yaml
+        - $ref: ../associations/document-inline.yaml
         - $ref: ../reference.yaml
         - $ref: ../attributeRestriction.yaml
       discriminator:
         propertyName: associationType
         mapping:
-          inline: ../documents-inline.yaml
+          inline: ../associations/document-inline.yaml
           reference: ../reference.yaml
           attributeRestriction: ../attributeRestriction.yaml
   location:
     description: The location at which this action is taking place.
     oneOf:
-      - $ref: ../handover-location-inline.yaml
+      - $ref: ../associations/location-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-location-inline.yaml
+        inline: ../associations/location-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
   timeFormat:
@@ -179,9 +169,11 @@ properties:
   startTime:
     description: The time at which the actions starts in ISO format.
     type: string
+    format: date-time
   endTime:
     description: The time at which the action is completed in ISO format.
     type: string
+    format: date-time
   recurrence:
     description: >-
       The recurrence of the date time, should only be set when `timeFormat` is
@@ -208,13 +200,13 @@ properties:
   constraint:
     description: The constraints this action abides to, such as start and end time windows.
     oneOf:
-      - $ref: ../handover-constraint-inline.yaml
+      - $ref: ../associations/handover-constraint-inline.yaml
       - $ref: ../reference.yaml
       - $ref: ../attributeRestriction.yaml
     discriminator:
       propertyName: associationType
       mapping:
-        inline: ../handover-constraint-inline.yaml
+        inline: ../associations/handover-constraint-inline.yaml
         reference: ../reference.yaml
         attributeRestriction: ../attributeRestriction.yaml
 required:

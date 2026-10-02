@@ -1,0 +1,7 @@
+type: array
+description: >-
+  Standardized identifiers of this entity as known in external systems. Use
+  this to exchange repeatable partner or system specific identifiers without
+  overloading `externalAttributes`.
+items:
+  $ref: ./externalIdentifier.yaml

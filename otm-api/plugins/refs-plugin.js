@@ -1,7 +1,7 @@
 const NoCircularRefs = require("./no-circular-refs");
 const NoRefsSiblings = require("./no-refs-siblings");
 
-module.exports = {
+module.exports = () => ({
   id: "refs-plugin",
   rules: {
     oas3: {
@@ -9,4 +9,4 @@ module.exports = {
       "no-circular-refs": NoCircularRefs,
     },
   },
-};
+});
