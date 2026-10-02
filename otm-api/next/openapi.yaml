@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Open Trip Model
-  version: v5-next
+  version: v5.9.0
   description: >
     ## Why OTM?
 
@@ -35,6 +35,9 @@ info:
 
 
     **Unreleased changes**
+
+
+    **Version 5.9 (released on 2026-10-02)**
 
     * Add `euralCode` to `goods[].items[].classificationLines[]` to support waste classification with EURAL.
     [See 64](https://github.com/opentripmodel/otm5-change-requests/issues/64)
