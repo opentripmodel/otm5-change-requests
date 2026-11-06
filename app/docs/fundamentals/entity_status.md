@@ -161,7 +161,7 @@ flowchart LR
    style TRANSPORTORDER fill:#faeeda,stroke:#854f0b,color:#412402;
 ```
 
-At a later point, the carrier is then able to possibly consolidate multiple
+Further in the process the carrier can optionally consolidate multiple
 consignments within a trip planning update so that eventually all the actions
 will be **planned**.
 
