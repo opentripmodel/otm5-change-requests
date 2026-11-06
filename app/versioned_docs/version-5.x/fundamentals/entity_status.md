@@ -161,7 +161,7 @@ flowchart LR
    style TRANSPORTORDER fill:#faeeda,stroke:#854f0b,color:#412402;
 ```
 
-At a later point, the carrier is then able to possibly consolidate multiple
+Further in the process the carrier can optionally consolidate multiple
 consignments within a trip planning update so that eventually all the actions
 will be **planned**.
 
@@ -184,7 +184,10 @@ flowchart LR
 
 **3. Confirmed -> inTransit -> completed**
 
-Eventually that trip becomes **inTransit** - typically as soon as a start event
+Eventually the status of that trip becomes **inTransit** - typically as soon as
+a start event such as a GPS location update is registered. This includes that
+the consignment also becomes **inTransit**. Meanwhile, its actions progress
+through the action lifecycle phases *projected*, *actual* and *realized*.
 such as a GPS location update is registered. This includes that the consignment
 also becomes **inTransit**. Meanwhile, its actions progress through the action
 lifecycle phases *projected*, *actual* and *realized*.
@@ -232,7 +235,9 @@ flowchart LR
 
 The status **completed** is more of an operational state while the status
 **closed** is used to indicate that the entity is also administratively closed.
-The entity status can in contrast to action lifecycles often be determined only
+Often the status of an entity can only be determined by the owner of the entity,
+in contrast to the lifecycles of an action. Once all administrative tasks are
+done then the status will reach **closed**.
 by the owner of the entity. Once all administrative tasks are done then the
 status will reach **closed**.
 
@@ -273,7 +278,7 @@ flowchart LR
    style CONS fill:#fcebeb,stroke:#a32d2d,color:#501313
 ```
 
-Can be achieved by the owner simply sending a message containing:
+This can be achieved by the owner simply sending a message containing:
 
 ```json
 {
