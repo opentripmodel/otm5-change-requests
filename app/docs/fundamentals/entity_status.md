@@ -184,7 +184,10 @@ flowchart LR
 
 **3. Confirmed -> inTransit -> completed**
 
-Eventually that trip becomes **inTransit** - typically as soon as a start event
+Eventually the status of that trip becomes **inTransit** - typically as soon as
+a start event such as a GPS location update is registered. This includes that
+the consignment also becomes **inTransit**. Meanwhile, its actions progress
+through the action lifecycle phases *projected*, *actual* and *realized*.
 such as a GPS location update is registered. This includes that the consignment
 also becomes **inTransit**. Meanwhile, its actions progress through the action
 lifecycle phases *projected*, *actual* and *realized*.
