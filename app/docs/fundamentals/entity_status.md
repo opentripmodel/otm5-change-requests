@@ -275,7 +275,7 @@ flowchart LR
    style CONS fill:#fcebeb,stroke:#a32d2d,color:#501313
 ```
 
-Can be achieved by the owner simply sending a message containing:
+This can be achieved by the owner simply sending a message containing:
 
 ```json
 {
