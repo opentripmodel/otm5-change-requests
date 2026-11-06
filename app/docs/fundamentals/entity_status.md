@@ -232,7 +232,9 @@ flowchart LR
 
 The status **completed** is more of an operational state while the status
 **closed** is used to indicate that the entity is also administratively closed.
-The entity status can in contrast to action lifecycles often be determined only
+Often the status of an entity can only be determined by the owner of the entity,
+in contrast to the lifecycles of an action. Once all administrative tasks are
+done then the status will reach **closed**.
 by the owner of the entity. Once all administrative tasks are done then the
 status will reach **closed**.
 
