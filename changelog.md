@@ -3,6 +3,9 @@
 The OTM standard is versioned, for the codebase of this documentation no separate versioning is needed.
 This changelog containts a list of chronological changes.
 
+### 2026-11-06
+* Extend documentation about entity status and difference from action lifecycle
+
 ### 2026-10-13
 * Logo and info updates on adopters page + add DALTI, TLN and TNO
 * Redesign adopters and contributors page
