@@ -86,7 +86,7 @@ const config: Config = {
   //       docsPluginId: "classic",
   //       config: {
   //         otm: {
-  //           specPath: "api/otm-api-v5.6.yaml",
+  //           specPath: "../../otm-api/otm-api-v5.6.yaml",
   //           hideSendButton: true,
   //           showExtensions: false,
   //           outputDir: "api-docs",

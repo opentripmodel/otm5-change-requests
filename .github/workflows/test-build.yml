@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'website/**'
+      - 'otm-api/otm-api-v*.yaml'
 
 jobs:
   test-yarn-build:

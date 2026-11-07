@@ -7,6 +7,7 @@ app/build
 # Generated files
 app/.docusaurus
 app/.cache-loader
+app/static/api
 
 # Misc
 app/.DS_Store

@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
+    "copy-api-specs": "node copy-api-specs.mjs",
+    "prestart": "node copy-api-specs.mjs",
     "start": "docusaurus start",
+    "prebuild": "node copy-api-specs.mjs",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",

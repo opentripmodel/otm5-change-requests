@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - 'website/**'
+      - 'otm-api/otm-api-v*.yaml'
 
 env:
   GKE_CLUSTER: sth-cluster                  # GKE cluster
