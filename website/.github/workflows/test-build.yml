@@ -1,0 +1,44 @@
+name: Test build
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-yarn-build:
+    name: Test yarn build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+          cache-dependency-path: app/yarn.lock
+
+      - name: Install dependencies
+        working-directory: ./app
+        run: yarn install --frozen-lockfile
+      - name: Test build website
+        working-directory: ./app
+        run: yarn build
+  
+  test-docker-build:
+    name: Test Docker build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build image with Docker
+        run: |-
+          docker build \
+            --tag "otm-documentation:$GITHUB_SHA" \
+            --build-arg GITHUB_SHA="$GITHUB_SHA" \
+            --build-arg GITHUB_REF="$GITHUB_REF" \
+            .
+    

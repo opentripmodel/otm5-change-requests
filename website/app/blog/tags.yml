@@ -1,0 +1,7 @@
+OTM:
+  label: "OTM"
+  description: "The Open Trip Model."
+
+logistiekedata:
+  label: "Logistieke Data"
+  description: "Logistieke Data van OTM."

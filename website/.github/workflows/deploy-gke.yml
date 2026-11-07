@@ -1,0 +1,76 @@
+# Workflow to automatically build and deploy documentation
+# Triggers on push to main
+
+name: Build and deploy to GKE
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GKE_CLUSTER: sth-cluster                  # GKE cluster
+  GKE_ZONE: europe-west4-a                  # GKE zone
+  DEPLOYMENT_NAME: otm-documentation        # From Kubernetes deployment manifest
+  CONTAINER_NAME: docusaurus                # From Kubernetes deployment manifest
+  IMAGE: europe-west4-docker.pkg.dev/sacred-sol-99413/sutc/otm-documentation
+
+jobs:
+  setup-build-publish-deploy:
+    name: Deploy to production
+    runs-on: ubuntu-latest
+    environment: production
+
+    # Add "id-token" with the intended permissions.
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Authenticate
+    - name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/838245397641/locations/global/workloadIdentityPools/github-pool/providers/github-provider'
+        service_account: 'github-sutc-service-account@sacred-sol-99413.iam.gserviceaccount.com'
+
+    # Set up gcloud
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+      with:
+        skip_install: true
+        version: '>= 363.0.0' # ignored because of skip_install=true
+        project_id: sacred-sol-99413
+
+    # Build image with Docker
+    - name: Build image with Docker
+      run: |-
+        docker build \
+          --tag "$IMAGE:$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
+
+    # Push the Docker image to Google Artifcat Registry
+    # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
+    - name: Publish image
+      run: |-
+        gcloud --quiet auth configure-docker europe-west4-docker.pkg.dev
+        docker push "$IMAGE:$GITHUB_SHA"
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - name: Configure GKE credentials
+      uses: google-github-actions/get-gke-credentials@v1
+      with:
+        cluster_name: ${{ env.GKE_CLUSTER }}
+        location: ${{ env.GKE_ZONE }}
+
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy to GKE
+      run: |-
+        kubectl set image deployment/$DEPLOYMENT_NAME $CONTAINER_NAME=$IMAGE:$GITHUB_SHA -n sutc --record
+        kubectl rollout status deployment/$DEPLOYMENT_NAME -n sutc

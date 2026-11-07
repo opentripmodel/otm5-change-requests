@@ -1,0 +1,184 @@
+{
+    "id": "976eed42-bccc-4731-9d01-85ec3a16bd7b",
+    "status": "requested",
+    "vehicle": {
+      "entity": {
+        "id": "1ee44c03-f899-421f-8e89-8f568ca30424",
+        "vehicleType": "truck",
+        "fuel": "Diesel",
+        "length": {
+          "value": 9,
+          "unit": "m"
+        },
+        "height": {
+          "value": 4.2,
+          "unit": "m"
+        },
+        "width": {
+          "value": 2.5,
+          "unit": "m"
+        },
+        "licensePlate": "AB-12-CD"
+      },
+      "associationType": "inline"
+    },
+    "actors": [
+      {
+        "entity": {
+          "id": "0d3198ad-2f2d-4aed-8c77-6d7779aefba3",
+          "name": "Shipping Company TM"
+        },
+        "roles": [
+          "shipper"
+        ],
+        "associationType": "inline"
+      },
+      {
+        "entity": {
+          "id": "005cffff-4aba-4e2d-a79d-d428ba93ae8a",
+          "name": "Carrier Transport"
+        },
+        "roles": [
+          "carrier"
+        ],
+        "associationType": "inline"
+      },
+      {
+        "entity": {
+          "id": "6084fd58-d26b-47e9-945b-5df9f2a36d70",
+          "name": "Hank",
+          "contactDetails": [
+            {
+              "value": "0031699999999",
+              "type": "phone"
+            }
+          ]
+        },
+        "roles": [
+          "driver"
+        ],
+        "associationType": "inline"
+      }
+    ],
+    "actions": [
+      {
+        "entity": {
+          "id": "2664fb3c-9ce4-4a56-98d0-4ac76c2a40c4",
+          "lifecycle": "planned",
+          "sequenceNr": 0,
+          "location": {
+            "entity": {
+              "id": "5a71bd67-e51c-46d1-842b-5fa171c0eb08",
+              "name": "Location of distribution center Bananas Inc",
+              "geoReference": {
+                "lat": 1,
+                "lon": 0,
+                "type": "latLonPointGeoReference"
+              }
+            },
+            "associationType": "inline"
+          },
+          "actions": [
+            {
+              "entity": {
+                "lifecycle": "planned",
+                "transportEquipment": {
+                  "entity": {
+                    "id": "25b01018-a5b4-4cee-a14f-6b72d8624b77",
+                    "equipmentType": "trailer",
+                    "licensePlate": "01-AAA-1"
+                  },
+                  "associationType": "inline"
+                },
+                "actionType": "attachTransportEquipment"
+              },
+              "associationType": "inline"
+            },
+            {
+              "entity": {
+                "id": "2a806c26-640c-4562-85d5-8ea4b9e7d80f",
+                "lifecycle": "planned",
+                "consignment": {
+                  "entity": {
+                    "id": "04a9870f-52c0-463a-80c1-7d1d81c8b38a",
+                    "goods": [
+                      {
+                        "entity": {
+                          "id": "376a5f1f-0b68-4671-bab6-2bd2b63c9f7b",
+                          "description": "Ordered box of Bananas",
+                          "quantity": 2,
+                          "type": "items"
+                        },
+                        "associationType": "inline"
+                      }
+                    ]
+                  },
+                  "associationType": "inline"
+                },
+                "actionType": "load"
+              },
+              "associationType": "inline"
+            }
+          ],
+          "constraint": {
+            "entity": {
+              "value": {
+                "startTime": "2021-03-25T10:00:00Z",
+                "endTime": "2021-03-25T11:00:00Z",
+                "type": "timeWindowConstraint"
+              }
+            },
+            "associationType": "inline"
+          },
+          "actionType": "stop"
+        },
+        "associationType": "inline"
+      },
+      {
+        "entity": {
+          "id": "b76c9a2d-15ed-49db-a654-1f8e1885d47d",
+          "lifecycle": "planned",
+          "sequenceNr": 1,
+          "location": {
+            "entity": {
+              "id": "306c1a89-fbd0-4dd8-a53d-b0671bba5973",
+              "name": "Location of store Fine Food groceries",
+              "geoReference": {
+                "lat": 1,
+                "lon": 0,
+                "type": "latLonPointGeoReference"
+              }
+            },
+            "associationType": "inline"
+          },
+          "actions": [
+            {
+              "entity": {
+                "id": "3af83c59-5550-4b92-88cf-06b750270134",
+                "lifecycle": "planned",
+                "consignment": {
+                  "uuid": "04a9870f-52c0-463a-80c1-7d1d81c8b38a",
+                  "entityType": "consignment",
+                  "associationType": "reference"
+                },
+                "actionType": "unload"
+              },
+              "associationType": "inline"
+            }
+          ],
+          "constraint": {
+            "entity": {
+              "value": {
+                "startTime": "2021-03-25T14:00:00Z",
+                "endTime": "2021-03-25T15:00:00Z",
+                "type": "timeWindowConstraint"
+              }
+            },
+            "associationType": "inline"
+          },
+          "actionType": "stop"
+        },
+        "associationType": "inline"
+      }
+    ]
+  }

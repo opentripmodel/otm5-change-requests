@@ -1,0 +1,20 @@
+# Dependencies
+app/node_modules
+
+# Production
+app/build
+
+# Generated files
+app/.docusaurus
+app/.cache-loader
+
+# Misc
+app/.DS_Store
+app/.env.local
+app/.env.development.local
+app/.env.test.local
+app/.env.production.local
+
+app/npm-debug.log*
+app/yarn-debug.log*
+app/yarn-error.log*
