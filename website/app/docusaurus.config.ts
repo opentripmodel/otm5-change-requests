@@ -12,12 +12,12 @@ const config: Config = {
   url: "https://opentripmodel.github.io",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: "/documentation/",
+  baseUrl: "/otm5-change-requests/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "opentripmodel", // Usually your GitHub org/user name.
-  projectName: "documentation", // Usually your repo name.
+  projectName: "otm5-change-requests", // Usually your repo name.
   deploymentBranch: "main",
 
   onBrokenLinks: "throw",
