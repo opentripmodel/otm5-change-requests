@@ -4,6 +4,8 @@ on:
   pull_request:
     branches:
       - main
+    paths:
+      - 'website/**'
 
 jobs:
   test-yarn-build:
@@ -17,13 +19,13 @@ jobs:
         with:
           node-version: 22
           cache: yarn
-          cache-dependency-path: app/yarn.lock
+          cache-dependency-path: website/app/yarn.lock
 
       - name: Install dependencies
-        working-directory: ./app
+        working-directory: ./website/app
         run: yarn install --frozen-lockfile
       - name: Test build website
-        working-directory: ./app
+        working-directory: ./website/app
         run: yarn build
   
   test-docker-build:
@@ -40,5 +42,5 @@ jobs:
             --tag "otm-documentation:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
-            .
+            ./website
     

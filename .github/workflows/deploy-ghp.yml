@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'website/**'
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
@@ -19,19 +21,19 @@ jobs:
         with:
           node-version: 22
           cache: yarn
-          cache-dependency-path: app/yarn.lock
+          cache-dependency-path: website/app/yarn.lock
 
       - name: Install dependencies
-        working-directory: ./app
+        working-directory: ./website/app
         run: yarn install --frozen-lockfile
       - name: Build website
-        working-directory: ./app
+        working-directory: ./website/app
         run: yarn build
 
       - name: Upload Build Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: app/build
+          path: website/app/build
 
   deploy:
     name: Deploy to GitHub Pages

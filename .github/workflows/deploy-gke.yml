@@ -7,6 +7,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'website/**'
 
 env:
   GKE_CLUSTER: sth-cluster                  # GKE cluster
@@ -53,7 +55,7 @@ jobs:
           --tag "$IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          .
+          ./website
 
     # Push the Docker image to Google Artifcat Registry
     # Configure Docker to use the gcloud command-line tool as a credential helper for authentication
