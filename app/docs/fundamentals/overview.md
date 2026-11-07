@@ -20,6 +20,11 @@ about _consignments_, _locations_, and _vehicles_. Though properties of these
 entities might change, this generally occurs quite rarely and is definitely not
 reflected in real-time. 
 
+For a deeper explanation of the difference between [entity status and action
+lifecycle](./entity_status), see the dedicated
+fundamentals page. The action lifecycle part is also documented separately in
+[Lifecycles](./lifecycles).
+
 On the other hand, how these static entities interact is more prone to change.
 For example, a vehicle itself remains the same height, width, and weight over
 its lifetime, but it can move multiple different goods every single day. Actions
