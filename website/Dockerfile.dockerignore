@@ -1,0 +1,28 @@
+# Used by BuildKit for website/Dockerfile; the build context is the repository root.
+# Only include what the website image needs.
+*
+!otm-api/otm-api-v*.yaml
+!website/app
+!website/nginx-conf
+
+# Dependencies
+website/app/node_modules
+
+# Production
+website/app/build
+
+# Generated files
+website/app/.docusaurus
+website/app/.cache-loader
+website/app/static/api
+
+# Misc
+website/app/.DS_Store
+website/app/.env.local
+website/app/.env.development.local
+website/app/.env.test.local
+website/app/.env.production.local
+
+website/app/npm-debug.log*
+website/app/yarn-debug.log*
+website/app/yarn-error.log*

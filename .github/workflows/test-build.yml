@@ -42,5 +42,6 @@ jobs:
             --tag "otm-documentation:$GITHUB_SHA" \
             --build-arg GITHUB_SHA="$GITHUB_SHA" \
             --build-arg GITHUB_REF="$GITHUB_REF" \
-            ./website
+            --file website/Dockerfile \
+            .
     

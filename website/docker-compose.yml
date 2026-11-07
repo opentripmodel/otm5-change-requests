@@ -1,6 +1,8 @@
 services:
   docusaurus:
     image: europe-west4-docker.pkg.dev/sacred-sol-99413/sutc/otm-documentation
-    build: .
+    build:
+      context: ..
+      dockerfile: website/Dockerfile
     ports:
       - 80:80
