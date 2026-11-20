@@ -2,7 +2,6 @@
 name: Change request
 about: Suggest an addition or change to the OTM specification
 title: ''
-labels: enhancement
 assignees: ''
 
 ---
